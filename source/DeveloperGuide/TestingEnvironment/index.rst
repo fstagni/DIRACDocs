@@ -421,9 +421,7 @@ This test submits few very simple jobs. Where? Locally. The API ``DIRAC.Interfac
 Admittently, this method is here almost only for testing purposes. 
 
 Submitting a job locally means instructing DIRAC to consider your machine as a worker node. 
-To run this test, you'll have to add few lines to your local dirac.cfg:
-
-.. code-block::
+To run this test, you'll have to add few lines to your local dirac.cfg::
 
    LocalSite
    {

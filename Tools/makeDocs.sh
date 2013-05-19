@@ -88,9 +88,9 @@ python $tmpdir/DIRACDocs/Tools/buildCodeDOC.py $codeDIR
 # Make html web pages from rst's
 
 # This command hangs, so we kill it after 5 minutes
-#( make -C $tmpdir/DIRACDocs html ) & sleep 300 ; kill -9 $!; echo "killed make"
+( make -C $tmpdir/DIRACDocs html ) & sleep 300 ; kill -9 $!; echo "killed make"
 
-make -C $tmpdir/DIRACDocs html
+#make -C $tmpdir/DIRACDocs html
 
 #-------------------------------------------------------------------------------
 # copying over
@@ -113,7 +113,7 @@ fi
 cp -r $tmpdir/DIRACDocs/build $DIR/../build
 
 echo Removing temporary directory $tmpdir 
-rm -rf $tmpdir
+#rm -rf $tmpdir
 
 echo 'Done'
 

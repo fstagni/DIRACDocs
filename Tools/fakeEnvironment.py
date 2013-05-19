@@ -13,8 +13,13 @@ import sys
 #...............................................................................
 # mocks...
 
+class MyMock(mock.Mock):
+  
+  def __len__(self):
+    return 0
+
 # GSI
-mockGSI                     = mock.Mock()
+mockGSI                     = MyMock()
 mockGSI.__version__         = "1"
 mockGSI.version.__version__ = "1"
 
@@ -27,6 +32,7 @@ mockMySQLdb = mock.Mock()
 
 sys.modules[ 'GSI' ]     = mockGSI
 sys.modules[ 'MySQLdb' ] = mockMySQLdb
+sys.modules[ 'MySQLdb.cursors' ] = mock.Mock()
 
 #FIXME: do we need all them ??
 

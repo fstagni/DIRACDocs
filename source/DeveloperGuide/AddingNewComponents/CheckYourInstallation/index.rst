@@ -159,24 +159,18 @@ Getting a Proxy
 ---------------------
 
 We assume that you have already your public and private certificates key in $HOME/.globus. 
-Then, do the following:
-
-.. code-block::
+Then, do the following::
 
    dirac-proxy-init
 
-You probably got something like:
-
-.. code-block::
+You probably got something like::
 
    toffo@pclhcb181:~/LHCbCode/DIRAC$ dirac-proxy-init 
    Generating proxy... 
    Enter Certificate password:
    DN /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=fstagni/CN=693025/CN=Federico Stagni is not registered 
 
-This is because DIRAC still doesn't know you exist. You should add yourself to the CS. For example, I had add the following section:
-
-.. code-block::
+This is because DIRAC still doesn't know you exist. You should add yourself to the CS. For example, I had add the following section::
 
    Registry
    {
@@ -191,25 +185,19 @@ This is because DIRAC still doesn't know you exist. You should add yourself to t
      }
      
 
-All the info you want and much more in:
-
-.. code-block::
+All the info you want and much more in::
 
    openssl x509 -in usercert.pem -text
 
 
-Now, it's time to issue again:
-
-.. code-block::
+Now, it's time to issue again::
 
    toffo@pclhcb181:~/.globus$ dirac-proxy-init 
    Generating proxy... 
    Enter Certificate password:
    User fstagni has no groups defined 
    
-So, let's add the groups within the /Registry section:
-
-.. code-block::
+So, let's add the groups within the /Registry section::
 
        Groups
        {
@@ -220,7 +208,6 @@ So, let's add the groups within the /Registry section:
        }
 
 You can keep playing with it (e.g. adding some properties), but for the moment this is enough.
-
 
 
 Exercise
