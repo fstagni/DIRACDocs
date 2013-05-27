@@ -1,14 +1,15 @@
 =====================
-Creating a release
+Creating a Project
 =====================
 
 ------------
 Motivation
 ------------
 
-DIRAC is used by several virtual organizations. Some of them are creating their own modules for DIRAC. 
+DIRAC is used by several user communities. Some of them are creating their own modules for DIRAC. 
 These modules require a certain version of DIRAC in order to function properly. Virtual organizations 
-have to be able to create their own releases of their modules and install them seamlessly with *dirac-install*.
+have to be able to create their own releases of their modules and install them seamlessly with 
+*dirac-install*. This is achieved by creating and releasing software projects in the DIRAC framework.
 
 -------------------
 Releases schema
@@ -158,7 +159,7 @@ The defaults file is defined per project and can live in any web server.
 How to make a distribution
 -----------------------------
 
-Just execute *dirac-distribution* with the appropiate flags. For instance::
+Just execute *dirac-distribution* with the appropriate flags. For instance::
 
  dirac-distribution -r v6r0 -l DIRAC 
  

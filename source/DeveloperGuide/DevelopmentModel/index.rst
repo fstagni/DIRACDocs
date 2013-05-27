@@ -6,7 +6,7 @@ DIRAC uses Git to manage it's source code. Git is a distributed version control 
 That means that there's no central repository like the one CVS/Subversion use. Each developer has 
 a copy of the whole repository. Because there are lots of repositories, code changes travel across 
 different repositories all the time by merging changes from different branches and repositories. 
-In any centralised VCS branching/merging is an advanced topic. In Git branching and merging are daily 
+In any centralized VCS branching/merging is an advanced topic. In Git branching and merging are daily 
 operations. That allows to manage the code in a much more easy and efficient way. This document is 
 heavily inspired on `A successful Git branching model <http://nvie.com/posts/a-successful-git-branching-model/>`_
 
@@ -61,11 +61,11 @@ DIRAC release.
     :align: left
     :alt: Schema on how changes flow between DIRAC and users
      
-    How to publish and retrieve changes to DIRAC (via `Pro Git Book <http://progit.org/book/>`_)
+    How to publish and retrieve changes to DIRAC (see also `Pro Git Book <http://progit.org/book/>`_)
 
 Developers use the *developer private* repositories for their daily work. When they want something to be 
-integrated, they publish the changes to their *developer public* repositories and send a *pull request* 
-to the integration manager. The integration manager will pull the changes to his/her own repository, 
+integrated, they publish the changes to their *developer public* repositories and send a *Pull Request* 
+to the release manager. The release manager will pull the changes to his/her own repository, 
 and publish them in the *blessed repository* where the rest of the developers can pull the new changes 
 to their respective *developer private* repositories.
 
@@ -80,7 +80,8 @@ to this repository as *release* since all releases will be generated from this r
 Each developer can only pull from the *release* repository. Developers can pull new release patches 
 from the *release* repository into their *private repositories*, work on a new feature, bugfix.... 
 and then push the changes to their *public* repository. Once there are new changes in their public 
-repositories, they can issue a *pull request* so the changes can be included in central *release* repository.
+repositories, they can issue a *pull request* so the changes can be included in central *release* 
+repository.
 
 ----------------------------------------------
 How to set up the *release* remote repository
@@ -94,6 +95,8 @@ To set up the *release* repository as a remote repository do::
   * [new branch]      integration -> release/integration
   * [new branch]      master     -> release/master
 
+The  
+ 
  
 The main branches
 ====================
