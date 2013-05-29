@@ -35,7 +35,7 @@
 
   Output must look like this::
 
-        $ dirac-dms-add-file LFN:/vo.formation.idgrilles.fr/user/v/vhamar/Test-Lyon.txt Test-Lyon.orig M3PEC-disk
+        $ dirac-dms-add-file /vo.formation.idgrilles.fr/user/v/vhamar/Test-Lyon.txt Test-Lyon.orig M3PEC-disk
         {'Failed': {},
          'Successful': {'/vo.formation.idgrilles.fr/user/v/vhamar/Test-Lyon.txt': {'put': 8.3242118358612061,
                                                                                     'register': 0.51048803329467773}}}
