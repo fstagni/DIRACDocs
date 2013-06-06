@@ -27,6 +27,7 @@ This section describes the policies and the conditions to match elements.
                           /Policies
                               /PolicyName
                                   policyType = policyType
+                                  doNotCombineResult = something
                                   /matchParams
                                       element = element
                                       elementType = elementType
@@ -39,9 +40,10 @@ This section describes the policies and the conditions to match elements.
                                         
 This is the complete definition of a policy. Let's go one by one.
 
-* PolicyName  : this must be a human readable name explaining what the policy is doing ( mandatory ).
-* policyType  : is the name of the policy we want to run as defined in DIRAC.ResourceStatusSystem.Policy.Configurations ( mandatory ).
-* matchParams : is the dictionary containing the policy metadata used by :ref:`Info Getter <info getter>` to match policies. Any of them can be a CSV.
+* PolicyName         : this must be a human readable name explaining what the policy is doing ( mandatory ).
+* policyType         : is the name of the policy we want to run as defined in DIRAC.ResourceStatusSystem.Policy.Configurations ( mandatory ).
+* doNotCombineResult : if this option is present, the status will not be merged with the rest of statuses ( but actions on this policy will apply ).
+* matchParams        : is the dictionary containing the policy metadata used by :ref:`Info Getter <info getter>` to match policies. Any of them can be a CSV.
 
 .. note :: Remember, declare ONLY the parameters in match params that want to be taken into account.
 
