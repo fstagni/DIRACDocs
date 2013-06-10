@@ -175,9 +175,10 @@ The validation of a new Request that is about to enter the system for execution 
   {'Message': "Operation #0 of type 'ForwardDISET' is missing Arguments attribute.", 'OK': False}
 
 
-
-
-
+A word of caution has to be clearly stated over here: both low- and high-level validation is not checking if 
+actual value provided during request definition makes sense, i.e. if you put to the Operation.TargetSE unknown 
+name of target storage element from the validation point of view your request will be OK (but hopefully it will 
+miserably fail during exection).   
 
 Request execution
 -----------------
@@ -186,24 +187,116 @@ Execution of the all possible requests is done in only one agent: RequestExecuti
 of handlers derived from OperationHandlerBase helper class. What is different from the previos attempt is 
 the way the request is treated: the agent will try to execute request as a whole in one go, while previously 
 there was several different agents in place, each trying to execute one sub-request type. This approach was
-a horrible complication for maintain request's state machine.
+a horrible complication for maintain request's state machine. 
 
-The agent is using ProcessPool utility to create slave subprocesses for execution. Each pool worker is:
+The RequestExecutingAgent agent is using ProcessPool utility to create slave workers (subprocesses running RequestTask) 
+desingnated to execute requests read from ReqDB. Each worker is processing request execution using following steps:
  
-  * downloads and sets up request owner proxy
-  * loop over defined and waiting operations
-  * creates on-demand and executes specific operation handler instance
+  * downloading and setting up request owner proxy
+  * loop over waiting operations in request
+  * creating on-demand and executing specific operation handlers 
   * if operation status is not updated after treatment inside handler, worker jumps out the loop 
     otherwise tries to pick up next waiting Operation 
     
-Outside the main execution loop worker is checking request status and depending of its value finlizes request 
-and putting it back to the ReqDB.
+Outside the main execution loop worker is checking request status and depending of its value finalizes request 
+and puts it back to the ReqDB.
+
 
 Extending
 ---------
 
+At the moment of writing following operation types are supported:
 
+  * DataManagement (under DMS/Agent/RequestOperations):
 
+    - PhysicalRemoval
+    - PutAndRegister 
+    - RegisterFile
+    - RemoveFile
+    - RemoveReplica
+    - ReplicateAndRegister
+    - ReTransfer
+
+  * RequestManagement (under RMS/Agent/RequestOperation)
+
+    - ForwardDISET
+
+This of course does not cover all possible needs for specific VO, hence VO developers are encouraged to create and keep
+new operation handlers in VO spin-off projects. Definition of a new operation type should be easy withing context of 
+RequestManagementSystem, all you need to do is to put in place operation handler (inherited from OperationHandlerBase) and/or
+extend RequestValidator to cope with the new type. The handler should be a functor and should override two methods: constructor (__init__)
+and () operator ( __call__)::
+
+    """ Parrots operation handler """
+    from DIRAC import gMonitor
+    from DIRAC.RequestManagementSystem.private.OperationHandlerBase import OperationHandlerBase 
+    import random
+
+    class ParrotsOperation( OperationHandlerBase ):
+      """ operation handler for 'Parrots' operation type
+
+      see OperationHandlerBase for list of methods and DIRAC tools exposed 
+
+      please notice that all CS options defined for this handler will 
+      be exposed there as read-only properties
+
+      """
+      def __init__( self, request = None, csPath = None ):
+        """ constructor -- DO NOT CHANGE its arguments list """
+        # # AND ALWAYS call BASE class constructor (or it won't work at all)
+        OperationHandlerBase.__init__(self, request, csPath )
+        # # put there something more if you need, i.e. gMonitor registration
+        gMonitor.registerActivity( "ParrotsDead", ... )
+        gMonitor.registerActivity( "ParrotsAlive", ... )
+
+      def __call__( self ):
+        """ this has to be defined and should return S_OK/S_ERROR """
+        self.log.info( "log is here" )
+        # # and some higher level tools like ReplicaManager
+        self.replicaManager().doSomething()
+        # # request is there as a member 
+        self.request 
+        # # ...as well as Operation with type set to Parrot
+        self.operation 
+        # # do something with parrot 
+        if random.random() > 0.5:
+          self.log.error( "Parrot is alive" )
+          self.operation.Error = "Parrot is alive"
+          self.operation.Status = "Failed"
+          gMonitor.addMark( "ParrotsAlive" , 1 )
+        else:
+          self.log.info( "Parrot is dead")
+          self.operation.Status = "Done"     
+          gMonitor.addMark( "ParrotsDead", 1)
+        # # return S_OK/S_ERROR (always!!!)
+        return S_OK()
+        
+Once the new handler is ready you should also update config section 
+for the RequestExecutingAgent::
+
+    RequestExecutingAgent {
+      OperationHandlers {
+         Parrots {
+           Location = LHCbDIRAC/RequestManagementSystem/Agent/RequestOperations/ParrotsOperation
+           ParrotsFoo = True
+           ParrotsBaz = 1,2,3
+         }
+      }
+    }    
+
+Please notice that all CS options defined for each handler is exposed in it as read-only property. In the above example
+ParrotsOperation instance will have boolean 'ParrotsFoo' set to True and 'ParrotsBaz' list set to [1,2,3]. You can access them in the 
+handler code using self.ParrotsFoo and self.ParrotsBaz.
+
+From now on you can put the new request to the ReqDB::
+
+  >>> request = Request()
+  >>> operation = Operation()
+  >>> operation.Type = "Parrots"
+  >>> request.addOperation( operation )
+  >>> reqClient.putRequest( request )
+
+and Parrots operations would be eventually executed by the agent.
 
 Installation
 ------------
