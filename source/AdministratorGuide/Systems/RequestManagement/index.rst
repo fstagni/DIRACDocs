@@ -5,5 +5,5 @@ Request Management System
 .. contents:: Table of contents
    :depth: 3
 
-.. include:: newrms.rst
+.. include:: rms.rst
 .. include:: requestManager.rst 
