@@ -1,10 +1,10 @@
------------------------------
-New Request Management System
------------------------------
+-------------------------
+Request Management System
+-------------------------
 
 :author:  Krzysztof Daniel Ciba <Krzysztof.Ciba@NOSPAMgmail.com>
 :date:    Fri, 28th May 2013
-:version: first
+:version: v6r9
 
 
 System Overview
@@ -59,8 +59,12 @@ states of Files) and built in state machine, which automatizes state propagation
 User is allowed to change only File statuses and in case of specific Operation's types - Operation statuses, as Request 
 builtin observer will propagate and set correct status on the higher level.
 
-Request construction and validation
------------------------------------
+
+CRUD
+----
+
+Create
+^^^^^^
 
 Construction of a new request is quite simple, one has to create a new Request instance::
 
@@ -109,6 +113,9 @@ Once the request is ready, you can insert it to the ReqDB::
   >>> rc = ReqClient() # # create client
   >>> rc.putRequest( request ) # # put request to ReqDB
 
+Read
+^^^^
+
 Reading request back can be done using two methods:
 
   * for reading::
@@ -123,9 +130,28 @@ Reading request back can be done using two methods:
   >>> rc = ReqClient() # # create client
   >>> rc.getRequest( "foobarbaz" ) # # get request from ReqDB for execution
 
-
 If you don't specify request name in RequestClient.getRequest or RequestClient.peekRequest, the one with "Waiting" 
 status  and the oldest Request.LastUpdate value will be chosen. 
+
+
+Update
+^^^^^^
+
+Updating the request can be done by using methods that modify operation list::
+
+  >>> del request[0] # # remove 1st operation using __delitem__
+  >>> request[0] = Operation() # # overwrite 1st operation using __setitem__
+  >>> request.addOperation( Operation() ) # # add new operation
+  >>> request.insertBefore( Operation(), request[0] ) # # insert new operation at head
+  >>> request.insertAfter( Operation(), request[0] ) # # insert new opration after 1st 
+  
+To make those changes persistent you should  of course put request to the ReqDB using RequestClient.putRequest.  
+
+
+Delete
+^^^^^^
+
+Nothing special here, just execute RequestClient.deleteRequest( requestName ) to remove whole request from ReqDB. 
 
 
 Request validation
