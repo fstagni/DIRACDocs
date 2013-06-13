@@ -6,4 +6,3 @@ Request Management System
    :depth: 3
 
 .. include:: rms.rst
-.. include:: requestManager.rst 
