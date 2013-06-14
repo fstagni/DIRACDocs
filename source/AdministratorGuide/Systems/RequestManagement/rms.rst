@@ -355,7 +355,7 @@ Modify CS by adding::
     } 
   }
 
-You need at least one of these - they are backing up new requests in case the `ReqManagerHandler` is down. 
+You need at least one of these - they are backing up new requests in case the `ReqManagerHandler` is down. Full description can be found in `ReqManager and ReqProxies`_.
 
 3. Install `ReqManagerHandler`::
 
@@ -427,9 +427,9 @@ and dbs::
   RequestManagement/RequestDB
   DataManagement/TransferDB
 
-----------------------------------
-Request Manager and RequestProxies
-----------------------------------
+-------------------------
+ReqManager and ReqProxies
+-------------------------
 
 :author:  Krzysztof Daniel Ciba <Krzysztof.Ciba@NOSPAMgmail.com>
 :date:    Fri, 18th Jan 2013
