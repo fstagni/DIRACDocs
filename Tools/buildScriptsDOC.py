@@ -295,8 +295,6 @@ def run( tmpDir = None ):
   if tmpDir is None:
     tmpDir = getTmpDir()
     
-  print 'AT >>> tmpDir', tmpDir  
-    
   commandRefPath = generateCommandReference( tmpDir )
   scriptsDict    = prepareScripts( tmpDir )
   sys.path.append( tmpDir )
