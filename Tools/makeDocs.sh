@@ -81,7 +81,10 @@ mkdir -p $scriptsDIR
 codeDIR=$tmpdir/build/code
 mkdir -p $codeDIR
 
+echo python $tmpdir/DIRACDocs/Tools/buildScriptsDOC.py $scriptsDIR
 python $tmpdir/DIRACDocs/Tools/buildScriptsDOC.py $scriptsDIR
+
+echo python $tmpdir/DIRACDocs/Tools/buildCodeDOC.py $codeDIR
 python $tmpdir/DIRACDocs/Tools/buildCodeDOC.py $codeDIR
 
 #-------------------------------------------------------------------------------
