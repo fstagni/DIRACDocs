@@ -16,6 +16,7 @@ import os
 import shutil
 import sys
 import tempfile
+import commands
 
 from DIRAC           import rootPath
 from DIRAC.Core.Base import Script
@@ -69,12 +70,11 @@ def prepareScripts( tmpDir ):
   # Get all scripts on scriptsPath and sorts them, this will make our life easier
   # afterwards
   scripts = glob.glob( scriptsPath )
-  scripts.sort()
-     
+  scripts.sort()     
   for scriptPath in scripts:
     
     # Few modules still have __init__.py on the scripts directory
-    if '__init__' in scriptPath:
+    if '__init__' in scriptPath or 'build' in scriptPath:
       continue
         
     # ..rubish/rubish/AnyDIRACSystem/scripts/scriptName.py
@@ -143,22 +143,28 @@ def writeScriptsDocs( scriptsDict, commandRefPath ):
         scriptPaths[ 'user' ].append( scriptPath )  
            
       # This is ugly, but otherwise Script piles up the arguments
-      reload( Script )
-      Script.parseCommandLine = killMe
+      #reload( Script )
+      #Script.parseCommandLine = killMe
 
       docToWrite = ''
-      
-      try:
-        script     = __import__( newScriptName )
-        docToWrite = script.__doc__
-      except SystemExit:
-        print 'exited: %s' % newScriptName 
-      except NameError:
-        print 'killMe: %s' % newScriptName
-      except:
-        print 'other: %s' % newScriptName
-
+      commandName = os.path.basename( scriptPath ).replace('.rst','')
+      status, docToWrite = commands.getstatusoutput( commandName+' -h' )
       writeScriptRST( scriptPath, docToWrite )
+            
+      #script = None
+      #try:
+      #  script     = __import__( newScriptName )
+      #  docToWrite = script.__doc__
+      #except SystemExit:
+      #  print 'exited: %s' % newScriptName 
+      #except NameError, x:
+      #  print 'killMe: %s' % newScriptName, str(x)
+      #except:
+      #  print 'other: %s' % newScriptName
+
+      #if script:
+      #  docToWrite = script.__doc__
+      #  writeScriptRST( scriptPath, docToWrite )
   
   return scriptPaths    
   
@@ -219,7 +225,10 @@ def writeScriptRST( scriptPath, docString ):
     docString = 'NO DOCSTRING'
     print 'NO DOCSTRING: %s' % scriptPath  
   with open( scriptPath, 'a' ) as script:
-    script.write( docString ) 
+    script.write( '\n::' )
+    lines = docString.split('\n')
+    for line in lines:
+      script.write( '\n  ' + line )
   
 #...............................................................................
 
@@ -286,8 +295,11 @@ def run( tmpDir = None ):
   if tmpDir is None:
     tmpDir = getTmpDir()
     
+  print 'AT >>> tmpDir', tmpDir  
+    
   commandRefPath = generateCommandReference( tmpDir )
   scriptsDict    = prepareScripts( tmpDir )
+  sys.path.append( tmpDir )
   scriptPaths    = writeScriptsDocs( scriptsDict, commandRefPath )
   
   print 'RSTs generated'
