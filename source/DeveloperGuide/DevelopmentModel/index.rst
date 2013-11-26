@@ -1,5 +1,5 @@
 ====================================
-DIRAC branching model
+DIRAC development model
 ====================================
 
 DIRAC uses Git to manage it's source code. Git is a distributed version control system (DVCS). 
@@ -116,15 +116,16 @@ Supporting branches
 
 Next to the main branches, there can be other type of branches such as:
 
- - Feature branches
  - Release branches
- - Hotfix branches
+ - Feature branches
  
 Each of these branches has a specific purpose and should follow certain rules to ease managing them. They aren't 
 special in any technical way. It's just the way they are used that categorizes them. They are plain git branches.
 
 Developer's pull requests should always be requested from one of these branches. *Don't* issue a pull request 
 from the developer's *master* branch. This way it's easier to know what's is going to be merged.
+
+
 
 Release and hotfix branches will not be explained in detail. They are branches for helping release managers 
 create a new release. Release branches are branches the release manager create from the *release/integration* 

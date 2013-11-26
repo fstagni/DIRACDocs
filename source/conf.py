@@ -11,7 +11,11 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import fakeEnvironment
+
+try:
+  import fakeEnvironment
+except:
+  pass
 
 import datetime
 import os
@@ -22,7 +26,7 @@ try:
   diracRelease = os.environ[ 'DIRACVERSION' ]
 except KeyError:
   diracRelease = 'integration'
-  
+
 print 'conf.py: %s as DIRACVERSION' % diracRelease
 
 #...............................................................................
