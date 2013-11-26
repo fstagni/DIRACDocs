@@ -115,3 +115,40 @@ Job management
 
 **DELETE /jobs/<jid>**
   Kill a job. The user has to have privileges over a job.
+
+File catalogue
+***************
+
+All directories that have to be set in a URL have to be encoded in url safe base 64 (RFC 4648 Spec where '+' is
+encoded as '-' and '/' is encoded as '_'). There are several implementations for different languages already. 
+
+An example in python of the url safe base 64 encoding would be:
+
+    >>> import base64
+    >>> base64.urlsafe_b64encode( "/" )
+    'Lw=='
+
+Most of the search queries accept a metadata condition. This condition has to be coded as a GET query string of key value pairs. Each key
+can be a metadata field and its value has to have the form 'operation|value'. The operation depends on the type of metadata field. For
+integers valid operations are '<', '>', '=', '<=', '>=' and the value has to be a number. For string fields the operation has to be 'in' and
+the value has to be a comma separared list of possible values. An example would be:
+
+    someNumberField=>|4.2&someStrangeName=in|name1,name2
+
+**GET /filecatalogue/metadata**
+  Retrieve all metadata keys with their type and possible values that are compatible with the metadata restriction.
+  *Accepts metadata condition*
+
+**GET /filecatalogue/directory/<directory>**
+  Retrieve contents of the specified directory
+
+**GET /filecatalogue/directory/<directory>/metadata**
+  Retrieve metadata values for this directory compatible with the metadata condition.
+  *Accepts metadata condition*
+
+**GET /filecatalogue/directory/<directory>/search**
+  Search from this directory subdirectories that match the requested metadata search.
+  *Accepts metadata condition*
+
+  
+
