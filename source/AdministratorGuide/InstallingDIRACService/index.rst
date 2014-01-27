@@ -110,6 +110,20 @@ Finally, you will have to instruct you users on the procedure to upload the publ
 of the host where the Web Portal is running. This depends from CA to CA, but typically only means clicking on a certain 
 link on the web portal of the CA.
 
+Using your own CA
+~~~~~~~~~~~~~~~~~
+This is mandatory on the server running the web portal.
+
+In case the CA certificate is not coming from traditional sources (installed using a package manager), but installed "by hand",
+you need to make sure the hash of that CA certificate is created. Make sure the CA certificate is located under
+``/etc/grid-security/certificates``, then do the following as root::
+
+  cd /etc/grid-security/certificates
+  openssl x509 -noout -in cert.pem -hash
+  ln -s cert.pem hash.0
+
+where the output of the ``openssl`` command gives you the hash of the certificate ``cert.pem``, and must be used for the 
+``hash.0`` link name. Make sure the ``.0`` part is present in the name, as this is looked for when starting the web server.
 
 .. _install_primary_server:
 
