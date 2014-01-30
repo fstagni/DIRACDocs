@@ -45,7 +45,8 @@ Requirements
       - Grid host certificates in pem format;
       - At least one of the servers of the installation must have updated CAs and CRLs files; if you want to install
          the standard Grid CAs you can follow the instructions at https://wiki.egi.eu/wiki/EGI_IGTF_Release. They 
-         are usally installed /etc/grid-security/certificates 
+         are usally installed /etc/grid-security/certificates. You may also need to install the ``fetch-crl`` package,
+         and run the ``fetch-crl`` command once installed.
       - If gLite third party services are needed (for example, for the pilot job submission via WMS 
         or for data transfer using FTS) gLite User Interface must be installed and the environment set up 
         by "sourcing" the corresponding script, e.g. /etc/profile.d/grid-env.sh.
