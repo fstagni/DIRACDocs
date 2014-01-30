@@ -32,6 +32,7 @@ Requirements
         configured by the DIRAC administrator)::
         
          iptables -I INPUT -p tcp --dport 9130:9200 -j ACCEPT
+         service iptables save
       - For the server hosting the portal, ports 80 and 443 should be open and redirected to ports 
         8080 and 8443 respectively, i.e. setting iptables appropriately::
 
