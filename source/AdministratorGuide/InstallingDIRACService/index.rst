@@ -31,7 +31,7 @@ Requirements
         default range if predefined ports are used, the port on which services are listening can be 
         configured by the DIRAC administrator)::
         
-         iptables -A INPUT -p tcp --dport 9130:9200 -j ACCEPT
+         iptables -I INPUT -p tcp --dport 9130:9200 -j ACCEPT
       - For the server hosting the portal, ports 80 and 443 should be open and redirected to ports 
         8080 and 8443 respectively, i.e. setting iptables appropriately::
 
@@ -145,7 +145,7 @@ be taken:
         #
         #  DIRAC release version (this is an example, you should find out the current 
         #  production release)
-        Release = v6r3p7
+        Release = v6r10p4
         #  Python version of the installation
         PythonVersion = 26
         #  To install the Server version of DIRAC (the default is client)
@@ -196,20 +196,20 @@ be taken:
         #  they properly initialize the configuration data
         #
         #  Name of the Admin user (default: None )
-        AdminUserName = atsareg
+        AdminUserName = adminusername
         #  DN of the Admin user certificate (default: None )
         #  In order the find out the DN that needs to be included in the Configuration for a given 
         #  host or user certificate the following command can be used::
         #
         #          openssl x509 -noout -subject -enddate -in <certfile.pem>
         #
-        AdminUserDN = /O=GRID-FR/C=FR/O=CNRS/OU=CPPM/CN=Andrei Tsaregorodtsev
+        AdminUserDN = /DC=ch/aminDN
         #  Email of the Admin user (default: None )
-        AdminUserEmail = atsareg@in2p3.fr
+        AdminUserEmail = adminmail@provider
         #  Name of the Admin group (default: dirac_admin )
         AdminGroupName = dirac_admin 
         #  DN of the host certificate (*) (default: None )
-        HostDN = /DC=ch/DC=cern/OU=computers/CN=volhcb29.cern.ch
+        HostDN = /DC=ch/DC=country/OU=computers/CN=computer.dn
         # Define the Configuration Server as Master for your installations
         ConfigurationMaster = yes
         
@@ -232,13 +232,13 @@ be taken:
         Database
         {
           #  User name used to connect the DB server
-          User = [default: Dirac]
+          User = Dirac # default value
           #  Password for database user acess. Must be set for SystemAdministrator Service to work
           Password = XXXX
           #  Password for root DB user. Must be set for SystemAdministrator Service to work
           RootPwd = YYYY
           #  location of DB server. Must be set for SystemAdministrator Service to work
-          Host = [default: localhost]
+          Host = localhost # default
           #  There are 2 flags for small and large installations Set either of them to True/yes when appropriated
           # MySQLSmallMem:        Configure a MySQL with small memory requirements for testing purposes
           #                       innodb_buffer_pool_size=200MB
