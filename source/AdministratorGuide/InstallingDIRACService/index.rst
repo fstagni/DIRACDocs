@@ -29,7 +29,7 @@ Requirements
 
       - 9130-9200 ports should be open in the firewall for the incoming TCP/IP connections (this is the 
         default range if predefined ports are used, the port on which services are listening can be 
-        configured by the DIRAC administrator);
+        configured by the DIRAC administrator)::
         
          iptables -A INPUT -p tcp --dport 9130:9200 -j ACCEPT
       - For the server hosting the portal, ports 80 and 443 should be open and redirected to ports 
@@ -83,7 +83,11 @@ the steps below. This procedure must be followed for the primary server and for 
 
       mkdir -p /opt/dirac/etc/grid-security/
       cp hostcert.pem hostkey.pem /opt/dirac/etc/grid-security
-
+   In case your host certificate is in the p12 format, you can convert it with::
+   
+      openssl pkcs12 -in host.p12 -clcerts -nokeys -out hostcert.pem
+      openssl pkcs12 -in host.p12 -nocerts -nodes -out hostkey.pem
+   Make sure the permissions are set right correctly, such that the hostkey.pem is only readable by the ``dirac`` user.
  - As *dirac* user, create a directory or a link pointing to the CA certificates directory, for example::
 
       ln -s /etc/grid-security/certificates  /opt/dirac/etc/grid-security/certificates    
