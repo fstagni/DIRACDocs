@@ -30,6 +30,8 @@ Requirements
       - 9130-9200 ports should be open in the firewall for the incoming TCP/IP connections (this is the 
         default range if predefined ports are used, the port on which services are listening can be 
         configured by the DIRAC administrator);
+        
+         iptables -A INPUT -p tcp --dport 9130:9200 -j ACCEPT
       - For the server hosting the portal, ports 80 and 443 should be open and redirected to ports 
         8080 and 8443 respectively, i.e. setting iptables appropriately::
 
