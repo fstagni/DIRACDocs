@@ -1,4 +1,4 @@
-.. _csoperationsinfo:
+.. _dirac-operations-cs:
 
 Operations - Section
 ====================
