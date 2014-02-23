@@ -62,9 +62,10 @@ def getPackageModules( package ):
 
   diracPackage = __import__( 'DIRAC.%s' % package, globals(), locals(), [ '*' ] )
 
-  pkgpath = os.path.dirname( diracPackage.__file__ )
-  modules = [ name for _, name, _ in pkgutil.iter_modules([pkgpath]) ]
   
+
+  pkgpath = os.path.dirname( diracPackage.__file__ )
+  modules = [ name for _, name, _ in pkgutil.iter_modules([pkgpath]) ]  
   modules.sort()
   
   return modules
@@ -141,20 +142,38 @@ def writePackageDocumentation( tmpDir, codeDocumentationPath, diracPackage ):
           route2 = tmpDir + '/../../' + route
            
           if not os.path.isfile( route2 ):
-            print route2
-            print 'Was a dir... skipping !'
-            continue
-              
-          packModFile.write( '\n\n   %s' % packModPackage )
-          packModPackagePath = os.path.join( packageModPath, '%s.rst' % packModPackage )
-          f = open( packModPackagePath, 'w' )
-          f.write( '=' * len( packModPackage ) )
-          f.write( '\n%s\n' % packModPackage )
-          f.write( '=' * len( packModPackage ) )
-          f.write( '\n' )
-          f.write( '\n.. automodule:: DIRAC.%s.%s.%s' % ( diracPackage, modulePackage, packModPackage ) )
-          f.write( '\n   :members:' )
-          f.close() 
+            if not packModPackage in ['Helpers']:
+              continue
+            packModFile.write( '\n\n   %s/index.rst' % packModPackage )
+            dir2 = 'DIRAC/%s/%s/%s' % ( diracPackage, modulePackage, packModPackage ) 
+            subModPackages = getPackageModules( '%s.%s.%s' % ( diracPackage, modulePackage, packModPackage ) )
+            subModPath = os.path.join( packageModPath, packModPackage )
+            subModPathIndex = os.path.join( subModPath, 'index.rst' )
+            os.mkdir( subModPath )
+            with open( subModPathIndex, 'w' ) as subModFile:
+              writeIndexHeader( subModFile, packModPackage )  
+              for subModPackage in subModPackages:                
+                subModFile.write( '\n\n   %s' % subModPackage )
+                subModPackagePath = os.path.join( subModPath, '%s.rst' % subModPackage )
+                f = open( subModPackagePath, 'w' )
+                f.write( '=' * len( subModPackage ) )
+                f.write( '\n%s\n' % subModPackage )
+                f.write( '=' * len( subModPackage ) )
+                f.write( '\n' )
+                f.write( '\n.. automodule:: DIRAC.%s.%s.%s.%s' % ( diracPackage, modulePackage, packModPackage, subModPackage ) )
+                f.write( '\n   :members:' )
+                f.close() 
+          else:    
+            packModFile.write( '\n\n   %s' % packModPackage )
+            packModPackagePath = os.path.join( packageModPath, '%s.rst' % packModPackage )
+            f = open( packModPackagePath, 'w' )
+            f.write( '=' * len( packModPackage ) )
+            f.write( '\n%s\n' % packModPackage )
+            f.write( '=' * len( packModPackage ) )
+            f.write( '\n' )
+            f.write( '\n.. automodule:: DIRAC.%s.%s.%s' % ( diracPackage, modulePackage, packModPackage ) )
+            f.write( '\n   :members:' )
+            f.close() 
 #...............................................................................
 # run
 
