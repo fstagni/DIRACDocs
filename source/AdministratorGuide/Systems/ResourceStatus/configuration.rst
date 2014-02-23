@@ -15,6 +15,7 @@ preferably on Defaults subsection. ::
                                   StorageElement = ReadAccess,WriteAccess,CheckAccess,RemoveAccess   
 
 .. _config section :
+
 --------------
 Config section
 --------------

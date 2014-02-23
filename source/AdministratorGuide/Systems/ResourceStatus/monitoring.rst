@@ -139,6 +139,7 @@ The PEP will iterate over the tuples in the PolicyAction value and executing the
 
 
 .. _actions :
+
 Actions
 -------
 
@@ -213,6 +214,7 @@ based on the proposed final result ). Once the PDP has a list of action tuples (
 dictionary and returns it to the PEP.
 
 .. _info getter :
+
 Info Getter
 ===========
 
