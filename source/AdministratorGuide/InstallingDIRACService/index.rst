@@ -38,6 +38,7 @@ Requirements
 
          iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080
          iptables -t nat -I PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 8443
+         
         If you have problems with NAT or iptables you can use multipurpose relay *socat*::
 
          socat TCP4-LISTEN:80,fork TCP4:localhost:8080 &
