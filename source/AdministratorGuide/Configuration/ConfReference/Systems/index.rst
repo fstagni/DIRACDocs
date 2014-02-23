@@ -1,3 +1,5 @@
+.. _dirac-systems-cs:
+
 Systems configuration
 =======================
 
