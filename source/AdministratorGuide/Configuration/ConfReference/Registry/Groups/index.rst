@@ -1,3 +1,5 @@
+.. _dirac-registry-cs:
+
 Registry / Groups - Subsections
 ===============================
 
