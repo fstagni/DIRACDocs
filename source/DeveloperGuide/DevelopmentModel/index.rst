@@ -2,7 +2,7 @@
 DIRAC development model
 ====================================
 
-DIRAC uses Git to manage it's source code. Git is a distributed version control system (DVCS). 
+DIRAC uses Git to manage it's source code. Git is a Distributed Version Control System (DVCS). 
 That means that there's no central repository like the one CVS/Subversion use. Each developer has 
 a copy of the whole repository. Because there are lots of repositories, code changes travel across 
 different repositories all the time by merging changes from different branches and repositories. 
@@ -10,34 +10,6 @@ In any centralized VCS branching/merging is an advanced topic. In Git branching 
 operations. That allows to manage the code in a much more easy and efficient way. This document is 
 heavily inspired on `A successful Git branching model <http://nvie.com/posts/a-successful-git-branching-model/>`_
 
-
-Why Git?
-==========
-
-DIRAC started using CVS. It was a pain. Directories could not be removed, each file had a version number, 
-it was slow... And migrated to Subversion. It definitely was an improvement compared to CVS. But 
-Subversion has some important defficiencies. Tags and banchs do not exist as such, they are directories 
-in a tree structure like a filesystem. That makes tagging and branching error prone. It's easy to merge 
-from a branch that's not the one you intend to, because branches and tags don't have a name, they are a 
-full path. Plus it is enervatingly slow.
-
-We evaluated different alternatives to Subversion. Our requirements were:
-
- - Cheap and easy branch/merge
- - Fast
- - Well supported by a community
-
-That reduced the possibilities to two different VCS:
-
- - Git (http://git-scm.com/)
- - Mercurial (http://mercurial.selenic.com/)
- 
-Both options are distributed VCS. Seems that by being distributed they are forced to have a powerful 
-branching/merging mechanism. Git is more powerful than Mercurial, but Mercurial is a bit more user-friendly 
-than Git. Both are great DVCS. 
-
-In the end we decided to use Git. Although mercurial is more user-friendly, Git seems to have better 
-branching mechanism and remote repository handling. 
 
 How decentralization works
 ===========================
@@ -47,27 +19,30 @@ That means that commits, branches, tags... everything is local. Almost all Git o
 By definition only one person works with one repository directly. But people don't develop alone. Git has a 
 set of operations to send and bring information to/from remote repositories. Users work with their local 
 repositories and only communicate with remote repositories to publish their changes or to bring other 
-developer's changes to their repository. In Git *lingo* sending changes to a repository is called *pull* 
-and bringing changes is *push*.
+developer's changes to their repository. In Git *lingo* sending changes to a repository is called *push* 
+and bringing changes is *pull*.
 
 Git *per-se* doesn't have a central repository but to make things easier we'll define a repository that 
 will hold the releases and stable branches for DIRAC. Developers will bring changes from that repository 
 to synchronize their code with the DIRAC releases. To send changes to be released, users will have to push 
-their changes to a repository where the integration manager can pull the changes from, and send a *pull request*. 
-A *pull request* is telling the release manager where to get the changes from to integrate them into the next 
+their changes to a repository where the integration manager can pull the changes from, and send a *Pull Request*. 
+A *Pull Request* is telling the release manager where to get the changes from to integrate them into the next 
 DIRAC release.
 
 .. figure:: integrationModel.png
     :align: left
     :alt: Schema on how changes flow between DIRAC and users
      
-    How to publish and retrieve changes to DIRAC (see also `Pro Git Book <http://progit.org/book/>`_)
+    How to publish and retrieve changes to DIRAC (see also `Pro Git Book <http://git-scm.com/book>`_)
 
 Developers use the *developer private* repositories for their daily work. When they want something to be 
 integrated, they publish the changes to their *developer public* repositories and send a *Pull Request* 
 to the release manager. The release manager will pull the changes to his/her own repository, 
 and publish them in the *blessed repository* where the rest of the developers can pull the new changes 
-to their respective *developer private* repositories.
+to their respective *developer private* repositories. 
+
+In practice, the DIRAC Project is using the `Github <http://github.com/DIRACGrid>`_ service to manage 
+the code integration operations. This will be described in subsequent chapters.
 
 
 Decentralized but centralized
@@ -83,41 +58,54 @@ and then push the changes to their *public* repository. Once there are new chang
 repositories, they can issue a *pull request* so the changes can be included in central *release* 
 repository.
 
-----------------------------------------------
 How to set up the *release* remote repository
 ----------------------------------------------
 
-To set up the *release* repository as a remote repository do::
+Developers work on the code in a local Git repositories in branches started from the ones in the
+main *release* remote repository. To set up the *release* repository in your local Git environment 
+as a remote repository do::
 
- $ git remote add release repourl
+ $ git remote add release <repourl>
  $ git fetch release
- From repourl
+ From <repourl>
   * [new branch]      integration -> release/integration
   * [new branch]      master     -> release/master
-
-The  
  
+The *release* repository currently used in the project is managed by the the Github service.
+The <repourl> for the DIRAC software module is thus *git@github.com:DIRACGrid/DIRAC.git*. The
+urls for other modules are constructed in the similar way.
  
-The main branches
-====================
+Branches in the *release* repository
+=====================================
 
-The central *release* repository holds many branches. But there are only two branches with an infinite life time:
+Branches in the *release* repository are strictly defined to support the procedure of making
+software releases. These branches are only manipulated by the release managers and never
+directly by developers.
+
+Permanent branches
+-------------------
+
+The central *release* repository holds many branches. But there are only two branches with an infinite 
+life time:
 
  - master
  - integration
  
 Branch *release/master* is considered to be the main branch where the code is **always** required to be in a 
-*production-ready* state.
+*production-ready* state. The code in the *release/master* corresponds to the current production release
+of the project software.
 
 Branch *release/integration* holds all the changes that are ready to go to the next release. Release managers 
 use this branch to accumulate changes and test the integration between different merges. When the source code 
 in *releases/integration* reaches a stable point and is ready to be released, all of the changes should be 
-merged into *release/master* and then tagged with a new release number.
+merged into *release/master* and then tagged with a new release number. The *release/integration* branch is
+a usual starting point for the new feature developments. 
 
-Supporting branches
-=====================
+Release branches
+----------------------
 
-Next to the main branches, there can be other type of branches such as:
+Release branches are used to build a new release distribution archives. 
+The release manager creates release branches from the *release/integration* branch. 
 
  - Release branches
  - Feature branches
