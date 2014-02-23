@@ -26,7 +26,6 @@ mockGSI.version.__version__ = "1"
 # MySQLdb
 mockMySQLdb = mock.Mock()
 
-
 #...............................................................................
 # sys.modules hacked
 
