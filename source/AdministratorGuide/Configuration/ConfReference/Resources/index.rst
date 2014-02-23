@@ -1,3 +1,5 @@
+.. _dirac-resources-cs:
+
 Resources - Section
 ===================
 
