@@ -73,7 +73,7 @@ The pilot submission logic is as follows:
           per iteration by the prioritySum.
 
         - select TaskQueues from the WMS system appropriated for PilotSubmission by the supported
-        SubmitPools
+          SubmitPools
 
         - For each TaskQueue determine a target number of pilots to submit:
 
