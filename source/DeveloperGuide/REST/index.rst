@@ -140,15 +140,21 @@ the value has to be a comma separared list of possible values. An example would 
   *Accepts metadata condition*
 
 **GET /filecatalogue/directory/<directory>**
-  Retrieve contents of the specified directory
+  Retrieve contents of the specified directory. Set parameter *verbose* to true to get extended information.
 
 **GET /filecatalogue/directory/<directory>/metadata**
   Retrieve metadata values for this directory compatible with the metadata condition.
   *Accepts metadata condition*
 
 **GET /filecatalogue/directory/<directory>/search**
-  Search from this directory subdirectories that match the requested metadata search.
+  Search from this directory subdirectories that match the requested metadata search. Each directory will also have the amount of files it contains and their total size.
   *Accepts metadata condition*
+  
+**GET /filecatalogue/file/<file>/attributes**
+  Get the file information 
+
+**GET /filecatalogue/file/<file>/metadata**
+  Get the file metadata
 
   
 
