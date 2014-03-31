@@ -27,8 +27,16 @@ In DIRAC project unit tests should be prepared for the developer herself, integr
 for regression tests the responsible person should be a complete subsystem (i.e. WMS, DMS, SMS etc..) manager, while certification tests should be 
 prepared and performed by release managers.  
 
-This document will try to formulate the basic requirements for the lowest level of testing: unit tests, on top of which any complicated 
+This document will first try to formulate the basic requirements for the lowest level of testing: unit tests, on top of which any complicated 
 and fully featured testing framework could be defined. 
+
+The second part will look better into integration and system tests. 
+
+
+
+Unit tests
+==========
+
 
 Tools and methodology
 ---------------------
@@ -365,6 +373,38 @@ All test modules should follow those conventions:
 **T7**
   The test modules should be kept as close as possible to the modules they are testing, preferably in a *test* subdirectory on DIRAC subsystem
   package directory, i.e: all tests modules for WMS should be kept in *DIRAC/WMS/tests* directory.
+
+
+Integration and System tests
+=============================
+
+Integration and system tests should not be defined at the same level of the unit tests. T
+he reason is that, in order to properly run such tests, an environment might be to be defined. 
+
+Integration and system tests do not just run 1 module's code. Instead, they evaluate that the connection between several modules,
+or the defined environment, is correctly coded.
+
+The TestDIRAC repository
+-------------------------
+
+The GIT repository https://github.com/DIRACGrid/TestDIRAC contains some integration and system tests. 
+These tests are not only used for the certification process. Some of them, in fact, might be extremely useful for the developers.
+Let's take for example the tests in https://github.com/DIRACGrid/TestDIRAC/tree/master/System
+
+These are tests of the chain
+
+  Client -> Service -> DB
+
+They supposes that the DB is present, and that the service is running. Indeed, usually in DIRAC you need to access a DB, write and read from it.
+So, you develop a DB class holding such basic interaction. Then, you develop a Service (Handler) that will look into it.
+Lastly, a Client will hold the logic, and will use the Service to connect to the DB. Just to say, an example of such a chain is:
+
+  TransformationClient -> TransformationManagerHandler -> TransformationDB
+
+And this is tested in https://github.com/DIRACGrid/TestDIRAC/blob/master/System/TransformationSystem/TestClientTransformation.py
+
+The tests are something as simple as a series of put/delete, but running such test can solve you few headaches before committing your code.
+
 
 Footnotes
 ---------
