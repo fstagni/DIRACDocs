@@ -14,10 +14,6 @@ using global variables or a database back-end.
 Creating a Service Handler is best illustrated by the example below which is presenting a fully 
 functional although a simple service:: 
 
-    ########################################################################
-    # $HeadURL: $
-    ########################################################################
-    
     """ SimpleMessage Service is an example of how to build services in the DIRAC framework 
     """
     
@@ -67,12 +63,9 @@ functional although a simple service::
 
 Let us walk through this code to see which elements should be provided.
 
-First, the comment line with the SVN keyword ''$HeadURL: $'' is provided. This line will 
-be substituted by the SVN to show the author and the date of the last commit. 
-
-Next comes the documentation string describing the service purpose and behavior. It is
+The first lines show the documentation string describing the service purpose and behavior. It is
 followed by the ''__RCSID__'' global module variable which is assigned the value of the
-''$Id: $'' SVN keyword.
+''$Id: $'' Git keyword.
 
 Several import statements will be clear from the subsequent code.
 
@@ -150,12 +143,21 @@ The Service can be also installed using the SystemAdministrator CLI interface::
   > install service Framework SimpleMessage      
   
 The SystemAdministrator interface can also be used to remotely control the Service, start or
-stop it, uninstall, get the Service status, etc.       
+stop it, uninstall, get the Service status, etc. and can be invoked in the standard way via a 
+DIRAC client installation:
+
+  > dirac-admin-sysadmin-cli --host=myDIRACServer
+
+In any case, if you are developing a service, you might test it without installing it, by simply running:
+
+  > dirac-service Framework/SimpleMessage
+
+
 
 Calling the Service from a Client
 -----------------------------------
 
-Once the Service is installed and running it can be accessed from the clients in the way
+Once the Service is running it can be accessed from the clients in the way
 illustrated by the following code snippet::
 
   from DIRAC.Core.DISET.RPCClient import RPCClient
