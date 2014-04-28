@@ -258,7 +258,7 @@ Like all SSH Computing Elements, it's defined like the following::
 The ``SSHOptions`` is needed when for example the user used to run the agent isn't local and requires access to afs. As the way the agents are started isn't a login, they does not 
 have access to afs (as they have no token), so no access to the HOME directory. Even if the HOME environment variable is replaced, ssh still looks up the original home directory. 
 If the ssh key and/or the known_hosts file is hosted on afs, the ssh connection is likely to fail. The solution is to pass explicitely the options to ssh with the SSHOptions option. 
-For example, 
+For example::
 
     SSHOptions = -o UserKnownHostsFile=/local/path/to/known_hosts 
 
@@ -281,7 +281,7 @@ A commented example follows::
      SSHUser = dirac_ssh
      # if SSH password is no given, the public key connection is assumed
      SSHPassword = XXXXXXXXX
-     
+     # specify the SSHKey if needed (like in the SSHBatchComputingElement above)
      Queues
      {
        # The queue section name should be the same as the name of the actual batch queue
