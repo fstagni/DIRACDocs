@@ -201,7 +201,7 @@ SSHBatch Computing Element
 
 This is an extension of the SSHComputingElement capable of submitting several jobs on one host.
 
-Like all SSH Computing Elements, it's defined like the following:
+Like all SSH Computing Elements, it's defined like the following::
 
    # Section placed in the */Resources/Sites/<domain>/<site>/CEs* directory
    pc.farm.ch  
