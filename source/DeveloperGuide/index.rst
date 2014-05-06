@@ -9,6 +9,7 @@ The DIRAC Developer Guide is describing the procedures and rules for developing 
 
    
    DevelopmentModel/index
+   DeveloperInstallation/index
    BranchingModel/index  
    AddingNewComponents/index
    Framework/index
