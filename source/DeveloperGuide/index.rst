@@ -4,6 +4,11 @@ Developer Guide
 
 The DIRAC Developer Guide is describing the procedures and rules for developing new DIRAC components.
 
+This documentation can be freely modified, as it is maintained in the `DiracGRID/DIRACDocs <https://github.com/DIRACGrid/DIRACDocs>`_ repository in GitHub. As developer, you are not only welcome to add or modify documentation: you are required to add documentation for everything that deserve a careful explanation. 
+
+For every question, or comment, regarding specific development activities, including suggestion and comments to RFC, the correct forum for is the `dirac-develop <https://groups.google.com/forum/#!forum/diracgrid-develop>`_ google group. For everything operational, instead, you can write on the `dirac-grid <https://groups.google.com/forum/#!forum/diracgrid-forum>`_ group.
+
+
 .. toctree::
    :maxdepth: 1
 
