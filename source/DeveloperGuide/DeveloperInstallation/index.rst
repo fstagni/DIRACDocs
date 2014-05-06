@@ -2,17 +2,6 @@
 Setting up a development installation
 ======================================
 
------------------------------
-Before jumping into the code
------------------------------
-
-DIRAC source code is maintained in GIT distributed code management system. It is highly recommended to be familiar with with GIT 
-before jumping into the code development. Please, go through a GIT tutorial. The recommended ones are:
-
- - For an GIT shallow overview the GIT community book at http://book.git-scm.com/ . 
-   Do not be alarmed by the word *book*. It's more a tutorial on the basics of GIT. 
- - For really knowing what's going on read http://progit.org/book/ . It'll make using GIT a painless and nice experience.
- 
 -------------------------------------
 Sharing your development
 ------------------------------------- 
@@ -76,11 +65,14 @@ First you need to check out all the sources you need to start working on DIRAC o
  
        DIRAC/Core/scripts/dirac-deploy-scripts.py
 
+
+*THIS WE NEED TO MODIFY*
  8. Get the DIRAC External binaries for you platform by running::
  
        scripts/dirac-install -X -t server -i 26
     
     This may take a while if there aren't externals available for your platform and they have to be compiled.
+*THIS WE NEED TO MODIFY*
  9. Configure DIRAC by executing::
  
        scripts/dirac-configure -S setupyouwanttorun -C configurationserverslist -n sitename -H
@@ -106,6 +98,8 @@ You're ready for DIRAC development !
 
 Configuring *Eclipse*
 =======================
+
+*THIS WE NEED TO MODIFY*
 
 Two extensions are required for developing DIRAC with *Eclipse*. To install them go to 
 *Help->Install new software->top right button "Add..." -> Insert name and URL* and then select the software to install in the list.
@@ -200,3 +194,4 @@ Now, to change the active working set or to disable them:
  
  
  
+
