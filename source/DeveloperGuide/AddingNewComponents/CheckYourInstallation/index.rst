@@ -106,36 +106,117 @@ Quite clear, isn't it? Often, you'll end up doing a lot of code like that:
 Playing with the Configuration Service
 --------------------------------------
 
+If you are here, it means that your developer installation contains a **dirac.cfg** file, that should stay in the $DIRACINSTALLATION/etc directory. 
+We'll play a bit with it now.
 
-Getting a certificate
+You have already done this:
+
+   In [14]: from DIRAC import gConfig
+
+   In [15]: gConfig.getValue('/DIRAC/Setup')
+   Out[15]: 'DeveloperSetup'
+
+Where does 'DeveloperSetup' come from? Open that dirac.cfg and search for it. Got it? it's in 
+
+.. code-block:: python
+   
+   DIRAC
+   {
+     ...
+     Setup = DeveloperSetup
+     ...
+   }
+
+Easy, huh? Try to get something else now, still using gConfig.getValue().
+
+So, gConfig is another singleton: it is the guy you need to call for basic interactions with the `Configuration Service <needAReference>`_. 
+If you are here, we assume you already know about the CS servers and layers. More information can be found in the Administration guide.
+We remind that, for a developer installation, we will work in ISOLATION, so with only the local dirac.cfg
+
+Mostly, gConfig exposes get type of methods:
+
+.. code-block:: python
+   
+   In [2]: gConfig.get
+   gConfig.getOption       gConfig.getOptionsDict  gConfig.getServersList  
+   gConfig.getOptions      gConfig.getSections     gConfig.getValue        
+
+for example, try:
+
+.. code-block:: python
+   
+   In [2]: gConfig.getOptionsDict('/DIRAC')
+
+Now, we'll modify the dirac.cfg. 
+
+
+Getting a Proxy
 ---------------------
 
-Now, it's time to issue:
+We assume that you have already your public and private certificates key in $HOME/.globus. 
+Then, do the following:
 
-    dirac-proxy-init
+.. code-block::
 
-That should print something like:
+   dirac-proxy-init
 
-    Generating proxy... 
-    Enter Certificate password:
-    Uploading proxy for lhcb_user... 
-    Uploading proxy for private_pilot... 
-    Proxy generated: 
-    subject      : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=fstagni/CN=693025/CN=Federico Stagni/CN=proxy
-    issuer       : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=fstagni/CN=693025/CN=Federico Stagni
-    identity     : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=fstagni/CN=693025/CN=Federico Stagni
-    timeleft     : 23:59:58
-    DIRAC group  : lhcb_user
-    path         : /tmp/x509up_u1000
-    username     : fstagni
-    properties   : NormalUser 
+You probably got something like:
 
-    Proxies uploaded: 
-      DN                                                                               | Group         | Until (GMT) 
-     /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=fstagni/CN=693025/CN=Federico Stagni | lhcb_prmgr    | 2014/07/03 10:46 
-     /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=fstagni/CN=693025/CN=Federico Stagni | lhcb_user     | 2014/07/03 10:46 
-     /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=fstagni/CN=693025/CN=Federico Stagni | private_pilot | 2014/07/03 10:46 
-     /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=fstagni/CN=693025/CN=Federico Stagni | lhcb_pilot    | 2014/07/03 10:46 
+.. code-block::
+
+   toffo@pclhcb181:~/LHCbCode/DIRAC$ dirac-proxy-init 
+   Generating proxy... 
+   Enter Certificate password:
+   DN /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=fstagni/CN=693025/CN=Federico Stagni is not registered 
+
+This is because DIRAC still doesn't know you exist. You should add yourself to the CS. For example, I had add the following section:
+
+.. code-block::
+
+   Registry
+   {
+     Users
+     {
+       fstagni
+       {
+         DN = /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=fstagni/CN=693025/CN=Federico Stagni
+         CA = /DC=ch/DC=cern/CN=CERN Trusted Certification Authority
+         Email = federico.stagni@cern.ch
+       }
+     }
+     
+
+All the info you want and much more in:
+
+.. code-block::
+
+   openssl x509 -in usercert.pem -text
+
+
+Now, it's time to issue again:
+
+.. code-block::
+
+   toffo@pclhcb181:~/.globus$ dirac-proxy-init 
+   Generating proxy... 
+   Enter Certificate password:
+   User fstagni has no groups defined 
+   
+So, let's add the groups within the /Registry section:
+
+.. code-block::
+
+       Groups
+       {
+         devGroup
+         {
+           Users = fstagni 
+         }
+       }
+
+You can keep playing with it (e.g. adding some properties), but for the moment this is enough.
+
+
 
 Exercise
 --------
@@ -145,8 +226,8 @@ Code a python module in DIRAC.Core.Utilities where there is only the following f
 .. code-block:: python
 
    def checkCAOfUser( user, CA ):
-   """ user, and CA are string
-   """
+     """ user, and CA are string
+     """
 
 This function should:
 * Get from the CS the registered Certification Authority for the user
