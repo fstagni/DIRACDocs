@@ -46,7 +46,7 @@ Let's start with the **logger**
    Hello world 
    Out[4]: True
 
-You'll use gLogger a lot. What's that? It is a `singleton <http://en.wikipedia.org/wiki/Singleton_pattern>`_ object for logging in DIRAC. Needless to say, you'll use it a lot.
+What's that? It is a `singleton <http://en.wikipedia.org/wiki/Singleton_pattern>`_ object for logging in DIRAC. Needless to say, you'll use it a lot.
 
 .. code-block:: python
 
@@ -136,4 +136,33 @@ That should print something like:
      /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=fstagni/CN=693025/CN=Federico Stagni | lhcb_user     | 2014/07/03 10:46 
      /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=fstagni/CN=693025/CN=Federico Stagni | private_pilot | 2014/07/03 10:46 
      /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=fstagni/CN=693025/CN=Federico Stagni | lhcb_pilot    | 2014/07/03 10:46 
+
+Exercise
+--------
+
+Code a python module in DIRAC.Core.Utilities where there is only the following function:
+
+.. code-block:: python
+
+   def checkCAOfUser( user, CA ):
+   """ user, and CA are string
+   """
+
+This function should:
+* Get from the CS the registered Certification Authority for the user
+* if the CA is the expected one return S_OK, else return S_ERROR
+
+Code a python script that:
+* call such function
+* log wih info or error mode depending on the result
+
+Remember to start the script with:
+
+.. code-block:: python
+
+   #!/usr/bin/env python
+   """ Some doc: what does this script should do?
+   """
+   from DIRAC.Core.Base import Script
+   Script.parseCommandLine()
 
