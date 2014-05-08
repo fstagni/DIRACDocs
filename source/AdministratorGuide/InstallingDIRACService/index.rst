@@ -389,6 +389,14 @@ is to add an entry in the */etc/inittab*::
 
       SV:123456:respawn:/opt/dirac/sbin/runsvdir-start
 
+or if using ``upstart`` (in RHEL6 for example), add a file ``/etc/init/dirac.conf`` containing::
+
+      start on runlevel [123456]
+      stop on runlevel [0]
+
+      respawn
+      exec /opt/dirac/sbin/runsvdir-start
+
 Together with a script like (it assumes that in your server DIRAC is using *dirac* local user to run)::
 
       #!/bin/bash
