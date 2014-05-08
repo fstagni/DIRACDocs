@@ -29,7 +29,10 @@ Requirements
 
       - 9130-9200 ports should be open in the firewall for the incoming TCP/IP connections (this is the 
         default range if predefined ports are used, the port on which services are listening can be 
-        configured by the DIRAC administrator);
+        configured by the DIRAC administrator)::
+        
+         iptables -I INPUT -p tcp --dport 9130:9200 -j ACCEPT
+         service iptables save
       - For the server hosting the portal, ports 80 and 443 should be open and redirected to ports 
         8080 and 8443 respectively, i.e. setting iptables appropriately::
 
@@ -43,7 +46,8 @@ Requirements
       - Grid host certificates in pem format;
       - At least one of the servers of the installation must have updated CAs and CRLs files; if you want to install
          the standard Grid CAs you can follow the instructions at https://wiki.egi.eu/wiki/EGI_IGTF_Release. They 
-         are usally installed /etc/grid-security/certificates 
+         are usally installed /etc/grid-security/certificates. You may also need to install the ``fetch-crl`` package,
+         and run the ``fetch-crl`` command once installed.
       - If gLite third party services are needed (for example, for the pilot job submission via WMS 
         or for data transfer using FTS) gLite User Interface must be installed and the environment set up 
         by "sourcing" the corresponding script, e.g. /etc/profile.d/grid-env.sh.
@@ -80,7 +84,11 @@ the steps below. This procedure must be followed for the primary server and for 
 
       mkdir -p /opt/dirac/etc/grid-security/
       cp hostcert.pem hostkey.pem /opt/dirac/etc/grid-security
-
+   In case your host certificate is in the p12 format, you can convert it with::
+   
+      openssl pkcs12 -in host.p12 -clcerts -nokeys -out hostcert.pem
+      openssl pkcs12 -in host.p12 -nocerts -nodes -out hostkey.pem
+   Make sure the permissions are set right correctly, such that the hostkey.pem is only readable by the ``dirac`` user.
  - As *dirac* user, create a directory or a link pointing to the CA certificates directory, for example::
 
       ln -s /etc/grid-security/certificates  /opt/dirac/etc/grid-security/certificates    
@@ -152,7 +160,7 @@ be taken:
         #
         #  DIRAC release version (this is an example, you should find out the current 
         #  production release)
-        Release = v6r3p7
+        Release = v6r10p4
         #  Python version of the installation
         PythonVersion = 26
         #  To install the Server version of DIRAC (the default is client)
@@ -203,20 +211,20 @@ be taken:
         #  they properly initialize the configuration data
         #
         #  Name of the Admin user (default: None )
-        AdminUserName = atsareg
+        AdminUserName = adminusername
         #  DN of the Admin user certificate (default: None )
         #  In order the find out the DN that needs to be included in the Configuration for a given 
         #  host or user certificate the following command can be used::
         #
         #          openssl x509 -noout -subject -enddate -in <certfile.pem>
         #
-        AdminUserDN = /O=GRID-FR/C=FR/O=CNRS/OU=CPPM/CN=Andrei Tsaregorodtsev
+        AdminUserDN = /DC=ch/aminDN
         #  Email of the Admin user (default: None )
-        AdminUserEmail = atsareg@in2p3.fr
+        AdminUserEmail = adminmail@provider
         #  Name of the Admin group (default: dirac_admin )
         AdminGroupName = dirac_admin 
         #  DN of the host certificate (*) (default: None )
-        HostDN = /DC=ch/DC=cern/OU=computers/CN=volhcb29.cern.ch
+        HostDN = /DC=ch/DC=country/OU=computers/CN=computer.dn
         # Define the Configuration Server as Master for your installations
         ConfigurationMaster = yes
         
@@ -239,13 +247,13 @@ be taken:
         Database
         {
           #  User name used to connect the DB server
-          User = [default: Dirac]
+          User = Dirac # default value
           #  Password for database user acess. Must be set for SystemAdministrator Service to work
           Password = XXXX
           #  Password for root DB user. Must be set for SystemAdministrator Service to work
           RootPwd = YYYY
           #  location of DB server. Must be set for SystemAdministrator Service to work
-          Host = [default: localhost]
+          Host = localhost # default
           #  There are 2 flags for small and large installations Set either of them to True/yes when appropriated
           # MySQLSmallMem:        Configure a MySQL with small memory requirements for testing purposes
           #                       innodb_buffer_pool_size=200MB
