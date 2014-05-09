@@ -307,7 +307,7 @@ The test suite code itself follows:
 
    import unittest
    from mock import Mock
- 
+   
    from DIRAC import S_OK, S_ERROR
    from DIRAC.CheeseShopSystem.Client.CheeseShopClient import Cheese, CheeseShopClient
    from DIRAC.CheeseShopSystem.Service.CheeseShopOwner import CheeseShopOwner
