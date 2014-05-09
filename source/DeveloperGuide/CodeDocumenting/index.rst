@@ -18,6 +18,7 @@ Release documentation
 ---------------------
 
 Releases documentation can be found in 2 places: release notes, and github wiki:
+
 * release notes are automatically created from titles of the Pull Requests. So, pay attention to what you put in there.
 * The github wiki can contain a section, for each DIRACGrid repository, highlighting update operations, for example the DIRAC releases notes are linked from the `DIRAC wiki main page <https://github.com/DIRACGrid/DIRAC/wiki>`_
 
