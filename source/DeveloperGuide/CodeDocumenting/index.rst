@@ -27,6 +27,6 @@ Full development documentation
 ------------------------------
 
 As said at the beginning of this guide, this documentation is in `github <https://github.com/DIRACGrid/DIRACDocs>`_. 
-It is very easy to contribute to it, and you are welcome to do that. 
+It is very easy to contribute to it, and you are welcome to do that. You don't even have to clone the repository: github lets you edit it online. 
 This documentation is written in ``RST`` and it is compiled using `sphinx <http://sphinx-doc.org/>`_.
 From time to time, the docuentation is built and added to the official documentation on the `DiracGrid website <http://diracgrid.org/files/docs/index.html>`_
