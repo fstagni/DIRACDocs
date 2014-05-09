@@ -164,7 +164,7 @@ purposes we can just pretend for a while that the owner is really checking the s
 for ``CheeseShopOwner``::
 
 .. code-block:: python
-
+   
    from types import *
    from DIRAC import S_OK, S_ERROR, gLogger, gConfig
    from DIRAC.Core.DISET.RequestHandler import RequestHandler  
@@ -195,10 +195,11 @@ for ``CheeseShopOwner``::
        return cheeseShopDB.insertCheese( cheeseName, price, quantity )
 
 
+
 And here for ``CheeseShopClient`` class::
 
 .. code-block:: python
-
+   
    from DIRAC import S_OK, S_ERROR, gLogger, gConfig
    from DIRAC.Core.Base.Client import Client
  
