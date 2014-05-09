@@ -161,26 +161,9 @@ Let's assume we are coding a client to the ``CheeseShopSystem`` inside DIRAC. Th
 ``CheeseShopSystem.DB.CheeseShopDB`` database behind it. Our ``CheeseShopSystem.Client.CheeseShopClient`` could only ask the owner for a specific cheese or try to buy it [#]_.
 We know the answers for all question that have been asked already, there was no cheese at all in original script, but here for teaching
 purposes we can just pretend for a while that the owner is really checking the shop's depot and even more, the Cheddar is present. The code 
-for ``CheeseShopOwner``::
+for ``CheeseShopOwner``:
 
-
-.. code-block::
-
-   LocalSite
-   {
-     Site = DIRAC.mySite.local
-     CPUScalingFactor = 0.0
-     #SharedArea = /cvmfs/lhcb.cern.ch/lib
-     #LocalArea =/home/some/local/LocalArea
-     GridCE = my.CE.local
-     CEQueue = myQueue
-     Architecture = x86_64-slc5
-     #CPUTimeLeft = 200000
-     CPUNormalizationFactor = 10.0
-   }
-
-
-.. code-block::
+.. code-block:: python
 
    from types import *
    from DIRAC import S_OK, S_ERROR, gLogger, gConfig
@@ -213,7 +196,7 @@ for ``CheeseShopOwner``::
 
 
 
-And here for ``CheeseShopClient`` class::
+And here for ``CheeseShopClient`` class:
 
 .. code-block:: python
    
