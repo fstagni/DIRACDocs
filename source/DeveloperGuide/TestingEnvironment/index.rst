@@ -163,6 +163,18 @@ We know the answers for all question that have been asked already, there was no 
 purposes we can just pretend for a while that the owner is really checking the shop's depot and even more, the Cheddar is present. The code 
 for ``CheeseShopOwner``::
 
+
+.. code-block:: python
+
+   result = aDIRACMethod()
+   if not result['OK']:
+       gLogger.error('aDIRACMethod-Fail', "Call to aDIRACMethod() failed with message %s" %result['Message'])
+       return result
+   else:
+       returnedValue = result['Value']
+
+
+
 .. code-block:: python
    
    from types import *
