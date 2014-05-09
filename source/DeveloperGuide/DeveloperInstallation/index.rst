@@ -66,14 +66,67 @@ First you need to check out all the sources you need to start working on DIRAC o
        DIRAC/Core/scripts/dirac-deploy-scripts.py
 
 
-*THIS WE NEED TO MODIFY*
- 8. Get the DIRAC External binaries for you platform by running::
+ 8. Now you need to install the required python packages for DIRAC to be able to run. There are two ways of doing that:
+ 
+   8.1 If you want to use your own python (it needs to be 2.6 or 2.7) you can install all the required packages by hand. Just do::
+       
+       pip install GSI
+       pip install MySQL-python
+ 
+   8.2 If you don't have python 2.6 ot 2.7 available for your system or you just want to get the DIRAC External binaries for you platform, run::
  
        scripts/dirac-install -X -t server -i 26
     
-    This may take a while if there aren't externals available for your platform and they have to be compiled.
-*THIS WE NEED TO MODIFY*
- 9. Configure DIRAC by executing::
+   This may take a while if there aren't externals available for your platform and they have to be compiled.
+       
+
+ 9. Last step is to to configure DIRAC. 
+ 
+   9.1 If you want to create an isolated installation just creaate a *etc/dirac.cfg* file with::
+   
+       DIRAC {
+         Setup = Local
+         Configuration {
+           Servers = dips://localhost:9135/Configuration/Server
+           Master = yes
+         }
+         Setups {
+           Local {
+             Configuration = Local
+           }
+         }
+       }
+       Registry {                                                                                                                                                                                                                                                                             
+         Users {                                                                                                                                                                                                                                                                  
+           yourusername {                                                                                                                                                                                                                                                                 
+             DN = your/DN/here                                                                                                                                                                                                                     
+           }                                                                                                                                                                                                                                                                          
+         }
+         Groups {                                                                                                                                                                                                                                                                      
+           admin {                                                                                                                                                                                                                                                                    
+             Users = yourusername                                                                                                                                                                                                                                                        
+             Properties = CSAdministrator                                                                                                                                                                                                                                            
+           }                                                                                                                                                                                                                                                                           
+         }                                                                                                                                                                                                                                                                           
+       }                                                                                                                                                                                                                                                                                
+       Systems {                                                                                                                                                                                                                                                                  
+         Configuration {                                                                                                                                                                                                                                                               
+           Local {                                                                                                                                                                                                                                                                     
+             Services {                                                                                                                                                                                                                                                               
+               Configuration {                                                                                                                                                                                                                                                       
+                 Port = 9135                                                                                                                                                                                                                                                         
+                 Authorization {                                                                                                                                                                                                                                                      
+                   Default = all                                                                                                                                                                                                                                                     
+                 }                                                                                                                                                                                                                                                                   
+               }                                                                                                                                                                                                                                                                     
+             }                                                                                                                                                                                                                                                                       
+           }                                                                                                                                                                                                                                                                         
+         }                                                                                                                                                                                                                                                                           
+       }  
+   
+   
+   
+   9.2 If you want to connect to an already existing installation:
  
        scripts/dirac-configure -S setupyouwanttorun -C configurationserverslist -n sitename -H
 
