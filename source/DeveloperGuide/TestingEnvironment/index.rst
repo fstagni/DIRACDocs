@@ -400,11 +400,14 @@ The TestDIRAC repository
 The GIT repository ``https://github.com/DIRACGrid/TestDIRAC`` contains some integration and system tests. 
 These tests are not only used for the certification process. Some of them, in fact, might be extremely useful for the developers.
 
+Integration tests
+~~~~~~~~~~~~~~~~~
 
+**Integration** is a quite vague term.
 
 
 System tests
-------------
+~~~~~~~~~~~~
 
 Let's take for example the tests in https://github.com/DIRACGrid/TestDIRAC/tree/master/System
 
