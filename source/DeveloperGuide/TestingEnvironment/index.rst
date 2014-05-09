@@ -165,7 +165,7 @@ for ``CheeseShopOwner``::
 
 
 
-.. code-block:: python
+.. code-block::
 
    from types import *
    from DIRAC import S_OK, S_ERROR, gLogger, gConfig
