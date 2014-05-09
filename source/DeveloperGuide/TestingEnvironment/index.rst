@@ -327,7 +327,7 @@ The test suite code itself follows:
        self.shopOwner.isThere = Mock( return_value = S_OK( { "Price" : 9.95, "Quantity" : 20.0 } ) )
        # and buyCheese methods
        self.shopOwner.buyCheese = Mock() 
-    
+      
      def tearDown( self ):
        del self.shopOwner
        del self.money
