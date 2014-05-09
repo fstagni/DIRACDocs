@@ -7,8 +7,8 @@ Developing new DIRAC components
 
    CheckYourInstallation/index
    DevelopingServices/index
+   DevelopingDatabases/index
    DevelopingAgents/index
    DevelopingExecutors/index
    DevelopingCommands/index
-   DevelopingDatabases/index
    DevelopingWebPages/index  
