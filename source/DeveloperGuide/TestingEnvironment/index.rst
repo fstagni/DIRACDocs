@@ -164,16 +164,6 @@ purposes we can just pretend for a while that the owner is really checking the s
 for ``CheeseShopOwner``::
 
 
-.. code-block:: python
-
-   result = aDIRACMethod()
-   if not result['OK']:
-       gLogger.error('aDIRACMethod-Fail', "Call to aDIRACMethod() failed with message %s" %result['Message'])
-       return result
-   else:
-       returnedValue = result['Value']
-
-
 
 .. code-block:: python
    
