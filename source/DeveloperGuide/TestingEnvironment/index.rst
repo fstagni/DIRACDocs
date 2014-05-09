@@ -395,7 +395,7 @@ Instead, they evaluate that the connection between several modules, or the defin
 
 
 The TestDIRAC repository
-________________________
+------------------------
 
 The GIT repository ``https://github.com/DIRACGrid/TestDIRAC`` contains some integration and system tests. 
 These tests are not only used for the certification process. Some of them, in fact, might be extremely useful for the developers.
