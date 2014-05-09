@@ -147,7 +147,12 @@ for example, try:
    
    In [2]: gConfig.getOptionsDict('/DIRAC')
 
-Now, we'll modify the dirac.cfg. 
+In the next section we will modify a bit the dirac.cfg file. Before doing that, have a look at it. 
+It's important what's in there, but for the developer installation it is also important what it is NOT there. We said we will work in isolation.
+So, it's important that this file does not contain any URL to server infrastructure (at least, not at this level: later, when you will feel more confortable, you can add some).
+
+A very important option of the cfg file is "DIRAC/Configuration/Server": this option can contain the URL(s) of the running Configuration Server.
+But, as said, for doing development, this option should stay empty.
 
 
 Getting a Proxy
