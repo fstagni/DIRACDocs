@@ -301,7 +301,7 @@ Other scenarios are:
 7. Some other unexpected problems in underlying components, which by the way we are not going to be test or explore here. *You just can't test everything, 
 keep track on testing your code!*
 
-The test suite code itself follows::
+The test suite code itself follows:
 
 .. code-block::python
 
