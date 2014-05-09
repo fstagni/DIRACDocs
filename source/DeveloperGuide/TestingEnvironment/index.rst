@@ -30,7 +30,7 @@ prepared and performed by release managers.
 This document will first try to formulate the basic requirements for the lowest level of testing: unit tests, on top of which any complicated 
 and fully featured testing framework could be defined. 
 
-The second part will look better into integration and system tests. 
+The second part will look into integration and system tests. 
 
 
 
@@ -153,6 +153,7 @@ It is clear that in such cases the developer should try to instrument the test s
 In a dynamically typed language like Python_ every test double is easy to create as there is no need to simulate the full API of depended-on 
 components and the developer can freely choose only those that are used in her own code. 
 
+
 Example
 -------
 
@@ -161,6 +162,8 @@ Let's assume we are coding a client to the ``CheeseShopSystem`` inside DIRAC. Th
 We know the answers for all question that have been asked already, there was no cheese at all in original script, but here for teaching
 purposes we can just pretend for a while that the owner is really checking the shop's depot and even more, the Cheddar is present. The code 
 for ``CheeseShopOwner``::
+
+.. code-block::python
 
   from types import *
   from DIRAC import S_OK, S_ERROR, gLogger, gConfig
@@ -193,6 +196,8 @@ for ``CheeseShopOwner``::
 
 
 And here for ``CheeseShopClient`` class::
+
+.. code-block::python
 
   from DIRAC import S_OK, S_ERROR, gLogger, gConfig
   from DIRAC.Core.Base.Client import Client
@@ -296,6 +301,8 @@ Other scenarios are:
 keep track on testing your code!*
 
 The test suite code itself follows::
+
+.. code-block::python
 
   import unittest
   from mock import Mock
