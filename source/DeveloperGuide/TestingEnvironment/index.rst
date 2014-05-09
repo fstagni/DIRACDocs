@@ -166,7 +166,7 @@ for ``CheeseShopOwner``::
 
 
 .. code-block:: python
-   
+
    from types import *
    from DIRAC import S_OK, S_ERROR, gLogger, gConfig
    from DIRAC.Core.DISET.RequestHandler import RequestHandler  
