@@ -156,8 +156,8 @@ components and the developer can freely choose only those that are used in her o
 Example
 -------
 
-Let's assume we are coding a client to the ``CheeseShopSystem`` inside DIRAC. The depended-on components are ``CSS.Service.CheeseShopOwner`` with 
-``CSS.DB.CheeseShopDB`` database behind it. Our ``CSS.Client.CheeseShopClient`` could only ask the owner for a specific cheese or try to buy it [#]_.
+Let's assume we are coding a client to the ``CheeseShopSystem`` inside DIRAC. The depended-on components are ``CheeseShopSystem.Service.CheeseShopOwner`` with 
+``CheeseShopSystem.DB.CheeseShopDB`` database behind it. Our ``CheeseShopSystem.Client.CheeseShopClient`` could only ask the owner for a specific cheese or try to buy it [#]_.
 We know the answers for all question that have been asked already, there was no cheese at all in original script, but here for teaching
 purposes we can just pretend for a while that the owner is really checking the shop's depot and even more, the Cheddar is present. The code 
 for ``CheeseShopOwner``::
