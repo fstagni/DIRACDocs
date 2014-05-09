@@ -163,7 +163,7 @@ We know the answers for all question that have been asked already, there was no 
 purposes we can just pretend for a while that the owner is really checking the shop's depot and even more, the Cheddar is present. The code 
 for ``CheeseShopOwner``::
 
-.. code-block::python
+.. code-block:: python
 
    from types import *
    from DIRAC import S_OK, S_ERROR, gLogger, gConfig
@@ -197,7 +197,7 @@ for ``CheeseShopOwner``::
 
 And here for ``CheeseShopClient`` class::
 
-.. code-block::python
+.. code-block:: python
 
    from DIRAC import S_OK, S_ERROR, gLogger, gConfig
    from DIRAC.Core.Base.Client import Client
