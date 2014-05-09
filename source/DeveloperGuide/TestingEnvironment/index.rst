@@ -375,6 +375,15 @@ All test modules should follow those conventions:
   package directory, i.e: all tests modules for WMS should be kept in *DIRAC/WMS/tests* directory.
 
 
+Exercise
+--------
+
+Now, we will verify that you can run unit tests really in isolation. 
+We will first use the python shell, and then we will run the test from pyDev, which indeed does a nice job in displaying the results.
+
+TODO
+
+
 Integration and System tests
 =============================
 
@@ -386,10 +395,17 @@ Instead, they evaluate that the connection between several modules, or the defin
 
 
 The TestDIRAC repository
--------------------------
+________________________
 
 The GIT repository ``https://github.com/DIRACGrid/TestDIRAC`` contains some integration and system tests. 
 These tests are not only used for the certification process. Some of them, in fact, might be extremely useful for the developers.
+
+
+
+
+System tests
+------------
+
 Let's take for example the tests in https://github.com/DIRACGrid/TestDIRAC/tree/master/System
 
 These are tests of the chain
@@ -414,6 +430,13 @@ Code a test, within the ``TestDIRAC`` repository, that will test the full chain 
    ``PingPongClient -> PingPingService -> PingPongDB``
    
 Then run it.
+
+
+The need for a full setup
+=========================
+
+Tests, by definition, are incomplete. Your test coverage can reach 100% and still there will be cases that won't be covered.
+This is true everywhere and it is true also in DIRAC. 
 
 
 Footnotes
