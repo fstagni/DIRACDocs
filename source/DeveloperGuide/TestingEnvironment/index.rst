@@ -165,90 +165,90 @@ for ``CheeseShopOwner``::
 
 .. code-block::python
 
-  from types import *
-  from DIRAC import S_OK, S_ERROR, gLogger, gConfig
-  from DIRAC.Core.DISET.RequestHandler import RequestHandler  
-  from DIRAC.CheeseShopSystem.DB.CheeseShopDB import CheeseShopDB
-  
-  # global instance of a cheese shop database
-  cheeseShopDB = False
+   from types import *
+   from DIRAC import S_OK, S_ERROR, gLogger, gConfig
+   from DIRAC.Core.DISET.RequestHandler import RequestHandler  
+   from DIRAC.CheeseShopSystem.DB.CheeseShopDB import CheeseShopDB
+   
+   # global instance of a cheese shop database
+   cheeseShopDB = False
 
-  # initialize it first
-  def initializeCheeseShopOwner( serviceInfo ):
-    global cheeseShopDB
-    cheeseShopDB = CheeseShopDB()
-    return S_OK()
+   # initialize it first
+   def initializeCheeseShopOwner( serviceInfo ):
+     global cheeseShopDB
+     cheeseShopDB = CheeseShopDB()
+     return S_OK()
+   
+   class CheeseShopOwner( RequestHandler ):
+   
+     types_isThere = [ StringType ]
+     def export_isThere( self, cheese ):
+       return cheeseShopDB.isThere( cheese ) 
   
-  class CheeseShopOwner( RequestHandler ):
+     types_buyCheese = [ StringType, FloatType ]
+     def export_buyCheese( self, cheese, quantity ):
+       return cheeseShopDB.buyCheese( cheese, quantity )
   
-    types_isThere = [ StringType ]
-    def export_isThere( self, cheese ):
-      return cheeseShopDB.isThere( cheese ) 
-  
-    types_buyCheese = [ StringType, FloatType ]
-    def export_buyCheese( self, cheese, quantity ):
-      return cheeseShopDB.buyCheese( cheese, quantity )
-  
-    # ... and so on, so on and so on, i.e:
-    types_insertCheese = [ StringType, FloatType, FloatType ]
-    def export_insertCheese( self, cheeseName, price, quantity ):
-      return cheeseShopDB.insertCheese( cheeseName, price, quantity )
+     # ... and so on, so on and so on, i.e:
+     types_insertCheese = [ StringType, FloatType, FloatType ]
+     def export_insertCheese( self, cheeseName, price, quantity ):
+       return cheeseShopDB.insertCheese( cheeseName, price, quantity )
 
 
 And here for ``CheeseShopClient`` class::
 
 .. code-block::python
 
-  from DIRAC import S_OK, S_ERROR, gLogger, gConfig
-  from DIRAC.Core.Base.Client import Client
+   from DIRAC import S_OK, S_ERROR, gLogger, gConfig
+   from DIRAC.Core.Base.Client import Client
+ 
+   class Cheese( object ):
 
-  class Cheese( object ):
+     def __init__( self, name ):
+       self.name = name
 
-    def __init__( self, name ):
-      self.name = name
+   class SpanishInquisitionError( Exception ):
+     pass
 
-  class SpanishInquisitionError( Exception ):
-    pass
+   class CheeseShopClient( Client ):
+ 
+     def __init__( self, money, shopOwner = None ):
+       self.__money = money
+       self.shopOwner = shopOwner
+ 
+     def buy( self, cheese, quantity = 1.0 ):
+ 
+       # is it really cheese, you're asking for?
+       if not isinstance( cheese, Cheese ):
+         raise SpanishInquisitionError( "It's stone dead!" )
+ 
+       # and the owner is in?
+       if not self.shopOwner:
+         return S_ERROR("Shop is closed!")
+ 
+       # and cheese is in the shop depot? 
+       res = self.shopOwner.isThere( cheese.name )   
+       if not res["OK"]:
+         return res
+ 
+       # and you are not asking for too much?
+       if quantity > res["Value"]["Quantity"]:
+         return S_ERROR( "Not enough %s, sorry!" % cheese.name )
 
-  class CheeseShopClient( Client ):
+       # and you have got enough money perhaps?
+       price = quantity * res["Value"]["Price"]
+       if self.__money < price:
+         return S_ERROR( "Not enough money in your pocket, get lost!")
 
-    def __init__( self, money, shopOwner = None ):
-      self.__money = money
-      self.shopOwner = shopOwner
+       # so we're buying
+       res = self.shopOwner.buyCheese( cheese.name, quantity )
+       if not res["OK"]:
+         return res
+       self.__money -= price
 
-    def buy( self, cheese, quantity = 1.0 ):
-
-      # is it really cheese, you're asking for?
-      if not isinstance( cheese, Cheese ):
-        raise SpanishInquisitionError( "It's stone dead!" )
-
-      # and the owner is in?
-      if not self.shopOwner:
-        return S_ERROR("Shop is closed!")
-
-      # and cheese is in the shop depot? 
-      res = self.shopOwner.isThere( cheese.name )   
-      if not res["OK"]:
-        return res
-
-      # and you are not asking for too much?
-      if quantity > res["Value"]["Quantity"]:
-        return S_ERROR( "Not enough %s, sorry!" % cheese.name )
-
-      # and you have got enough money perhaps?
-      price = quantity * res["Value"]["Price"]
-      if self.__money < price:
-        return S_ERROR( "Not enough money in your pocket, get lost!")
-
-      # so we're buying
-      res = self.shopOwner.buyCheese( cheese.name, quantity )
-      if not res["OK"]:
-        return res
-      self.__money -= price
-
-      # finally transaction is over 
-      return S_OK( self.__money )
-
+       # finally transaction is over 
+       return S_OK( self.__money )
+ 
 This maybe oversimplified code example already has several hot spots of failure for chess buying task: first of all, your input parameters 
 could be wrong (i.e. you want to buy rather parrot, not cheese); the shop owner could be out; they haven't got cheese you are asking for in the store;
 or maybe it is there, but not enough for your order; or you haven't got enough money to pay and at least the transaction itself could be interrupted 
@@ -304,51 +304,51 @@ The test suite code itself follows::
 
 .. code-block::python
 
-  import unittest
-  from mock import Mock
+   import unittest
+   from mock import Mock
+ 
+   from DIRAC import S_OK, S_ERROR
+   from DIRAC.CheeseShopSystem.Client.CheeseShopClient import Cheese, CheeseShopClient
+   from DIRAC.CheeseShopSystem.Service.CheeseShopOwner import CheeseShopOwner
 
-  from DIRAC import S_OK, S_ERROR
-  from DIRAC.CheeseShopSystem.Client.CheeseShopClient import Cheese, CheeseShopClient
-  from DIRAC.CheeseShopSystem.Service.CheeseShopOwner import CheeseShopOwner
-
-  class CheeseClientMainSuccessScenario( unittest.TestCase ):
-
-    def setUp( self ):
-      # stub, as we are going to use it's name but nothing else 
-      self.cheese = Chesse( "Cheddar" )
-      # money, dummy 
-      self.money = 9.95
-      # amount, dummy
-      self.amount = 1.0
-      # real object to use
-      self.shopOwner = CheeseShopOwner( "CheeseShop/CheeseShopOwner" )
-      # but with mocking of isThere
-      self.shopOwner.isThere = Mock( return_value = S_OK( { "Price" : 9.95, "Quantity" : 20.0 } ) )
-      # and buyCheese methods
-      self.shopOwner.buyCheese = Mock() 
+   class CheeseClientMainSuccessScenario( unittest.TestCase ):
+ 
+     def setUp( self ):
+       # stub, as we are going to use it's name but nothing else 
+       self.cheese = Chesse( "Cheddar" )
+       # money, dummy 
+       self.money = 9.95
+       # amount, dummy
+       self.amount = 1.0
+       # real object to use
+       self.shopOwner = CheeseShopOwner( "CheeseShop/CheeseShopOwner" )
+       # but with mocking of isThere
+       self.shopOwner.isThere = Mock( return_value = S_OK( { "Price" : 9.95, "Quantity" : 20.0 } ) )
+       # and buyCheese methods
+       self.shopOwner.buyCheese = Mock() 
     
-    def tearDown( self ):
-      del self.shopOwner
-      del self.money
-      del self.amount
-      del self.cheese 
-
-    def test_buy( self ):
-       client = CheeseShopClient( money = self.money, shopOwner = self.shopOwner )
-       # check if test object has been created
-       self.assertEqual( isinstance( client, CheeseShopClient), True )     
-       # and works as expected       
-       self.assertEqual( client.buy( self.cheese, self.amount ), { "OK" : True, "Value" : 0.0 } )
-       ## and now for mocked objects
-       # asking for cheese
-       self.shopOwner.isThere.assert_called_once_with( self.cheese.name )
-       # and buying it
-       self.shopOwner.buyCheese.assert_called_once_with( self.cheese.name, self.amount )
+     def tearDown( self ):
+       del self.shopOwner
+       del self.money
+       del self.amount
+       del self.cheese 
+ 
+     def test_buy( self ):
+        client = CheeseShopClient( money = self.money, shopOwner = self.shopOwner )
+        # check if test object has been created
+        self.assertEqual( isinstance( client, CheeseShopClient), True )     
+        # and works as expected       
+        self.assertEqual( client.buy( self.cheese, self.amount ), { "OK" : True, "Value" : 0.0 } )
+        ## and now for mocked objects
+        # asking for cheese
+        self.shopOwner.isThere.assert_called_once_with( self.cheese.name )
+        # and buying it
+        self.shopOwner.buyCheese.assert_called_once_with( self.cheese.name, self.amount )
+       
       
-      
-  if __name__ == "__main__":
-    unittest.main()
-    #testSuite = unittest.TestSuite( [ "CheeseClientMainSuccessScenario" ] )
+   if __name__ == "__main__":
+     unittest.main()
+     #testSuite = unittest.TestSuite( [ "CheeseClientMainSuccessScenario" ] )
     
 
 Conventions
