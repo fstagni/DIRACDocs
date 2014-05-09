@@ -303,7 +303,8 @@ keep track on testing your code!*
 
 The test suite code itself follows:
 
-.. code-block::python
+
+.. code-block:: python
 
    import unittest
    from mock import Mock
