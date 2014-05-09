@@ -378,32 +378,42 @@ All test modules should follow those conventions:
 Integration and System tests
 =============================
 
-Integration and system tests should not be defined at the same level of the unit tests. T
-he reason is that, in order to properly run such tests, an environment might be to be defined. 
+Integration and system tests should not be defined at the same level of the unit tests. 
+The reason is that, in order to properly run such tests, an environment might need to be defined. 
 
-Integration and system tests do not just run 1 module's code. Instead, they evaluate that the connection between several modules,
-or the defined environment, is correctly coded.
+Integration and system tests do not just run a single module's code.
+Instead, they evaluate that the connection between several modules, or the defined environment, is correctly coded.
+
 
 The TestDIRAC repository
 -------------------------
 
-The GIT repository https://github.com/DIRACGrid/TestDIRAC contains some integration and system tests. 
+The GIT repository ``https://github.com/DIRACGrid/TestDIRAC`` contains some integration and system tests. 
 These tests are not only used for the certification process. Some of them, in fact, might be extremely useful for the developers.
 Let's take for example the tests in https://github.com/DIRACGrid/TestDIRAC/tree/master/System
 
 These are tests of the chain
 
-  Client -> Service -> DB
+   ``Client -> Service -> DB``
 
 They supposes that the DB is present, and that the service is running. Indeed, usually in DIRAC you need to access a DB, write and read from it.
 So, you develop a DB class holding such basic interaction. Then, you develop a Service (Handler) that will look into it.
 Lastly, a Client will hold the logic, and will use the Service to connect to the DB. Just to say, an example of such a chain is:
 
-  TransformationClient -> TransformationManagerHandler -> TransformationDB
+   ``TransformationClient -> TransformationManagerHandler -> TransformationDB``
 
 And this is tested in https://github.com/DIRACGrid/TestDIRAC/blob/master/System/TransformationSystem/TestClientTransformation.py
 
 The tests are something as simple as a series of put/delete, but running such test can solve you few headaches before committing your code.
+
+Exercise
+--------
+
+Code a test, within the ``TestDIRAC`` repository, that will test the full chain of 
+
+   ``PingPongClient -> PingPingService -> PingPongDB``
+   
+Then run it.
 
 
 Footnotes
