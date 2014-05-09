@@ -403,15 +403,36 @@ These tests are not only used for the certification process. Some of them, in fa
 Integration tests
 ~~~~~~~~~~~~~~~~~
 
-**Integration** is a quite vague term.
+**Integration** is a quite vague term. Within DIRAC, we define as integration test every test that does not fall in the unit test category, 
+but that does not need external systems to complete.
+Usually, for example, you won't be able to run an integration test if you have not added something in the CS. 
+This is still vague, so better look at an `example <https://github.com/DIRACGrid/TestDIRAC/blob/master/Integration/Workflow/Test_UserJobs.py>`_
+
+This test submits few very simple jobs. Where? Locally. The API ``DIRAC.Interfaces.API.Job.Job`` contains a ``runLocal()`` method. 
+Admittently, this method is here almost only for testing purposes. 
+
+Submitting a job locally means instructing DIRAC to consider your machine as a worker node. 
+To run this test, you'll have to add few lines to your local dirac.cfg:
+
+.. code-block::
+
+   LocalSite
+   {
+     Site = DIRAC.mySite.local
+     CPUScalingFactor = 0.0
+     #SharedArea = /cvmfs/lhcb.cern.ch/lib
+     #LocalArea =/home/some/local/LocalArea
+     GridCE = my.CE.local
+     CEQueue = myQueue
+     Architecture = x86_64-slc5
+     #CPUTimeLeft = 200000
+     CPUNormalizationFactor = 10.0
+   }
+
+These kind of tests can be extremely useful if you use the Job API and the DIRAC workflow to make your jobs.
 
 
-System tests
-~~~~~~~~~~~~
-
-Let's take for example the tests in https://github.com/DIRACGrid/TestDIRAC/tree/master/System
-
-These are tests of the chain
+Another example of integration tests are tests of the chain:
 
    ``Client -> Service -> DB``
 
@@ -423,23 +444,36 @@ Lastly, a Client will hold the logic, and will use the Service to connect to the
 
 And this is tested in https://github.com/DIRACGrid/TestDIRAC/blob/master/System/TransformationSystem/TestClientTransformation.py
 
-The tests are something as simple as a series of put/delete, but running such test can solve you few headaches before committing your code.
+The test code itself contains something as simple as a series of put/delete, 
+but running such test can solve you few headaches before committing your code.
+
+Tipically, other requirements might be needed for the integration tests to run. 
+For example, one requirement might be that the DB should be empty.
+
+Integration tests, as unit tests, are coded by the developers. 
+Suppose you modified the code of a DB for which its integration test already exist:
+it is a good idea to run the test, and verify its result.
+
+
+Validation and System tests
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Validation and System tests are black-box tests. As such, coding them should not require knowledge of the inner design of the code or logic. 
+At the same time, to run them you'll require a DIRAC server installation.
+Examples of a system test might be: send jobs on the Grid, and expecting them to be completed after hours. Or, replicate a file or two.
+
+Validation and system tests are usually coded by software testers. 
+
 
 Exercise
 --------
 
-Code a test, within the ``TestDIRAC`` repository, that will test the full chain of 
+Code an integration test, within the ``TestDIRAC`` repository, that will test the full chain of 
 
    ``PingPongClient -> PingPingService -> PingPongDB``
    
 Then run it.
 
-
-The need for a full setup
-=========================
-
-Tests, by definition, are incomplete. Your test coverage can reach 100% and still there will be cases that won't be covered.
-This is true everywhere and it is true also in DIRAC. 
 
 
 Footnotes
