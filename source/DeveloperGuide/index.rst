@@ -18,11 +18,11 @@ For every question, or comment, regarding specific development activities, inclu
    BranchingModel/index  
    Eclipse/index
    AddingNewComponents/index
+   TestingEnvironment/index
    Framework/index
    Utilities/index
    CodingConvention/index
    CodeDocumenting/index  
-   TestingEnvironment/index
    ReleaseProcedure/index
    Internals/index
    REST/index
