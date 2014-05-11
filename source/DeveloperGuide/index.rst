@@ -20,7 +20,6 @@ For every question, or comment, regarding specific development activities, inclu
    AddingNewComponents/index
    TestingEnvironment/index
    Framework/index
-   Utilities/index
    CodingConvention/index
    CodeDocumenting/index  
    TestingEnvironment/index
