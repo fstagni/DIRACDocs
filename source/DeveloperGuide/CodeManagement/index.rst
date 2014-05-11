@@ -16,7 +16,6 @@ code distribution tar archives.
    :maxdepth: 1
 
    
-   BranchingModel/index  
    ContributingCode/index
    ReleaseProcedure/index
    

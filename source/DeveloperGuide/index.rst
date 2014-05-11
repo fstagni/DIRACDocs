@@ -15,7 +15,7 @@ For every question, or comment, regarding specific development activities, inclu
    
    DevelopmentModel/index
    DeveloperInstallation/index
-   BranchingModel/index  
+   CodeManagement/index  
    Eclipse/index
    AddingNewComponents/index
    TestingEnvironment/index
@@ -23,7 +23,6 @@ For every question, or comment, regarding specific development activities, inclu
    Utilities/index
    CodingConvention/index
    CodeDocumenting/index  
-   ReleaseProcedure/index
    TestingEnvironment/index
    Internals/index
    REST/index
