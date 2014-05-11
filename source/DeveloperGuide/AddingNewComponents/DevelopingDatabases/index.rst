@@ -4,7 +4,7 @@ Developing Databases
 
 Developing databases mean: developing the DB schema 
 (with DIRAC, both MySQL and Oracle are supported, with a strong preference for the first) 
-and developing the python database class that will interact with the DB itself. A simple example follow:
+and developing the python database class that will interact with the DB itself. A simple example follow::
 
 
     """ This is just an example
