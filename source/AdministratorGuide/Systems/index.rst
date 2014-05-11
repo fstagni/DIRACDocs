@@ -1,4 +1,4 @@
-.. _dirac-systems-cs:
+.. _dirac-systems-desc:
 
 =======================================
 DIRAC Systems

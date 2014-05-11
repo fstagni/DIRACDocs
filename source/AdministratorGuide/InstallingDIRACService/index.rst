@@ -85,10 +85,12 @@ the steps below. This procedure must be followed for the primary server and for 
 
       mkdir -p /opt/dirac/etc/grid-security/
       cp hostcert.pem hostkey.pem /opt/dirac/etc/grid-security
+      
    In case your host certificate is in the p12 format, you can convert it with::
    
       openssl pkcs12 -in host.p12 -clcerts -nokeys -out hostcert.pem
       openssl pkcs12 -in host.p12 -nocerts -nodes -out hostkey.pem
+      
    Make sure the permissions are set right correctly, such that the hostkey.pem is only readable by the ``dirac`` user.
  - As *dirac* user, create a directory or a link pointing to the CA certificates directory, for example::
 

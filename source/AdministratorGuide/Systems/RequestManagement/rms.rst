@@ -121,15 +121,15 @@ Reading request back can be done using two methods defined in the `ReqClient`:
 
   * for reading::
 
-  >>> from DIRAC.RequestManagementSystem.Client.ReqClient import ReqClient
-  >>> rc = ReqClient() # # create client
-  >>> rc.peekRequest( "foobarbaz" ) # # get request from ReqDB for reading
+      >>> from DIRAC.RequestManagementSystem.Client.ReqClient import ReqClient
+      >>> rc = ReqClient() # # create client
+      >>> rc.peekRequest( "foobarbaz" ) # # get request from ReqDB for reading
 
   * for execution (request status on DB side will flip to 'Assigned')::
 
-  >>> from DIRAC.RequestManagementSystem.Client.ReqClient import ReqClient
-  >>> rc = ReqClient() # # create client
-  >>> rc.getRequest( "foobarbaz" ) # # get request from ReqDB for execution
+      >>> from DIRAC.RequestManagementSystem.Client.ReqClient import ReqClient
+      >>> rc = ReqClient() # # create client
+      >>> rc.getRequest( "foobarbaz" ) # # get request from ReqDB for execution
 
 If you don't specify request name in `ReqClient.getRequest` or `ReqClient.peekRequest`, the one with "Waiting" 
 status and the oldest `Request.LastUpdate` value will be chosen. 
@@ -164,22 +164,22 @@ The validation of a new Request that is about to enter the system for execution 
   * low-level: each property in `Request`, `Operation` and `File` classes is instrumeted to check if value provided 
     to its setter has a meaningful type and value::
 
-  >>> opFile.LFN = 1
-  Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-  File "DIRAC/RequestManagementSystem/private/Record.py", line 52, in __setattr__
-    object.__setattr__( self, name, value )
-  File "DIRAC/RequestManagementSystem/Client/File.py", line 137, in LFN
-    raise TypeError( "LFN has to be a string!" )
-  TypeError: LFN has to be a string!
-  >>> operation.SubmitTime = False
-  Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-  File "DIRAC/RequestManagementSystem/private/Record.py", line 52, in __setattr__
-    object.__setattr__( self, name, value )
-  File "DIRAC/RequestManagementSystem/Client/Operation.py", line 370, in SubmitTime
-    raise TypeError( "SubmitTime should be a datetime.datetime!" )
-  TypeError: SubmitTime should be a datetime.datetime!
+      >>> opFile.LFN = 1
+      Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+      File "DIRAC/RequestManagementSystem/private/Record.py", line 52, in __setattr__
+        object.__setattr__( self, name, value )
+      File "DIRAC/RequestManagementSystem/Client/File.py", line 137, in LFN
+        raise TypeError( "LFN has to be a string!" )
+      TypeError: LFN has to be a string!
+      >>> operation.SubmitTime = False
+      Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+      File "DIRAC/RequestManagementSystem/private/Record.py", line 52, in __setattr__
+        object.__setattr__( self, name, value )
+      File "DIRAC/RequestManagementSystem/Client/Operation.py", line 370, in SubmitTime
+        raise TypeError( "SubmitTime should be a datetime.datetime!" )
+      TypeError: SubmitTime should be a datetime.datetime!
 
 
   * high-level: additionally there is also a request validator helper class (`RequestValidator` or its global 
@@ -187,22 +187,22 @@ The validation of a new Request that is about to enter the system for execution 
     is properly defined. The validator is blocking insertion of a new record to the `ReqDB` in case of missing or 
     malformed attrubutes and returning `S_ERROR` describing the reason for rejection, i.e.::
 
-  >>> from DIRAC.RequestManagementSystem.private.RequestValidator import gRequestValidator
-  >>> from DIRAC.RequestManagementSystem.Client.Request import Request
-  >>> invalid = Request()
-  >>> gRequestValidator.validate( invalid )
-  {'Message': 'RequestName not set', 'OK': False}
-  >>> invalid.RequestName = "foobarbaz"
-  >>> gRequestValidator.validate( invalid )
-  {'Message': "Operations not present in request 'foobarbaz'", 'OK': False}
-  >>> from DIRAC.RequestManagementSystem.Client.Operation import Operation
-  >>> invalid.addOperation( Operation() )
-  {'OK': True, 'Value': ''}
-  >>> gRequestValidator.validate( invalid )
-  {'Message': "Operation #0 in request 'foobarbaz' hasn't got Type set", 'OK': False}
-  >>> invalid[0].Type = "ForwardDISET"
-  >>> gRequestValidator.validate( invalid )
-  {'Message': "Operation #0 of type 'ForwardDISET' is missing Arguments attribute.", 'OK': False}
+      >>> from DIRAC.RequestManagementSystem.private.RequestValidator import gRequestValidator
+      >>> from DIRAC.RequestManagementSystem.Client.Request import Request
+      >>> invalid = Request()
+      >>> gRequestValidator.validate( invalid )
+      {'Message': 'RequestName not set', 'OK': False}
+      >>> invalid.RequestName = "foobarbaz"
+      >>> gRequestValidator.validate( invalid )
+      {'Message': "Operations not present in request 'foobarbaz'", 'OK': False}
+      >>> from DIRAC.RequestManagementSystem.Client.Operation import Operation
+      >>> invalid.addOperation( Operation() )
+      {'OK': True, 'Value': ''}
+      >>> gRequestValidator.validate( invalid )
+      {'Message': "Operation #0 in request 'foobarbaz' hasn't got Type set", 'OK': False}
+      >>> invalid[0].Type = "ForwardDISET"
+      >>> gRequestValidator.validate( invalid )
+      {'Message': "Operation #0 of type 'ForwardDISET' is missing Arguments attribute.", 'OK': False}
 
 
 A word of caution has to be clearly stated over here: both low- and high-level validation is not checking if 
@@ -339,11 +339,11 @@ Installation
 
 1. Login to host, install `ReqDB`::
 
-  dirac-install-db ReqDB
+    dirac-install-db ReqDB
 
 2. Install `ReqProxyHandler`::
 
-  dirac-install-service RequestManagement/ReqProxy
+    dirac-install-service RequestManagement/ReqProxy
 
 Modify CS by adding::
 
@@ -359,31 +359,31 @@ You need at least one of these - they are backing up new requests in case the `R
 
 3. Install `ReqManagerHandler`::
 
-  dirac-install-service RequestManagement/ReqManager
+     dirac-install-service RequestManagement/ReqManager
 
 4. Install `CleanReqDBAgent`::
 
-  dirac-install-agent RequestManagement/CleanReqDBAgent
+     dirac-install-agent RequestManagement/CleanReqDBAgent
 
 5. Install `RequestExecutingAgent`::
 
-  dirac-install-agent RequestManagement/RequestExecutingAgent
+     dirac-install-agent RequestManagement/RequestExecutingAgent
 
 If one `RequestExecutingAgent` is not enough (and this is a working horse replacing `DISETForwadingAgent`, 
 `TransferAgent`, `RemovalAgent` and `RegistrationAgent`), clone it several times.
 
 1. If VO is using FTS system, install `FTSDB`::
 
-  dirac-install-db FTSDB
+     dirac-install-db FTSDB
 
 2. Stop `DataManagement/TransferDBMonitor` service and install `FTSManagerHandler`::
 
-  runsvctrl d runit/DataManagement/TransferDBMonitor
-  dirac-install-service DataManagement/FTSManager
+      runsvctrl d runit/DataManagement/TransferDBMonitor
+      dirac-install-service DataManagement/FTSManager
 
 3. Configure FTS sites using command `dirac-dms-add-ftssite`::
 
-  dirac-dms-add-ftssite SITENAME FTSSERVERURL
+      dirac-dms-add-ftssite SITENAME FTSSERVERURL
 
 In case of LHCb VO::
 
@@ -398,23 +398,23 @@ In case of LHCb VO::
  
 4. Install `CleanFTSDBAgent`::
 
-  dirac-install-agent DataManagement/CleanFTSDBAgent
+     dirac-install-agent DataManagement/CleanFTSDBAgent
 
 
 5. Install `FTSAgent`::
 
-  dirac-install-agent DataManagement/FTSAgent
+     dirac-install-agent DataManagement/FTSAgent
 
 Again, as in case of `RequestExecutingAgent`, if one instance is not enough, you should probably clone it several times.
 
 
 7. Once all requests from old version of system are processed, shutdown and remove agents:: 
 
-  RequestManagement/DISETForwardingAgent
-  RequestManagement/RequestCleaningAgent
-  DataManagement/TransferAgent
-  DataManagement/RegistrationAgent
-  DataManagement/RemovalAgent
+      RequestManagement/DISETForwardingAgent
+      RequestManagement/RequestCleaningAgent
+      DataManagement/TransferAgent
+      DataManagement/RegistrationAgent
+      DataManagement/RemovalAgent
 
 and services::
 
