@@ -89,11 +89,11 @@ Local Git environment
 In the local Git environment developers create two "remotes" corresponding to the two remote repositories
 above:
 
-*upstream*
+*release*
   this remote is pointing to the main DIRAC project repository. It can be created using the following
   command:::
     
-    git remote add upstream git@github.com:DIRACGrid/DIRAC.git
+    git remote add release git@github.com:DIRACGrid/DIRAC.git
 
 *origin*
   this remote is pointing to the DIRAC project personal fork repository of the developer. It can be 
@@ -113,8 +113,8 @@ The work on the new features to be incorporated eventually in a new release shou
 branch created from the current *integration* branch of the main DIRAC repository. Let call the 
 new development branch "newdev", for example. It shoukd be created with the following commands:::
 
-  git fetch upstream
-  git checkout -b newdev upstream/integration
+  git fetch release
+  git checkout -b newdev release/integration
   
 This will create the new *newdev* branch locally starting from the current status of the main DIRAC
 repository. The "newdev" branch becomes the working branch. 
@@ -125,8 +125,8 @@ branch should receive all the new changes in the main *integration* branch that 
 the development branch was created:::
 
    git checkout newdev
-   git fetch upstream  
-   git rebase upstream/integration
+   git fetch release  
+   git rebase release/integration
    
 This might need resolving possible conflicts following git instructions. Once the conflicts are
 resolved, the *newdev* branch should be pushed to the developer personal Github repository:::
@@ -172,8 +172,8 @@ in production for some DIRAC installations and for which the patch is relevant.
 As a matter of reminder, here is a set of commands to make a patch. First, start with the new branch
 to work on the patch based on the target release branch, for example rel-v6r7 :::
 
-  git fetch upstream
-  git checkout -b fix-v6r7 upstream/rel-v6r7
+  git fetch release
+  git checkout -b fix-v6r7 release/rel-v6r7
   
 Make the necessary changes to the code of the branch and then push them to the developer's fork:::
 
@@ -199,7 +199,7 @@ your branch on upstream/integration ( or on release branch for the patches ), e.
 
   $ git checkout featurebranch
   Switched to branch 'featurebranch'
-  $ git fetch upstream
+  $ git fetch release
   remote: Counting objects: 1366, done.
   remote: Compressing objects: 100% (528/528), done.
   remote: Total 1138 (delta 780), reused 952 (delta 605)
@@ -212,7 +212,7 @@ your branch on upstream/integration ( or on release branch for the patches ), e.
    * [new tag]         v6r0-pre2  -> v6r0-pre2
   From git://github.com/DIRACGrid/DIRAC
    * [new tag]         v6r0-pre3  -> v6r0-pre3
-  $ git rebase upstream/integration
+  $ git rebase release/integration
   First, rewinding head to replay your work on top of it...
   Applying: added .metadata to .gitignore
   Using index info to reconstruct a base tree...
