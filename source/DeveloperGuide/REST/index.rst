@@ -18,7 +18,7 @@ All requests to the *REST* API are *HTTP* requests. For more info about *REST* t
 understanding of the HTTP protocol is assumed.
 
 OAuth2 authentication
-======================
+-----------------------
 
 Whenever an application wants to use the API, DIRAC needs to know on behalf of which user 
 the application is making the request. Users have to grant privileges to the application so 
@@ -72,7 +72,7 @@ From now on. All requests to the *REST* API have to bear the access token either
 For more info check out the `OAuth2 draft <http://tools.ietf.org/html/draft-ietf-oauth-v2-31>`_.
 
 REST API Resources
-=====================
+-------------------
 
 Once the app has a valid access token, it can use the *REST* API. All data sent or received will be serialized in JSON.
 

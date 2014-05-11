@@ -11,4 +11,6 @@ Developing new DIRAC components
    DevelopingAgents/index
    DevelopingExecutors/index
    DevelopingCommands/index
+   DevelopingDatabases/index
    DevelopingWebPages/index  
+   Utilities/index

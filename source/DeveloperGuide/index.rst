@@ -24,6 +24,7 @@ For every question, or comment, regarding specific development activities, inclu
    CodingConvention/index
    CodeDocumenting/index  
    ReleaseProcedure/index
+   TestingEnvironment/index
    Internals/index
    REST/index
    
