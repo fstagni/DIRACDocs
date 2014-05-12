@@ -72,7 +72,7 @@ def getPackageModules( package ):
 
 def writeIndexHeader( indexFile, title, depth=2 ):
 
-  indexFile.write( '\n=' * len( title ) )
+  indexFile.write( '\n' + '=' * len( title ) )
   indexFile.write( '\n%s\n' % title )
   indexFile.write( '=' * len( title ) )
   indexFile.write( '\n\n.. toctree::' )
