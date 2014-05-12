@@ -8,6 +8,7 @@ Data Management System
    :maxdepth: 1
    
    agents
+   fts
 
 .. contents:: Table of contents
    :depth: 4
