@@ -1,3 +1,5 @@
+.. _adding_new_components:
+
 ==========================================
 Developing new DIRAC components
 ==========================================

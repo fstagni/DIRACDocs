@@ -5,7 +5,17 @@ Developer Guide
 ==================================
 
 The DIRAC Developer Guide is describing procedures, rules and practical details for developing 
-new DIRAC components. The section :ref:`development_model` describes the code management versioning of the DIRAC release
+new DIRAC components. The section :ref:`development_model` describes the general code management
+procedures, building and distribution of the DIRAC releases. 
+
+To work on the code, DIRAC developers need to set up an environment to work on the software
+components and to test it together with other parts of the distributed system. Setting up
+such an environment is discussed in :ref:`development_environment`.
+
+Detailed instructions on how to develop various types of DIRAC components are given in 
+:ref:`adding_new_components` chapter. It gives examples with explanations, common utilities
+are discussed as well. More detailes on the available interfaces can be found in the 
+:ref:`code_documentation` part. 
 
 For every question, or comment, regarding specific development activities, 
 including suggestion and comments to the `RFC <https://github.com/DIRACGrid/DIRAC/wiki/DIRAC-Requests-For-Comments-%28RFC%29>`_, 
@@ -21,7 +31,6 @@ group.
    DevelopmentModel/index
    DevelopmentEnvironment/index
    AddingNewComponents/index
-   TestingEnvironment/index
    Framework/index
    CodingConvention/index
    CodeDocumenting/index  
