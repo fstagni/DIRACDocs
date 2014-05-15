@@ -9,7 +9,7 @@ Helper for accessing /Operations
 
 In any case, to define any configuration for all *setups*. The *Default* keyword can be used instead of the setup. For instance
 */Operations/myvo/Default*. Parameters defined for a specific setup take precedence over parameters defined for the *Default* setup. Take
-a look at :ref:`csoperationsinfo` for further info .
+a look at :ref:`dirac-operations-cs` for further info .
 
 To ease accessing the *Operations* section a helper has been created. This helper receives the *VO* and the *Setup* at instantiation and
 will calculate the *Operations* path automatically. Once instanced it's used as the *gConfig* object. An example would be::

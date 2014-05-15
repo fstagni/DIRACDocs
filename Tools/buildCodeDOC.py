@@ -55,6 +55,8 @@ def getDIRACPackages():
   packages = [ name for _, name, _ in pkgutil.iter_modules([pkgpath]) ]
   
   packages.sort()
+  packages.pop(packages.index('Resources'))
+  packages.pop(packages.index('Workflow'))
   
   return packages
 
@@ -92,7 +94,7 @@ def writeCodeDocumentationIndexRST( codeDocumentationPath, diracPackages ):
       if "System" in diracPackage:
         index.write( '\n   %s/index.rst\n' % diracPackage )
     writeIndexHeader( index, 'Other', 1 )    
-    for diracPackage in ['Interfaces','Core','Resources']:
+    for diracPackage in ['Interfaces','Core']:
       index.write( '\n   %s/index.rst\n' % diracPackage )      
 
 def writePackageDocumentation( tmpDir, codeDocumentationPath, diracPackage ):

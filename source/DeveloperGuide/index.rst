@@ -12,6 +12,7 @@ To work on the code, DIRAC developers need to set up an environment to work on t
 components and to test it together with other parts of the distributed system. Setting up
 such an environment is discussed in :ref:`development_environment`.
 
+An overview of the DIRAC software architecture is presented in the :ref:`dirac_overview` section.
 Detailed instructions on how to develop various types of DIRAC components are given in 
 :ref:`adding_new_components` chapter. It gives examples with explanations, common utilities
 are discussed as well. More detailes on the available interfaces can be found in the 
@@ -27,9 +28,9 @@ group.
 .. toctree::
    :maxdepth: 1
 
-   
    DevelopmentModel/index
    DevelopmentEnvironment/index
+   Overview/index
    AddingNewComponents/index
    Framework/index
    CodingConvention/index

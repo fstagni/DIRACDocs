@@ -1,5 +1,7 @@
+.. _dirac_overview:
+
 ==================================
-DIRAC overview
+Architecture overview
 ==================================
 
 .. toctree::
