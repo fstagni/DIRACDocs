@@ -1,3 +1,5 @@
+.. _testing_environment:
+
 ==============================
 Setting up testing environment
 ==============================

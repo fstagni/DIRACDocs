@@ -1,3 +1,5 @@
+.. _develper_installation:
+
 ======================================
 Setting up a development installation
 ======================================

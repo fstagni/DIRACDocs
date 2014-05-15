@@ -1,3 +1,5 @@
+.. _eclipse_environment:
+
 =======================
 Configuring *Eclipse*
 =======================

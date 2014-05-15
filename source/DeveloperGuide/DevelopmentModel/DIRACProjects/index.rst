@@ -1,47 +1,48 @@
-=====================
-DIRAC Projects
-=====================
+.. _dirac_projects:
 
-------------
-Motivation
-------------
+========================
+DIRAC Projects
+========================
 
 DIRAC is used by several user communities. Some of them are creating their own modules for DIRAC. 
 These modules require a certain version of DIRAC in order to function properly. Virtual organizations 
 have to be able to create their own releases of their modules and install them seamlessly with 
 *dirac-install*. This is achieved by creating and releasing software projects in the DIRAC framework.
 
--------------------
+Preparing DIRAC distribution
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+
 Releases schema
 -------------------
 
-DIRAC modules are released and distributed in projects. Each project has a *releases.cfg* where the 
-releases, modules and dependencies are defined. A single *releases.cfg* can take care of one or more 
-modules. *releases.cfg* file follows a simplified schema of DIRAC's cfg format. It can have several 
-sections, nested sections and options. Section *Releases* contains the releases definition. Each 
-section in the *Releases* section defines a release. The name of the section will be the release 
-name. Each release will contain a list of dependencies (if any) and a list of modules (if more than 
-one). An example of a *release.cfg* for a single module is shown below::
+DIRAC *modules* are released and distributed in *projects*. Each project has a *releases.cfg* 
+configuration file where the releases, modules and dependencies are defined. A single *releases.cfg* 
+can take care of one or more modules. *releases.cfg* file follows a simplified schema of DIRAC's cfg 
+format. It can have several sections, nested sections and options. Section *Releases* contains the 
+releases definition. Each section in the *Releases* section defines a release. The name of the 
+section will be the release name. Each release will contain a list of dependencies (if any) 
+and a list of modules (if more than one). An example of a *release.cfg* for a single module is 
+shown below::
  
- DefaultModules = MyExt
- 
- Sources
- {
-   MyExt = git://somerepohosting/MyExt.git
- }
- 
- Releases
- {
-   v1r2p3
+   DefaultModules = MyExt
+   
+   Sources
    {
-     depends = DIRAC:v5r12
+     MyExt = git://somerepohosting/MyExt.git
    }
- 
-   v1r2p2
+   
+   Releases
    {
-     depends = DIRAC:v5r12p1
+     v1r2p3
+     {
+       depends = DIRAC:v5r12
+     }
+   
+     v1r2p2
+     {
+       depends = DIRAC:v5r12p1
+     }
    }
- }
 
 The *DefaultModules* option (outside any section) defines what modules will be installed by default 
 if there's nothing explicitly specified at installation time. Because there is only one module defined 
@@ -50,29 +51,29 @@ release name. Each release can require a certain version of any other project (D
 
 An example with more than one module follows::
 
- DefaultModules = MyExt
- RequiredExtraModules = Web
- 
- Sources
- {
-   MyExt = git://somerepohosting/MyExt.git
-   MyExtExtra = svn | http://someotherrepohosting/repos/randomname/MyExtExtra/tags
- }
- 
- Releases
- {
-   v1r2p3
+   DefaultModules = MyExt
+   RequiredExtraModules = Web
+   
+   Sources
    {
-     Modules = MyExt:v1r2p1, MyExtExtra:v1r1p1
-     Depends = DIRAC:v5r12p1
+     MyExt = git://somerepohosting/MyExt.git
+     MyExtExtra = svn | http://someotherrepohosting/repos/randomname/MyExtExtra/tags
    }
- 
-   v1r2p2
+   
+   Releases
    {
-     Modules = MyExt:v1r2p1, MyExtExtra:v1r1
-     Depends = DIRAC:v5r12
+     v1r2p3
+     {
+       Modules = MyExt:v1r2p1, MyExtExtra:v1r1p1
+       Depends = DIRAC:v5r12p1
+     }
+   
+     v1r2p2
+     {
+       Modules = MyExt:v1r2p1, MyExtExtra:v1r1
+       Depends = DIRAC:v5r12
+     }
    }
- }
  
 If a project requires a module that is not installed by default from another project to be installed, 
 it can be defined in the *RequiredExtraModules* option. For instance, DIRAC project contains *DIRAC* 
@@ -137,9 +138,7 @@ How to define how to make a project distribution
 *dirac-distribution* needs to know where to find the *releases.cfg* file. *dirac-distribution* will load 
 some global configuration from a DIRAC web server. That configuration can instruct *dirac-distribution* 
 to load the project defaults file from a URL. Those defaults will define default values for 
-*dirac-distribution* and *dirac-install* command line options. An example of a project defaults file would be:
-
-::
+*dirac-distribution* and *dirac-install* command line options. An example of a project defaults file would be:::
 
  #Where to load the release.cfg file from
  Releases = https://github.com/DIRACGrid/DIRAC/raw/integration/releases.cfg
@@ -148,32 +147,17 @@ to load the project defaults file from a URL. Those defaults will define default
  #How to upload the release tarballs to the BaseURL
  UploadCommand = ( cd %OUTLOCATION% ; tar -cf - %OUTFILENAMES% ) | ssh webuser@webhost 'cd /webroot/lhcbproject/dist/DIRAC3/installSource &&  tar -xvf - && ls *.tar.gz > tars.list'
 
-Once the tarballs and required files have been generated by *dirac-distribution*, if *UploadCommand* is 
-defined the variables will be substituted and the final command printed to be executed by the user.
+Once the tarballs and required files have been generated by *dirac-distribution* (see below), 
+if *UploadCommand* is defined the variables will be substituted and the final command printed to 
+be executed by the user.
 
 *dirac-install* will download the project files from the *BaseURL* location.
 
 The defaults file is defined per project and can live in any web server.
 
- 
-How to make a distribution
------------------------------
 
-Just execute *dirac-distribution* with the appropriate flags. For instance::
-
- dirac-distribution -r v6r0 -l DIRAC 
- 
-You can also pass the releases.cfg to use via command line using the *-C* switch. *dirac-distribution* 
-will generate a set of tarballs, release and md5 files. Please copy those to your installation source 
-so *dirac-install* can find them. 
-
-When generating a distribution, if a file called ``releasenotes.rst`` is found, it will be "compiled" 
-into html and pdf. The compiled files will be included in the tarball whereas the rst file will not.
-
-
---------------------------------
 Installation
---------------------------------
+@@@@@@@@@@@@@@@
 
 When installing, *dirac-install* requires a release version and optionally a project name. If the project 
 name is given *dirac-install* will try to load the project's versioned ``release-<projectName>-<version>.cfg`` 
@@ -214,7 +198,6 @@ is used *dirac-install* will try to load the defaults file for that installation
 the arguments.
 
 
------------------------------------
 Reference of *releases.cfg*  schema
 -----------------------------------
 
@@ -258,7 +241,6 @@ Reference of *releases.cfg*  schema
    }
  }
  
------------------------------------------------
 Reference of an installation's defaults file
 -----------------------------------------------
 
@@ -292,7 +274,6 @@ Reference of an installation's defaults file
  }
  
  
-------------------------------------
 Reference of global default's file
 ------------------------------------
 
