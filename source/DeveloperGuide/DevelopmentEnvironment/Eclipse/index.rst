@@ -4,14 +4,22 @@
 Configuring *Eclipse*
 =======================
 
-*THIS WE NEED TO MODIFY*
+The suggested way to develop in DIRAC is using `Eclipse <http://www.eclipse.org/>`_. We know `Emacs <www.gnu.org/s/emacs/>`_ is a great tool, and someone can't just leave without it. And that also `vim <http://www.vim.org/>`_ is great. Anyway, we support  *Eclipse*. It is not mandatory to use it, but it is highly recommended. And this guide will give you some hints on it.
+
+As it has been true for the previous paragraph, this guide will NOT explain the basic usage of eclipse and its plugins: go on the net and search. In a nutshell, based on experience we can say that:
+
+- Eclipse is a great tool. Use it! It will simplify enormously your life.
+- There are many Eclipse versions out there: just take the *classic* one, and take the latest package.
+- `Eclipse 4 <http://www.eclipse.org/e4/>`_ is mature since long time. Some linux distributions still ships the version 3. The suggestion is to get the standalone version from the web.
+- If you have a very old machine, Eclipse will eat your memory. If you are on Linux, use the Oracle JVM.
+- You'll have to update eclipse and its plugins manually (e.g. "Help" -> "Check for updates").
 
 Two extensions are required for developing DIRAC with *Eclipse*. To install them go to 
 *Help->Install new software->top right button "Add..." -> Insert name and URL* and then select the software to install in the list.
 
- - *pyDev* : Use http://pydev.org/updates as the URL to install from. For more info go to http://pydev.org/updates
- - *EGit* : Git team provider for eclipse. Use http://download.eclipse.org/egit/updates as the URL. 
-   For more info go to http://www.eclipse.org/egit/
+ - *pyDev* : Use `http://pydev.org/updates` as the URL to install from. For more info go `here <http://pydev.org/updates>`_.
+ - *EGit* : Git team provider for eclipse. The latest of Eclipse come with this extension ready to be installed. If this is not the case, use `http://download.eclipse.org/egit/updates` as the URL. 
+   For more info go `here <http://www.eclipse.org/egit/>`_.
  
 Now you need to configure the *pyDev* plugin. Go to *Window->Preferences* (*Eclipse->preferences* if you're in a MacOSX box). 
 In the preferences pane go to *Pydev->Editor*, select 2 as the tab length and click "Replace tabs with spaces when typing". 

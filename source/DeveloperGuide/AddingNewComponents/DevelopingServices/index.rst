@@ -32,7 +32,9 @@ For each service interface method it is necessary to define *types_<method_name>
 Default Service Configuration parameters
 ------------------------------------------
 
-The Hello Handler is written. It should be placed to the Service directory of one of the DIRAC System directories in the code repository, for example FrameworkSystem. 
+The Hello Handler is written. Now, we'll need to put the new service in the dirac CS in order to see it running. Since we are running in an isolated installation, the net effect is that the service will have to be added to the local "dirac.cfg" file. To do this, we should first have a "/Systems" section in it. The "/Systems" section keeps references to the real code, e.g. if you are developing for the "WorkloadManagementSystem" you should have a "/Systems/WorkloadManagement" section. If there are services that have to run in the WMS, you should place them under "/Systems/WorkloadManagement/Services". 
+
+For what concerns our example, we should place it to the Service directory of one of the DIRAC System directories, for example we can use FrameworkSystem. 
 The default Service Configuration parameters should be added to the corresponding System ConfigTemplate.cfg file. In our case the Service section in the ConfigTemplate.cfg will look like the following::
 
   Services
@@ -50,18 +52,18 @@ Note that you should choose the port number on which the service will be listeni
 Installing the Service
 ------------------------
 
-Once the Service is ready it should be installed. The DIRAC Server installation is described in [[[[here]]]. If you are adding the Service to an already existing installation it is sufficient to execute the following in this DIRAC instance::
+Once the Service is ready it should be installed. The DIRAC Server installation is described in [[[here]]]. If you are adding the Service to an already existing installation it is sufficient to execute the following in this DIRAC instance::
 
   > dirac-install-service Framework Hello
   
 This command will do several things:
 
-  * It will create the SimpleMessage Service directory in the standard place and will set 
+  * It will create the Hello Service directory in the standard place and will set 
     it up under the ''runit'' control - the standard DIRAC way of running permanent processes. 
-  * The SimpleMessage Service section will be added to the Configuration System. So, its
+  * The Hello Service section will be added to the Configuration System. So, its
     address and parameters will be available to clients.
     
-The Service can be also installed using the SystemAdministrator CLI interface::
+The Service can be also installed using the SystemAdministrator CLI interface (provided that you are running Framework/SystemAdministrator service on your machine)::
 
   > install service Framework Hello      
   
@@ -73,20 +75,23 @@ In any case, if you are developing a service, you might test it without installi
 
   > dirac-service Framework/Hello
 
+
 Calling the Service from a Client
 -----------------------------------
 
 Once the Service is running it can be accessed from the clients in the way
-illustrated by the following code snippet::
+illustrated by the following code snippet:
 
-  from DIRAC.Core.DISET.RPCClient import RPCClient
-  
-  simpleMessageService = RPCClient('Framework/Hello')
-  result = simpleMessageService.sayHello()
-  if not result['OK']:
-    print "Error while calling the service:", result['Message']
-  else:
-    print result[ 'Value' ]
-      
-Note that the service is always returning the result in the form of S_OK/S_ERROR structure.        
- 
+.. code-block:: python
+   
+   from DIRAC.Core.DISET.RPCClient import RPCClient
+   
+   simpleMessageService = RPCClient('Framework/Hello')
+   result = simpleMessageService.sayHello()
+   if not result['OK']:
+     print "Error while calling the service:", result['Message'] #Here, in DIRAC, you better use the gLogger
+   else:
+     print result[ 'Value' ] #Here, in DIRAC, you better use the gLogger
+
+     
+Note that the service is always returning the result in the form of S_OK/S_ERROR structure. 

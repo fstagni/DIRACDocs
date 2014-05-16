@@ -11,60 +11,54 @@ an Agent by inheriting the base AgentModule class.
 Creating an Agent is best illustrated by the example below which is presenting a fully 
 functional although simplest possible agent:: 
 
+.. code-block:: python
     
-    ########################################################################
-    # $HeadURL$
-    ########################################################################
-    """ :mod: SimplestAgent
-        ====================
+   """ :mod: SimplestAgent
+       ====================
+   
+       Simplest Agent send a simple log message
+   """
     
-        Simplest Agent send a simple log message
-    """
-    
-    # # imports
-    from DIRAC import S_OK, S_ERROR
-    from DIRAC.Core.Base.AgentModule import AgentModule
-    
-    
-    __RCSID__ = "Id: $"
-    
-    class SimplestAgent( AgentModule ):
-      """
-      .. class:: SimplestAgent
-    
-      Simplest agent
-      print a message on log
-      """
-    
-      def initialize( self ):
-        """ agent's initalisation
-    
-        :param self: self reference
-        """
-    
-        self.message = self.am_getOption( 'Message', "SimplestAgent is working..." )
-        self.log.info( "message = %s" % self.message )
-    
-        return S_OK()
-    
-      def execute( self ):
-        """ execution in one agent's cycle
-    
-        :param self: self reference
-        """
-    
-        self.log.info( "message: %s" % self.message )
-    
-        return S_OK()   
+   # # imports
+   from DIRAC import S_OK, S_ERROR
+   from DIRAC.Core.Base.AgentModule import AgentModule
+   
+   
+   __RCSID__ = "Id: $"
+   
+   class SimplestAgent( AgentModule ):
+     """
+     .. class:: SimplestAgent
+   
+     Simplest agent
+     print a message on log
+     """
+   
+     def initialize( self ):
+       """ agent's initalisation
+   
+       :param self: self reference
+       """
+   
+       self.message = self.am_getOption( 'Message', "SimplestAgent is working..." )
+       self.log.info( "message = %s" % self.message )
+   
+       return S_OK()
+   
+     def execute( self ):
+       """ execution in one agent's cycle
+   
+       :param self: self reference
+       """
+   
+       self.log.info( "message: %s" % self.message )
+   
+       return S_OK()   
 
 Let us walk through this code to see which elements should be provided.
 
-First, the comment line with the SVN keyword ''$HeadURL: $'' is provided. This line will 
-be substituted by the SVN to show the author and the date of the last commit. 
-
-Next comes the documentation string describing the service purpose and behavior. It is
-followed by the ''__RCSID__'' global module variable which is assigned the value of the
-''$Id: $'' SVN keyword.
+First comes the documentation string describing the service purpose and behavior. It is
+followed by the ''__RCSID__'' global module variable which we have already seen in the services part.
 
 Several import statements will be clear from the subsequent code.
 
@@ -135,11 +129,11 @@ Checking the Agent output from log messages
 ------------------------------------------------
 
 Login to dirac-admin-sysadmin-cli as administrator.
-Show log of SimplestAgent:
+Show log of SimplestAgent::
 
   > show log Framework SimplestAgent
       
-An info message will appear in log:
+An info message will appear in log::
 
   Framewrok/SimplestAgent  INFO: message: still working...
 
