@@ -31,9 +31,9 @@ group.
    DevelopmentModel/index
    DevelopmentEnvironment/index
    Overview/index
+   CodingConvention/index
    AddingNewComponents/index
    Framework/index
-   CodingConvention/index
    CodeDocumenting/index  
    Internals/index
    REST/index

@@ -121,19 +121,19 @@ may use different releases. Therefore, the target release branch for a patch is 
 in production for some DIRAC installations and for which the patch is relevant. 
 
 As a matter of reminder, here is a set of commands to make a patch. First, start with the new branch
-to work on the patch based on the target release branch, for example rel-v6r7 :::
+to work on the patch based on the target release branch, for example rel-v6r11 :::
 
   git fetch release
-  git checkout -b fix-v6r7 release/rel-v6r7
+  git checkout -b fix-v6r11 release/rel-v6r11
   
 Make the necessary changes to the code of the branch and then push them to the developer's fork:::
 
-  git push origin fix-v6r7
+  git push origin fix-v6r11
   
-Do the *PR* with the rel-v6r7 as a target branch. Once the *PR* is merged, scrap the patch branch 
+Do the *PR* with the rel-v6r11 as a target branch. Once the *PR* is merged, scrap the patch branch 
 from the forked repository:::
 
-  git push origin :fix-v6r7     
+  git push origin :fix-v6r11  
 
 The patches incorporated into a release branch will be propagated to the more recent release branches
 and to the integration branch by the release manager. There is no need to make separate *PR*'s of the

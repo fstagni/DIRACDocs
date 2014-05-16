@@ -159,6 +159,8 @@ components and the developer can freely choose only those that are used in her o
 Example
 -------
 
+NOTA BENE: the example that follows suppose that the reader has already a basic familiarity with some DIRAC constructs. If this is not the case, we suggest the reader to first read :ref:`adding_new_components`.
+
 Let's assume we are coding a client to the ``CheeseShopSystem`` inside DIRAC. The depended-on components are ``CheeseShopSystem.Service.CheeseShopOwner`` with 
 ``CheeseShopSystem.DB.CheeseShopDB`` database behind it. Our ``CheeseShopSystem.Client.CheeseShopClient`` could only ask the owner for a specific cheese or try to buy it [#]_.
 We know the answers for all question that have been asked already, there was no cheese at all in original script, but here for teaching
@@ -386,15 +388,6 @@ All test modules should follow those conventions:
   package directory, i.e: all tests modules for WMS should be kept in *DIRAC/WMS/tests* directory.
 
 
-Exercise
---------
-
-Now, we will verify that you can run unit tests really in isolation. 
-We will first use the python shell, and then we will run the test from pyDev, which indeed does a nice job in displaying the results.
-
-TODO
-
-
 Integration and System tests
 =============================
 
@@ -463,6 +456,8 @@ Integration tests, as unit tests, are coded by the developers.
 Suppose you modified the code of a DB for which its integration test already exist:
 it is a good idea to run the test, and verify its result.
 
+Within section :ref:`adding_new_components` we will develop one of these tests as an exercise.
+
 
 Validation and System tests
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -472,16 +467,6 @@ At the same time, to run them you'll require a DIRAC server installation.
 Examples of a system test might be: send jobs on the Grid, and expecting them to be completed after hours. Or, replicate a file or two.
 
 Validation and system tests are usually coded by software testers. 
-
-
-Exercise
---------
-
-Code an integration test, within the ``TestDIRAC`` repository, that will test the full chain of 
-
-   ``PingPongClient -> PingPingService -> PingPongDB``
-   
-Then run it.
 
 
 

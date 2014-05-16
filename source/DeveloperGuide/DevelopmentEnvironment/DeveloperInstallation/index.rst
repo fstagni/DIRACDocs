@@ -9,7 +9,7 @@ Sharing your development
 -------------------------------------
 
 Once you're familiar with the basics of how GIT works. You're ready to clone the DIRAC source repository.
-DIRAC repository is hosted at https://github.com/DIRACGrid/DIRAC . From there you have two options:
+DIRAC repository is hosted at https://github.com/DIRACGrid/DIRAC. This has been already outlined in the previous sections, we repeat here briefly:
 
  - Easy way:
 
@@ -67,13 +67,17 @@ First you need to check out all the sources you need to start working on DIRAC o
 
        DIRAC/Core/scripts/dirac-deploy-scripts.py
 
+   It is a good idea to add the scripts directory to your $PATH.
 
  8. Now you need to install the required python packages for DIRAC to be able to run. There are two ways of doing that:
 
-   8.1 If you want to use your own python (it needs to be 2.6 or 2.7) you can install all the required packages by hand. Just do::
+   8.1 If you want to use your own python (you can use versions 2.6 or 2.7, but it is highly suggested to use python 2.7) you can install all the required packages by hand. Just do::
 
        pip install GSI
        pip install MySQL-python
+
+   You will probably also need to install some python packages, like `mock <http://www.voidspace.org.uk/python/mock/>`_. Also, remembers to update the $PYTHONPATH with the directory where you put your DIRAC code (and the code of possible extensions). 
+
 
    8.2 If you don't have python 2.6 ot 2.7 available for your system or you just want to get the DIRAC External binaries for you platform, run::
 
@@ -82,7 +86,11 @@ First you need to check out all the sources you need to start working on DIRAC o
    This may take a while if there aren't externals available for your platform and they have to be compiled.
 
 
- 9. Last step is to to configure DIRAC.
+ 9. Last step is to to configure DIRAC. There are 2 ways to do that: the first, and suggested way, is to work in isolation. 
+
+   At this point, the key becomes understanding how the DIRAC `Configuration Service (CS) <http://diracgrid.org/files/docs/AdministratorGuide/Configuration/ConfigurationStructure/index.html>`_ works. I'll explain here briefly. The CS is a layered structure: whenever you access a CS information (e.g. using a "gConfig" object, see later), DIRAC will first check into your local "dirac.cfg" file (it can be in your home as .dirac.cfg, or in etc/ directory, see the link above). If this will not be found, it will look for such info in the CS servers available. 
+
+   When you develop locally, you don't need to access any CS server: instead, you need to have total control. So, you need to work a bit on the local dirac.cfg file. There is not much else needed, just create your own etc/dirac.cfg. The example that follows might not be easy to understand at a first sight, but it will become easy soon. The syntax is extremely simple, yet verbose: simply, only brackets and equalities are used. 
 
    9.1 If you want to create an isolated installation just creaate a *etc/dirac.cfg* file with::
 
@@ -128,9 +136,12 @@ First you need to check out all the sources you need to start working on DIRAC o
 
 
 
-   9.2 If you want to connect to an already existing installation::
+   9.2 The second possibility (ALTERNATIVE to the previous one) is to issue the following script::
 
        scripts/dirac-configure -S setupyouwanttorun -C configurationserverslist -n sitename -H
+
+      This is a standard script, widely used for non-developer installations, that will connect to an already existing installation when the configurationserverslist is given
+.
 
  10. From now on, every time you want to publish something to your public repository do::
 

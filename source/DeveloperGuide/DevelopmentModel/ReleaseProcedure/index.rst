@@ -38,12 +38,12 @@ This means that patches applied to older branches must be propagated to the newe
 release branches. This is done in the local Git repository of the release manager.
 Let's take an example of a patch created against *release* branch *rel-v6r10* while
 the new release branch *rel-v6r11* is already in production. This can be accomplished
-by the following sequence of commands:::
-
+by the following sequence of commands::
+  
   > get fetch release
  
 This will bring all the changes from the central repository including all the 
-*release* branches.   
+*release* branches.::
   
   > git checkout -b rel-v6r10 release/rel-v6r10
   > vim release.notes
@@ -51,7 +51,7 @@ This will bring all the changes from the central repository including all the
 We create local branch from the the remote one containing the patch. Release notes
 must be updated to create a new section for the new patch release describing the
 new changes. Now we can make a local branch corresponding to a downstream branch
-and merge the commits from the patches:::  
+and merge the commits from the patches::
   
   > git checkout -b rel-v6r11 release/rel-v6r11
   > git merge --no-ff rel-v6r10
@@ -65,7 +65,7 @@ on the remote counterparts instead of recreating them:::
 
 This will bring the patches into the local release branch, you can now update the release 
 notes and proceed with tagging and uploading. All the patches must be also propagated
-to the *integration* branch:::
+to the *integration* branch::
 
   > git checkout -b integration release/integration
   > git merge --no-ff rel-v6r11  
@@ -75,7 +75,7 @@ Release notes
 --------------
 
 Release notes are contained in the *release.notes* file. Each release version has a dedicated
-section in this file, for example:::
+section in this file, for example::
 
   [v6r10p1]
   
@@ -96,7 +96,7 @@ Tagging and uploading release branches
 ----------------------------------------
 
 Once the local release and integration branches have got all the necessary
-changes they can be tagged with the new version tags:::
+changes they can be tagged with the new version tags::
 
   > git checkout rel-v6r10
   > git tag v6r10p11
@@ -109,7 +109,7 @@ add in one release operation. If the downstream release branch has got its own p
 those should be described in its release notes under the v6r11p1 section. 
 
 Once the tags are done, the updated branches and new tags must be pushed to the
-central repository:::
+central repository::
 
   > git push --tags release rel-v6r10
   > git push --tags release rel-v6r11
@@ -120,13 +120,13 @@ new versions of the DIRAC modules ( see :ref:`dirac_projects` ).
 
 The *integration* branch is also receiving new features to go into the next release.
 Therefore, it is used to tag *prerelease* versions that can be then installed
-with standard tools on test DIRAC servers, for example:::
+with standard tools on test DIRAC servers, for example::
 
   > git checkout integration
   > git tag v7r0-pre12
   
 After the *releases.cfg* file is updated in the *integration* branch and prerelease
-tags are made, the branch can be pushed in the usual way :::
+tags are made, the branch can be pushed in the usual way ::
  
   > git push --tags release integration     
 

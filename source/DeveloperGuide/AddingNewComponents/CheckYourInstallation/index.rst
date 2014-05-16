@@ -2,6 +2,8 @@
 Check your installation
 ======================================
 
+If you are here, we suppose you have already a developer installation. Within this part we'll check the basics, and we'll do few exercises.
+
 
 Is my installation correctly done?
 --------------------------------------
@@ -30,7 +32,7 @@ Let's do one more check:
 
 Was this good? If it wasn't, again, then you should probably hit the "previous" button of this guide.
 
-Let's not think about you just typed right now. It will become more clear later.
+Do not think about you just typed right now. It will become more clear later.
 
 
 The real basic stuff
@@ -96,10 +98,10 @@ Quite clear, isn't it? Often, you'll end up doing a lot of code like that:
 
    result = aDIRACMethod()
    if not result['OK']:
-       gLogger.error('aDIRACMethod-Fail', "Call to aDIRACMethod() failed with message %s" %result['Message'])
-       return result
+     gLogger.error('aDIRACMethod-Fail', "Call to aDIRACMethod() failed with message %s" %result['Message'])
+     return result
    else:
-       returnedValue = result['Value']
+     returnedValue = result['Value']
 
 
 
@@ -111,14 +113,14 @@ We'll play a bit with it now.
 
 You have already done this:
 
+.. code-block:: python
+
    In [14]: from DIRAC import gConfig
 
    In [15]: gConfig.getValue('/DIRAC/Setup')
    Out[15]: 'DeveloperSetup'
 
-Where does 'DeveloperSetup' come from? Open that dirac.cfg and search for it. Got it? it's in 
-
-.. code-block:: python
+Where does 'DeveloperSetup' come from? Open that dirac.cfg and search for it. Got it? it's in::
    
    DIRAC
    {
@@ -209,33 +211,4 @@ So, let's add the groups within the /Registry section::
 
 You can keep playing with it (e.g. adding some properties), but for the moment this is enough.
 
-
-Exercise
---------
-
-Code a python module in DIRAC.Core.Utilities where there is only the following function:
-
-.. code-block:: python
-
-   def checkCAOfUser( user, CA ):
-     """ user, and CA are string
-     """
-
-This function should:
-* Get from the CS the registered Certification Authority for the user
-* if the CA is the expected one return S_OK, else return S_ERROR
-
-Code a python script that:
-* call such function
-* log wih info or error mode depending on the result
-
-Remember to start the script with:
-
-.. code-block:: python
-
-   #!/usr/bin/env python
-   """ Some doc: what does this script should do?
-   """
-   from DIRAC.Core.Base import Script
-   Script.parseCommandLine()
 
