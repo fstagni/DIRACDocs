@@ -137,7 +137,7 @@ def writePackageDocumentation( tmpDir, codeDocumentationPath, diracPackage ):
           
           if 'lfc_dfc_copy' in packModPackage:
             continue 
-          if 'TransformationCLI' in packModPackage:
+          if 'CLI' in packModPackage:
             continue
             
           route = 'DIRAC/%s/%s/%s.py' % ( diracPackage, modulePackage, packModPackage )
