@@ -14,7 +14,6 @@ functional although simplest possible agent::
 .. code-block:: python
     
    """ :mod: SimplestAgent
-       ====================
    
        Simplest Agent send a simple log message
    """
