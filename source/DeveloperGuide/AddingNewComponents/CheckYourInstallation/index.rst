@@ -2,7 +2,12 @@
 Check your installation
 ======================================
 
-If you are here, we suppose you have already a developer installation. Within this part we'll check the basics, and we'll do few exercises.
+If you are here, we suppose you have read the documentation that came before. Specifically:
+
+* you should know about our :ref:development_model
+* you should have your :ref:development_environment already set up, specifcally you should already have a developer installation. 
+
+Within this part we'll check the basics, and we'll do few exercises.
 
 
 Is my installation correctly done?
