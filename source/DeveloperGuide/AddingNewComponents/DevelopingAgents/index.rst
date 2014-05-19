@@ -10,11 +10,8 @@ an Agent by inheriting the base AgentModule class.
 
 Creating an Agent is best illustrated by the example below which is presenting a fully 
 functional although simplest possible agent:: 
-
-.. code-block:: python
     
    """ :mod: SimplestAgent
-       ====================
    
        Simplest Agent send a simple log message
    """
