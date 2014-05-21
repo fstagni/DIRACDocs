@@ -9,19 +9,9 @@ Sharing your development
 -------------------------------------
 
 Once you're familiar with the basics of how GIT works. You're ready to clone the DIRAC source repository.
-DIRAC repository is hosted at https://github.com/DIRACGrid/DIRAC. This has been already outlined in the previous sections, we repeat here briefly:
+DIRAC repository is hosted at https://github.com/DIRACGrid/DIRAC. This has been already outlined in the previous sections, so we will not repeat it here.
 
- - Easy way:
-
-  1. Register at *github.com* and set up your account
-  2. On *github.com* fork the DIRAC repository by going to https://github.com/DIRACGrid/DIRAC and clicking the *Fork* button on
-     the top right part of the page.
-  3. By forking a repository *github.com* will create a https://github.com/yourusername/DIRAC repository where you are the administrator.
-  4. Clone that repository in your local work space
-  5. Start working on the DIRAC code
-  6. Push changes to your *github.com* repository
-  7. Issue a pull request to DIRAC by going to https://github.com/yourusername/DIRAC, switching to the branch you want DIRAC to
-     pull changes from and clicking the pull request button.
+In any case, it's now time to setup a developer installation. A developer installation is a "closed" installation: an installation that can, even, be used while being disconnected from the network.
 
 -------------------------------------------
 Setting up your development installation
@@ -71,19 +61,25 @@ First you need to check out all the sources you need to start working on DIRAC o
 
  8. Now you need to install the required python packages for DIRAC to be able to run. There are two ways of doing that:
 
-   8.1 If you want to use your own python (you can use versions 2.6 or 2.7, but it is highly suggested to use python 2.7) you can install all the required packages by hand. Just do::
+   8.1 If you want to use your own python (you can use versions 2.6 or 2.7, but it is highly suggested to use python 2.7) you can install all the required packages by hand. 
+       First, you'll need to install few packages for your distrubution, e.g. you will need gcc, python-devel, openssl-devel, mysql, mysql-devel, python-pip.
+       
+       Then, you can use pip to install specifc python tools::
 
-       pip install GSI
-       pip install MySQL-python
+         pip install GSI
+         pip install MySQL-python
+         pip install mock
 
-   You will probably also need to install some python packages, like `mock <http://www.voidspace.org.uk/python/mock/>`_. Also, remembers to update the $PYTHONPATH with the directory where you put your DIRAC code (and the code of possible extensions). 
+
+       Now, remembers to update the $PYTHONPATH with the directory where you put your DIRAC code (and the code of possible extensions). 
 
 
-   8.2 If you don't have python 2.6 ot 2.7 available for your system or you just want to get the DIRAC External binaries for you platform, run::
+   8.2 The second possibility is to use the same script that is used for the server installations. 
+       This is needed if you don't have python 2.6 ot 2.7 available for your system or you just want to get the DIRAC External binaries for you platform::
 
-       scripts/dirac-install -X -t server -i 26
+         scripts/dirac-install -X -t server -i 26
 
-   This may take a while if there aren't externals available for your platform and they have to be compiled.
+      This may take a while if there aren't externals available for your platform and they have to be compiled. In any case, we suggest to try with the first alternative.
 
 
  9. Last step is to to configure DIRAC. There are 2 ways to do that: the first, and suggested way, is to work in isolation. 
@@ -92,58 +88,30 @@ First you need to check out all the sources you need to start working on DIRAC o
 
    When you develop locally, you don't need to access any CS server: instead, you need to have total control. So, you need to work a bit on the local dirac.cfg file. There is not much else needed, just create your own etc/dirac.cfg. The example that follows might not be easy to understand at a first sight, but it will become easy soon. The syntax is extremely simple, yet verbose: simply, only brackets and equalities are used. 
 
-   9.1 If you want to create an isolated installation just creaate a *etc/dirac.cfg* file with::
+   9.1 If you want to create an isolated installation just creaate a *etc/dirac.cfg* file with (create the etc directory first)::
 
-       DIRAC {
-         Setup = Local
-         Configuration {
-           Servers = dips://localhost:9135/Configuration/Server
-           Master = yes
-         }
-         Setups {
-           Local {
-             Configuration = Local
-           }
-         }
-       }
-       Registry {
-         Users {
-           yourusername {
-             DN = your/DN/here
-           }
-         }
-         Groups {
-           admin {
-             Users = yourusername
-             Properties = CSAdministrator
-           }
-         }
-       }
-       Systems {
-         Configuration {
-           Local {
-             Services {
-               Configuration {
-                 Port = 9135
-                 Authorization {
-                   Default = all
-                 }
-               }
-             }
-           }
-         }
-       }
+      DIRAC
+      {
+        Setup = MyDevelopment
+      }
+      Setups
+      {
+        MyDevelopment
+        {
+        } 
+      }
+      Registry
+      {
+      }
 
-
-
-   9.2 The second possibility (ALTERNATIVE to the previous one) is to issue the following script::
+   9.2 The second possibility (ALTERNATIVE to the previous one, and not suggested) is to issue the following script::
 
        scripts/dirac-configure -S setupyouwanttorun -C configurationserverslist -n sitename -H
 
       This is a standard script, widely used for non-developer installations, that will connect to an already existing installation when the configurationserverslist is given
 .
 
- 10. From now on, every time you want to publish something to your public repository do::
+ 10. As a reminder, from now on, every time you want to publish something to your public repository do::
 
        git push origin localbranch:remotebranch
 
