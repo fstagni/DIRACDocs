@@ -95,12 +95,28 @@ First you need to check out all the sources you need to start working on DIRAC o
       }
       Setups
       {
-        MyDevelopment
+        DeveloperSetup
         {
         } 
       }
       Registry
       {
+      #  Users
+      #  {
+      #    userName
+      #    {
+      #      DN = 
+      #      CA = 
+      #      Email = 
+      #    }
+      #  }
+      #  Groups
+      #  {
+      #    devGroup
+      #    {
+      #      Users = 
+      #    }
+      #  }
       }
 
    9.2 The second possibility (ALTERNATIVE to the previous one, and not suggested) is to issue the following script::
@@ -110,7 +126,9 @@ First you need to check out all the sources you need to start working on DIRAC o
       This is a standard script, widely used for non-developer installations, that will connect to an already existing installation when the configurationserverslist is given
 
 
- 10. As a reminder, from now on, every time you want to publish something to your public repository do::
+ 10. Now, it's time to deal with certificates. You will need 2 types of certificates: your own certificate, and a machine certificate. We will create self-signed certificates, but before, create a ``~/.globus`` directory.
+
+ 11. As a reminder, from now on, every time you want to publish something to your public repository do::
 
        git push origin localbranch:remotebranch
 
@@ -122,7 +140,7 @@ First you need to check out all the sources you need to start working on DIRAC o
 
      for an already pushed branch
 
- 11. To bring changes from the release repository do::
+ 12. To bring changes from the release repository do::
 
        git fetch release
        git rebase release/integration
