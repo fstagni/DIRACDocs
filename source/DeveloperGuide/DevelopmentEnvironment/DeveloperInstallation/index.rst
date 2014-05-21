@@ -71,8 +71,7 @@ First you need to check out all the sources you need to start working on DIRAC o
          pip install mock
 
 
-       Now, remembers to update the $PYTHONPATH with the directory where you put your DIRAC code (and the code of possible extensions). 
-
+       Now, remembers to update the $PYTHONPATH with the directory where you put your DIRAC code (and the code of possible extensions).  
 
    8.2 The second possibility is to use the same script that is used for the server installations. 
        This is needed if you don't have python 2.6 ot 2.7 available for your system or you just want to get the DIRAC External binaries for you platform::
@@ -106,10 +105,10 @@ First you need to check out all the sources you need to start working on DIRAC o
 
    9.2 The second possibility (ALTERNATIVE to the previous one, and not suggested) is to issue the following script::
 
-       scripts/dirac-configure -S setupyouwanttorun -C configurationserverslist -n sitename -H
+         scripts/dirac-configure -S setupyouwanttorun -C configurationserverslist -n sitename -H
 
       This is a standard script, widely used for non-developer installations, that will connect to an already existing installation when the configurationserverslist is given
-.
+
 
  10. As a reminder, from now on, every time you want to publish something to your public repository do::
 
