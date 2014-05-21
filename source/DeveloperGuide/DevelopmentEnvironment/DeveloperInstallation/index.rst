@@ -92,12 +92,28 @@ First you need to check out all the sources you need to start working on DIRAC o
       DIRAC
       {
         Setup = DeveloperSetup
-      }
-      Setups
-      {
-        DeveloperSetup
+        Setups
         {
-        } 
+          DeveloperSetup
+          {
+      #      Framework
+      #      {
+      #      }
+          }
+        }
+      }
+      Systems
+      {
+      #  SystemName
+      #  {
+      #    Framework
+      #    URLs
+      #    {
+      #    }
+      #    Services
+      #    {
+      #    }
+      #  }
       }
       Registry
       {
