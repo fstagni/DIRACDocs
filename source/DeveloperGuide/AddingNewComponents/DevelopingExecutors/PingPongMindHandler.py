@@ -1,11 +1,9 @@
 import types
 import time
 import random
-from DIRAC import S_OK, S_ERROR
-from DIRAC.Core.Utilities import DEncode, ThreadScheduler
+from DIRAC import S_OK, S_ERROR, gLogger
+from DIRAC.Core.Utilities import DEncode
 from DIRAC.Core.Base.ExecutorMindHandler import ExecutorMindHandler
-from DIRAC.WorkloadManagementSystem.Client.JobState.JobState import JobState
-from DIRAC.WorkloadManagementSystem.Client.JobState.CachedJobState import CachedJobState
 
 random.seed()
 
@@ -20,6 +18,13 @@ class PingPongMindHandler( ExecutorMindHandler ):
     taskData = { 'bouncesLeft' : bouncesLeft }
     return self.executeTask( time.time() + random.random(), taskData )
 
+  auth_startPingOfDeath = [ 'all' ]
+  types_startPingOfDeath = [ types.IntType ]
+  def export_startPingOfDeath( self, numBounces ):
+    taskData = { 'bouncesLeft' : numBounces }
+    gLogger.info( "START TASK = %s" % taskData )
+    return self.executeTask( int( time.time() + random.random() ), taskData )
+
   @classmethod
   def exec_executorConnected( cls, trid, eTypes ):
     """
@@ -27,6 +32,7 @@ class PingPongMindHandler( ExecutorMindHandler ):
 
     eTypes is a list of executor modules the reactor runs
     """
+    gLogger.info( "EXECUTOR CONNECTED OF TYPE %s" % eTypes )
     return S_OK()
 
   @classmethod
@@ -41,8 +47,10 @@ class PingPongMindHandler( ExecutorMindHandler ):
     """
     Before a task can be executed, the mind has to know which executor module can process it
     """
+    gLogger.info( "IN DISPATCH %s" % taskData )
     if taskData[ 'bouncesLeft' ] > 0:
-      return S_OK( "Framework/PingPong" )
+      gLogger.info( "SEND TO PLACE" )
+      return S_OK( "Test/PingPongExecutor" )
     return S_OK()
 
   @classmethod
@@ -53,23 +61,27 @@ class PingPongMindHandler( ExecutorMindHandler ):
 
   @classmethod
   def exec_serializeTask( cls, taskData ):
-    return S_OK( jobState.serialize() )
+    gLogger.info( "SERIALIZE %s" % taskData )
+    return S_OK( DEncode.encode( taskData ) )
 
   @classmethod
   def exec_deserializeTask( cls, taskStub ):
-    return CachedJobState.deserialize( taskStub )
+    gLogger.info( "DESERIALIZE %s" % taskStub )
+    return S_OK( DEncode.decode( taskStub )[0] )
 
   @classmethod
   def exec_taskProcessed( cls, taskid, taskData, eType ):
     """
     This function will be called when a task has been processed and by which executor module
     """
+    gLogger.info( "PROCESSED %s" % taskData )
     taskData[ 'bouncesLeft' ] -= 1
-    return self.executeTask( taskid, taskData )
+    return cls.executeTask( taskid, taskData )
 
   @classmethod
   def exec_taskError( cls, taskid, taskData, errorMsg ):
-    return jobState.setStatus( "Failed", errorMsg, source = 'OptimizationMindHandler' )
+    print "OOOOOO THERE WAS AN ERROR!!", errorMsg
+    return S_OK()
 
   @classmethod
   def exec_taskFreeze( cls, taskid, taskData, eType ):
@@ -77,6 +89,5 @@ class PingPongMindHandler( ExecutorMindHandler ):
     A task can be frozen either because there are no executors connected that can handle it
      or becase an executor has requested it.
     """
+    print "OOOOOO THERE WAS A TASK FROZEN"
     return S_OK()
-
-

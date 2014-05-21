@@ -22,12 +22,11 @@ class HelloHandler( RequestHandler ):
     """
     self.requestDefaultWhom = self.srv_getCSOption( "DefaultWhom", HelloHandler.defaultWhom )
 
-
   auth_sayHello = [ 'all' ]
   types_sayHello = [ types.StringTypes ]
   def export_sayHello( self, whom ):
     """ Say hello to somebody
     """
     if not whom:
-      whom = HelloHandler.requestDefaultWhom
+      whom = self.requestDefaultWhom
     return S_OK( "Hello " + whom )

@@ -97,7 +97,7 @@ illustrated by the following code snippet:
    from DIRAC.Core.DISET.RPCClient import RPCClient
    
    simpleMessageService = RPCClient('Framework/Hello')
-   result = simpleMessageService.sayHello()
+   result = simpleMessageService.sayHello( 'you' )
    if not result['OK']:
      print "Error while calling the service:", result['Message'] #Here, in DIRAC, you better use the gLogger
    else:

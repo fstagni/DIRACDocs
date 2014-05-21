@@ -10,7 +10,7 @@ class PingPongExecutor( ExecutorModule ):
     """
     Executors need to know to which mind they have to connect.
     """
-    cls.ex_setMind( "Framework/PingPongMind" )
+    cls.ex_setMind( "Test/PingPongMind" )
     return S_OK()
 
   def processTask( self, taskid, taskData ):
@@ -25,11 +25,10 @@ class PingPongExecutor( ExecutorModule ):
     """
     Tasks are received as a stream of bytes. They have to be converted from that into a usable object.
     """
-    return DEncode.decode( taskStub )[0]
+    return S_OK( DEncode.decode( taskStub )[0] )
 
   def serializeTask( self, taskData ):
     """
     Before sending the task back to the mind it has to be serialized again.
     """
-    return DEncode.encode( taskData )
-
+    return S_OK( DEncode.encode( taskData ) )

@@ -2,11 +2,18 @@
 Developing Agents
 ======================================
 
+What is an agent?
+-------------------
+
+Agents are active software components which run as independent processes to fulfil one or several system functions. They are the engine that make DIRAC beat. Agents are processes that perform actions periodically. Each cycle agents tipically contact a service or look into a DB to check for pending actions, execute the required ones and report back the results. All agents are built in the same framework which organizes the main execution loop and provides a uniform way for deployment, configuration, control and logging of the agent activity.
+
+Agents run in different environments. Those belonging to a DIRAC system, for example Workload Management or Data Distribution, are usually deployed close to the corresponding services. They watch for changes in the system state and react accordingly by initiating actions like job submission or result retrieval. 
+
+
 Simplest Agent
 -------------------
 
-All the DIRAC Agents are built in the same framework where developers should provide
-an Agent by inheriting the base AgentModule class. 
+An agent essentially loops over and over executing the same function every *X* seconds. It has essentially two methods, *initialize* and *execute*. When the agent is started it will execute the *initialize* method. Tipically this *initialize* method will define (amongst other stuff) how frequently the *execute* method will be run. Then the *execute* method is run. Once it finishes the agent will wait until the required seconds have passed and run the *execute* method again. This will loop over and over until the agent is killed or the specified amount of loops have passed.
 
 Creating an Agent is best illustrated by the example below which is presenting a fully 
 functional although simplest possible agent:: 
@@ -19,6 +26,7 @@ functional although simplest possible agent::
    # # imports
    from DIRAC import S_OK, S_ERROR
    from DIRAC.Core.Base.AgentModule import AgentModule
+   from DIRAC.Core.DISET.RPCClient import RPCClient
    
    
    __RCSID__ = "Id: $"
@@ -36,10 +44,8 @@ functional although simplest possible agent::
    
        :param self: self reference
        """
-   
        self.message = self.am_getOption( 'Message', "SimplestAgent is working..." )
        self.log.info( "message = %s" % self.message )
-   
        return S_OK()
    
      def execute( self ):
@@ -47,9 +53,13 @@ functional although simplest possible agent::
    
        :param self: self reference
        """
-   
-       self.log.info( "message: %s" % self.message )
-   
+       self.log.info( "message is: %s" % self.message )
+       simpleMessageService = RPCClient( 'Framework/Hello' )
+       result = simpleMessageService.sayHello( self.message )
+       if not result['OK']:
+         self.log.error( "Error while calling the service: %s" % result['Message'] )
+         return result
+       self.log.info( "Result of the request is %s" % result[ 'Value' ])
        return S_OK()   
 
 Let us walk through this code to see which elements should be provided.
@@ -59,22 +69,10 @@ followed by the ''__RCSID__'' global module variable which we have already seen 
 
 Several import statements will be clear from the subsequent code.
 
-The Agent name is SimplestAgent. The ''initialize'' method is
-called once when the Agent is created. Here one can put creation and initialization
-of the global variables if necessary. **Please not that the __init__ method cannot be used 
-when developing an Agent. It is used to intialize the module before it can be used**
+The Agent name is SimplestAgent. The *initialize* method is called once when the Agent is created. Here one can put creation and initialization of the global variables if necessary. **Please not that the __init__ method cannot be used when developing an Agent. It is used to intialize the module before it can be used**
 
-One can define initialize() method with no arguments although this is not necessary.
-The details of the caller can be obtained using the "getRemoteCredentials()" method
-of the base RequestHandler class.
-The other useful method is getCSOption() which allows to extract options from the Service
-section in the Configuration Service.
 
-Now comes the definition of the '''execute''' method.
-This method is executed evry time Agent runs. Place your code inside this method.
-Other methods can be defined in the same file and used via '''execute''' method
-
-The result must always be returned as an S_OK or S_ERROR structure.
+Now comes the definition of the *execute* method. This method is executed every time Agent runs. Place your code inside this method. Other methods can be defined in the same file and used via *execute* method. The result must always be returned as an *S_OK* or *S_ERROR* structure for the *execute* method. The previous example will execute the same example code in the Services section from within the agent.
 
 Default Agent Configuration parameters
 ------------------------------------------

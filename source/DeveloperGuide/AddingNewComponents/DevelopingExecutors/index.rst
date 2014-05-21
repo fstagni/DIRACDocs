@@ -24,7 +24,7 @@ Implementing an Executor module
 
 Implementing an executor module is quite straightforward. It just needs 4 methods to be implemented. Here's an example:
 
-.. literalinclude:: executor.py
+.. literalinclude:: PingPongExecutor.py
    :language: python
    :linenos:
 
@@ -56,7 +56,7 @@ The *Mind* is a bit more complex. It has to:
   
 A simple example follows:
 
-.. literalinclude:: mind.py
+.. literalinclude::  PingPongMindHandler.py
    :language: python
    :linenos:
 
