@@ -32,7 +32,9 @@ For each service interface method it is necessary to define *types_<method_name>
 Default Service Configuration parameters
 ------------------------------------------
 
-The Hello Handler is written. Now, we'll need to put the new service in the dirac CS in order to see it running. Since we are running in an isolated installation, the net effect is that the service will have to be added to the local "dirac.cfg" file. To do this, we should first have a "/Systems" section in it. The "/Systems" section keeps references to the real code, e.g. if you are developing for the "WorkloadManagementSystem" you should have a "/Systems/WorkloadManagement" section. If there are services that have to run in the WMS, you should place them under "/Systems/WorkloadManagement/Services". 
+The Hello Handler is written. Now, we'll need to put the new service in the dirac CS in order to see it running. Since we are running in an isolated installation, the net effect is that the service will have to be added to the local "dirac.cfg" file. 
+
+To do this, we should first have a "/Systems" section in it. The "/Systems" section keeps references to the real code, e.g. if you are developing for the "WorkloadManagementSystem" you should have a "/Systems/WorkloadManagement" section. If there are services that have to run in the WMS, you should place them under "/Systems/WorkloadManagement/Services". 
 
 For what concerns our example, we should place it to the Service directory of one of the DIRAC System directories, for example we can use FrameworkSystem. 
 The default Service Configuration parameters should be added to the corresponding System ConfigTemplate.cfg file. In our case the Service section in the ConfigTemplate.cfg will look like the following::
@@ -42,17 +44,25 @@ The default Service Configuration parameters should be added to the correspondin
     Hello
     {
       Port = 3424
-      DefaultWhom = "Universe"
+      DefaultWhom = Universe
     }
   }  
   
 Note that you should choose the port number on which the service will be listening which is not conflicting with other services. This is the default value which can be changed later in the Configuration Service. The Port parameter should be specified for all the services.  The 'DefaultWhom' is this service specific option.
 
+Now, you can try to run the service. To do that, simply::
+
+  dirac-service Framework/Hello -ddd
+
+The ``-ddd`` is for running in DEBUG mode. At first, this will not work. Useful info will be printed out, and you'll have to work on your dirac.cfg to make it run. Once you are done, you are ready to go.
+
 
 Installing the Service
 ------------------------
 
-Once the Service is ready it should be installed. The DIRAC Server installation is described in [[[here]]]. If you are adding the Service to an already existing installation it is sufficient to execute the following in this DIRAC instance::
+We are running in isolation. So, unless you run also a ConfigurationServer on your machine, you won't be able to do the following, and you can safely skip this part.
+
+The Service is ready it should be installed. The DIRAC Server installation is described in [[[here]]]. If you are adding the Service to an already existing installation it is sufficient to execute the following in this DIRAC instance::
 
   > dirac-install-service Framework Hello
   
@@ -71,7 +81,7 @@ The SystemAdministrator interface can also be used to remotely control the Servi
 
   > dirac-admin-sysadmin-cli --host=myDIRACServer
 
-In any case, if you are developing a service, you might test it without installing it, by simply running:
+As said in the previous section, in any case, if you are developing a service, you might test it without installing it, by simply running:
 
   > dirac-service Framework/Hello
 
