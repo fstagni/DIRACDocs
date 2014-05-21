@@ -170,9 +170,19 @@ Then, do the following::
 
    dirac-proxy-init
 
-You probably got something like::
+if you got something like::
 
-   toffo@pclhcb181:~/LHCbCode/DIRAC$ dirac-proxy-init 
+  > dirac-proxy-init 
+  Traceback (most recent call last):
+    File "/home/dirac/diracInstallation/scripts/dirac-proxy-init", line 22, in <module>
+      for entry in os.listdir( baseLibPath ):
+  OSError: [Errno 2] No such file or directory: '/home/dirac/diracInstallation/Linux_x86_64_glibc-2.12/lib'
+
+just create the directory by hand.
+
+Now, if try again you will probably get something like::
+
+   > dirac-proxy-init 
    Generating proxy... 
    Enter Certificate password:
    DN /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=fstagni/CN=693025/CN=Federico Stagni is not registered 
