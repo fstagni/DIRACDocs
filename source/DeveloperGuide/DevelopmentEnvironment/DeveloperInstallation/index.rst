@@ -139,11 +139,18 @@ First you need to check out all the sources you need to start working on DIRAC o
 
          scripts/dirac-configure -S setupyouwanttorun -C configurationserverslist -n sitename -H
 
+      
       This is a standard script, widely used for non-developer installations, that will connect to an already existing installation when the configurationserverslist is given
 
 
- 10. Now, it's time to deal with certificates. You will need 2 types of certificates: your own certificate, and a machine certificate. We will create self-signed certificates, but before, create a ``~/.globus`` directory.
-
+ 10. Now, it's time to deal with certificates. You will need 2 types of certificates: your own certificate, and a machine certificate. We will create self-signed certificates, but before, create a ``~/.globus`` directory. Inside there, generate a self-signed certificate with the command::
+    
+       openssl req -x509 -newkey rsa:2048 -keyout userkey.pem -out usercert.pem -days 365
+      
+    For what regards the machine certificate (that are necessary to run services and agents)
+    
+    INSERT_HERE
+      
  11. As a reminder, from now on, every time you want to publish something to your public repository do::
 
        git push origin localbranch:remotebranch
