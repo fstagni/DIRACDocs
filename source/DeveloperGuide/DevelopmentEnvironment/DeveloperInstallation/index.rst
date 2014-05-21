@@ -52,10 +52,10 @@ First you need to check out all the sources you need to start working on DIRAC o
     In that repository you will publish your code to be released. But all the releases will be done in the
     https://github.com/DIRACGrid/DIRAC repository.
     You need to define a *remote* for that repository to be able to pull newly released changes into your working repo.
-    We will name that repository *upstream*::
+    We will name that repository *release*::
 
-     git remote add upstream https://github.com/DIRACGrid/DIRAC.git
-     git fetch upstream
+     git remote add release https://github.com/DIRACGrid/DIRAC.git
+     git fetch release
 
  4. If you need DIRACWeb extension, for example, do the same with the repo at https://github.com/DIRACGrid/DIRACWeb
  5. If you need to check out any extension do so in the *devRoot* directory. For instance::
@@ -157,8 +157,8 @@ First you need to check out all the sources you need to start working on DIRAC o
 
  11. To bring changes from the release repository do::
 
-       git fetch upstream
-       git rebase upstream/integration
+       git fetch release
+       git rebase release/integration
 
 You're ready for DIRAC development !
 
