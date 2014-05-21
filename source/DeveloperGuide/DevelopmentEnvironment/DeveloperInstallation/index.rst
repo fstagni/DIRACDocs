@@ -92,7 +92,7 @@ First you need to check out all the sources you need to start working on DIRAC o
 
       DIRAC
       {
-        Setup = MyDevelopment
+        Setup = DeveloperSetup
       }
       Setups
       {
