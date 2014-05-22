@@ -14,10 +14,11 @@ What starts here is a guide to develop DIRAC components. This guide is done in t
    DevelopingServices/index
    TestingServices/index
    DevelopingDatabases/index
+   TestingDBs/index
    DevelopingAgents/index
    TestingAgents/index
    DevelopingExecutors/index
    DevelopingCommands/index
    Utilities/index
    DevelopingWebPages/index  
-
+   CodeQuality/index
