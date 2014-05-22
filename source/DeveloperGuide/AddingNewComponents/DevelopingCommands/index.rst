@@ -63,17 +63,20 @@ After defining the switches, the *parseCommandLine()* function has to be called.
 
 **4.** Once the command line has been parsed and DIRAC is properly initialized, the rest of the required DIRAC modules can be imported and the script logic can take place::
 
-    #Import the required DIRAC modules
-    from DIRAC.Interfaces.API.DIRAC import DIRAC
-    from DIRAC import gLogger
-    #Do stuff... depending on cliParams.raw, cliParams.pingsToDo and servicesList
+.. code-block:: python
+
+   #Import the required DIRAC modules
+   from DIRAC.Interfaces.API.DIRAC import DIRAC
+   from DIRAC import gLogger
+   #Do stuff... depending on cliParams.raw, cliParams.pingsToDo and servicesList
+  
+   def executeCommandLogic()
+     # Do stuff
+     gLogger.notice('This is the result of the command')
     
-    def executeCommandLogic()
-      # Do stuff
-      gLogger.notice('This is the result of the command')
-      
-    if __name__ == "__main__":
-      executeCommandLogic()  
+   if __name__ == "__main__":
+     executeCommandLogic()  
+    
     
 Having understood the logic of the script, there are few good practices that must be followed:
 
