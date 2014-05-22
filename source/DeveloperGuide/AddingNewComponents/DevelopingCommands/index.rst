@@ -61,7 +61,7 @@ All the command line arguments that are not corresponding to the explicitly defi
 
 After defining the switches, the *parseCommandLine()* function has to be called. This method not only parses the command line options but also initializes DIRAC collecting all the configuration data. **It is absolutely important to call this function before importing any other DIRAC module**. The callbacks defined for the switches will be called when parsing the command line if necessary. *Even if the switch is not supposed to receive a parameter, the callback has to receive a value*. Switches without callbacks defined can be obtained with *getUnprocessedSwitches()* function.
 
-**4.** Once the command line has been parsed and DIRAC is properly initialized, the rest of the required DIRAC modules can be imported and the script logic can take place::
+**4.** Once the command line has been parsed and DIRAC is properly initialized, the rest of the required DIRAC modules can be imported and the script logic can take place:
 
 .. code-block:: python
 
