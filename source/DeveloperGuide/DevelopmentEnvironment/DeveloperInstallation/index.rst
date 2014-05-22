@@ -1,4 +1,4 @@
-.. _develper_installation:
+.. _developer_installation:
 
 ======================================
 Setting up a development installation
