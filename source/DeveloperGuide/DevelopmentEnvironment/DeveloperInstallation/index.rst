@@ -56,21 +56,15 @@ First you need to check out all the sources you need to start working on DIRAC o
 
   8. Now you need to install the required python packages for DIRAC to be able to run. There are two ways of doing that:
 
-    8.1 If you want to use your own python (you can use versions 2.6 or 2.7, but it is highly suggested to use python 2.7) 
-        you can install all the required packages by hand. First, you'll need to install few packages for your distribution, 
-        e.g. you will need gcc, python-devel, openssl-devel, mysql, mysql-devel, python-pip. 
-        Then, you can use pip to install specifc python tools::
+    8.1 If you want to use your own python (you can use versions 2.6 or 2.7, but it is highly suggested to use python 2.7) you can install all the required packages by hand. First, you'll need to install few packages for your distribution, e.g. you will need gcc, python-devel, openssl-devel, mysql, mysql-devel, python-pip. Then, you can use pip to install specifc python tools::
 
           pip install GSI
           pip install MySQL-python
           pip install mock
 
-       Now, remember to update the $PYTHONPATH with the directory where you put your DIRAC code (and the code of possible extensions). Note:
-       For those of you with OSX Lion or newer take a look `here <http://bruteforce.gr/bypassing-clang-error-unknown-argument.html>`_ if you
-       can't install MySQL-python...
+       Now, remember to update the $PYTHONPATH with the directory where you put your DIRAC code (and the code of possible extensions). Note: for those of you with OSX Lion or newer take a look `here <http://bruteforce.gr/bypassing-clang-error-unknown-argument.html>`_ if you can't install MySQL-python...
 
-    8.2 The second possibility is to use the same script that is used for the server installations. 
-        This is needed if you don't have python 2.6 ot 2.7 available for your system or you just want to get the DIRAC External binaries for you platform::
+    8.2 The second possibility is to use the same script that is used for the server installations. This is needed if you don't have python 2.6 ot 2.7 available for your system or you just want to get the DIRAC External binaries for you platform::
 
           scripts/dirac-install -X -t server -i 26
 
