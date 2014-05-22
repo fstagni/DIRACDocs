@@ -33,7 +33,7 @@ which will set the interpreter directive to the python on the environment.
   
 **2.** The next is the documentation line which is describing the command. This same documentation line will be used also the command help information available with the *-h* command switch.   
 
-**3.** Users need to specify parameters to scripts to define what they want to do. To do so, they pass arguments when calling the script. The first thing any script has to do is define what  options and arguments the script accepts. Once the valid arguments are defined, the script can parse the command line. An example follows which is a typical command description part:
+**3.** Users need to specify parameters to scripts to define what they want to do. To do so, they pass arguments when calling the script. The first thing any script has to do is define what  options and arguments the script accepts. Once the valid arguments are defined, the script can parse the command line. An example follows which is a typical command description part
 
        .. literalinclude:: dirac-ping-info.py 
 
