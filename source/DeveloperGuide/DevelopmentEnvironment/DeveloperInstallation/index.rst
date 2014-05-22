@@ -1,4 +1,4 @@
-    .. _develper_installation:
+.. _developer_installation:
 
 ======================================
 Setting up a development installation
@@ -27,8 +27,9 @@ Checking out the source
 First you need to check out all the sources you need to start working on DIRAC or on any extension. Go to a clean directory
 ( from now on we will call that directory *devRoot* ) and:
 
-     1. Go to your *devRoot* directory
- 2. Check out DIRAC source code. DIRAC source is hosted     on *github.com*. So, you have to do:            :
+ 1. Go to your *devRoot* directory
+
+ 2. Check out DIRAC source code. DIRAC source is hosted on *github.com*. So, you have to do::
 
       git clone git@github.com:yourusername/DIRAC  .git
 
@@ -38,21 +39,23 @@ First you need to check out all the sources you need to start working on DIRAC o
 
       git clone https://github.com/DIRACGrid/DIRAC.git
 
-   3. This will create a *remote* pointer ( in git terms ) in the local git repository called *origin* that points to your source repository.
+ 3. This will create a *remote* pointer ( in git terms ) in the local git repository called *origin* that points to your source repository.
       In that repository you will publish your code to be released. But all the releases will be done in the
-      https://github.com/DIRACGrid/DIRAC repository.
-    You need to define a *remote* for that repository to be able to pull newly released changes into your working repo.
-      We will name that repository *relea    se*::
+     `<DIRAC <https://github.com/DIRACGrid/DIRAC>`_ repository. You need to define a *remote* for that repository to be able to pull newly released changes into your working repo.
+
+      We will name that repository *release*::
 
        git remote add release https://githu    b.com/DIRACGrid/DIRAC.git
-     git fetch relea            se
+       git fetch release
 
  4. If you need DIRACWeb ex  tension, for example, do the same with the repo at https://github.com/DIRACGrid/DIRACWeb
+
  5. If you need to check out any extension do so in the *devRoot* directory. For instance::
 
        svn co svn+ssh://svn.cern.ch/reps/dirac/LHCbDIRAC/trunk/LHCbDIRAC LHCbDIRAC
 
  6. Repeat step 4 for each extension you need
+
  7. Deploy DIRAC scripts by running::
 
        DIRAC/Core/scripts/dirac-deploy-scripts.py

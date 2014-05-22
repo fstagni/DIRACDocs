@@ -6,4 +6,8 @@ Code quality
 
 DIRAC code should be coded following the conventions explained in :ref:coding_conventions. There are automatic tools that can help you to follow general good code quality rules. 
 
-Specifically, `pylint <http://www.pylint.org/>`_, a static code analyzer, can be used. 
+Specifically, `pylint <http://www.pylint.org/>`_, a static code analyzer, can be used. Pylint can give you nice suggestions, and might force you to code in a "standard" way. In any case, to use pylint on DIRAC code we have to supply a configuration file, otherwise pylint will assume that we are coding with standard rules, which is not fully the case: just to say, our choice was to use 2 spaces instead of 4, which is non-standard.
+
+A pylint config file for DIRAC can be found `here <http://svnweb.cern.ch/world/wsvn/dirac/LHCbTestDirac/trunk/LHCbTestDirac/Jenkins/config/pylint/DIRAC.pylint.rc?op=dl&rev=69328>`_
+
+
