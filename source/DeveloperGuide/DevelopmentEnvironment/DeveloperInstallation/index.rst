@@ -62,13 +62,13 @@ First you need to check out all the sources you need to start working on DIRAC o
           pip install MySQL-python
           pip install mock
 
-       Now, remember to update the $PYTHONPATH with the directory where you put your DIRAC code (and the code of possible extensions). Note: for those of you with OSX Lion or newer take a look `here <http://bruteforce.gr/bypassing-clang-error-unknown-argument.html>`_ if you can't install MySQL-python...
+    Now, remember to update the $PYTHONPATH with the directory where you put your DIRAC code (and the code of possible extensions). Note: for those of you with OSX Lion or newer take a look `here <http://bruteforce.gr/bypassing-clang-error-unknown-argument.html>`_ if you can't install MySQL-python...
 
     8.2 The second possibility is to use the same script that is used for the server installations. This is needed if you don't have python 2.6 ot 2.7 available for your system or you just want to get the DIRAC External binaries for you platform::
 
           scripts/dirac-install -X -t server -i 26
 
-        This may take a while if there aren't externals available for your platform and they have to be compiled. In any case, we suggest to try with the first alternative.
+    This may take a while if there aren't externals available for your platform and they have to be compiled. In any case, we suggest to try with the first alternative.
 
 
   9. Last step is to to configure DIRAC. There are 2 ways to do that: the first, and suggested way, is to work in isolation. At this point, the key becomes understanding how the DIRAC `Configuration Service (CS) <http://diracgrid.org/files/docs/AdministratorGuide/Configuration/ConfigurationStructure/index.html>`_ works. I'll explain here briefly. The CS is a layered structure: whenever you access a CS information (e.g. using a "gConfig" object, see later), DIRAC will first check into your local "dirac.cfg" file (it can be in your home as .dirac.cfg, or in etc/ directory, see the link above). If this will not be found, it will look for such info in the CS servers available.
