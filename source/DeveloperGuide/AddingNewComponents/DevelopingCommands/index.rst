@@ -15,12 +15,15 @@ will live in::
 
   DIRAC/WorkloadManagementSystem/scripts/dirac-wms-job-submit.py
 
-The command script name is the same as the command name itself with the *.py* suffix appended. When DIRAC client software is installed, all scripts will be placed in the installation scripts directory and stripped of the *.py* extension. This way users can see all the scripts in a single place and it makes easy to include all the scripts in the system PATH variable.
+The command script name is the same as the command name itself with the *.py* suffix appended. When DIRAC client software is installed, 
+all scripts will be placed in the installation scripts directory and stripped of the *.py* extension. This is done by the dirac-deploy-scripts command that you should have already done when you installed.
+This way users can see all the scripts in a single place and it makes easy to include all the scripts in the system PATH variable.
 
 Coding commands
 ------------------
 
-All the commands should be coded following a common recipe and having several mandatory parts. The instructions below must be applied as close as possible although some variation are allowed according to developer's habits. 
+All the commands should be coded following a common recipe and having several mandatory parts. 
+The instructions below must be applied as close as possible although some variation are allowed according to developer's habits. 
 
 **1.** All scripts must start with a Shebang line like the following::
 
@@ -32,7 +35,7 @@ which will set the interpreter directive to the python on the environment.
 
 **3.** Users need to specify parameters to scripts to define what they want to do. To do so, they pass arguments when calling the script. The first thing any script has to do is define what  options and arguments the script accepts. Once the valid arguments are defined, the script can parse the command line. An example follows which is a typical command description part:
 
-.. literalinclude:: dirac-ping-info.py 
+       .. literalinclude:: dirac-ping-info.py 
 
 Let's follow the example step by step. First, we import the required modules from DIRAC. *S_OK* and *S_ERROR* are the default way DIRAC modules return values or errors. The *Script* module is the initialization and command line parser that scripts use to initialize themselves. **No other DIRAC module should be imported here**.
 
