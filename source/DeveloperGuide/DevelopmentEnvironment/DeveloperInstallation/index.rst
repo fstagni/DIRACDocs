@@ -187,7 +187,7 @@ First you need to check out all the sources you need to start working on DIRAC o
     This is a standard script, widely used for non-developer installations, that will connect to an already existing installation when the configuration servers list is given
 
 
-  11. Now, it's time to deal with certificates. DIRAC understands certificates in *pem* format. That means that certificate set will consist of two files. Files ending in *cert.pem* can be world readable but just user writable since it contains the certificate and public key. Files ending in *key.pem* sould be only user readable since they contain the private key. You will need two different sets certificates and the CA certificate that signed the sets. *Note: Please notice that if any of the paths mentioned here does not yet exist, please create it with mkdir*
+  11. Now, it's time to deal with certificates. DIRAC understands certificates in *pem* format. That means that certificate set will consist of two files. Files ending in *cert.pem* can be world readable but just user writable since it contains the certificate and public key. Files ending in *key.pem* should be only user readable since they contain the private key. You will need two different sets certificates and the CA certificate that signed the sets. *Note: if any of the paths mentioned here does not yet exist, just create it with mkdir*
 
     11.1. CA certificates: Place them under *$DEVROOT/etc/grid-security/certificates*. You can install them following the instructions `here <https://wiki.egi.eu/wiki/EGI_IGTF_Release>`_. In case you can't use a package manager like *apt* or *yum*. There are tarballs available to download the CA certificates. In that case you can use this script:
 
