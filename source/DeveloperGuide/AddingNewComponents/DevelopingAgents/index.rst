@@ -97,13 +97,13 @@ will look like the following::
 Polling time define execution time scheduling.
 The Message is this agent specific option.
 
-
 Installing the Agent
 ------------------------
 
-Once the Agent is ready it should be installed. The DIRAC Server installation is described
-in documentation. If you are adding the Agent to an already existing installation it is
-sufficient to execute the following in this DIRAC instance::
+Once the Agent is ready it should be installed. As for the service part, we won't do this part unless we want to mimic a full installation. Also, this part won't work if we won't have a ConfigurationServer running, which is often the case of a developer installation. For our development installation we can modify our local *dirac.cfg* in a very similar fashion to what we have done for the service part in the previous section, and run the agent using the dirac-agent command.
+
+
+The DIRAC Server installation is described in documentation. If you are adding the Agent to an already existing installation it is sufficient to execute the following in this DIRAC instance::
 
   > dirac-install-agent Framework SimplestAgent
   
@@ -123,8 +123,7 @@ stop it, uninstall, get the Agent status, etc.
 Checking the Agent output from log messages
 ------------------------------------------------
 
-Login to dirac-admin-sysadmin-cli as administrator.
-Show log of SimplestAgent::
+If case you are running a SystemAdministrator service, you'll be able to login to the machine using (as adminitrator) `dirac-admin-sysadmin-cli` and show the log of SimplestAgent using::
 
   > show log Framework SimplestAgent
       
@@ -132,5 +131,4 @@ An info message will appear in log::
 
   Framewrok/SimplestAgent  INFO: message: still working...
 
-Note that the service is always returning the result in the form of S_OK/S_ERROR structure.        
- 
+Note that the service is always returning the result in the form of S_OK/S_ERROR structure.

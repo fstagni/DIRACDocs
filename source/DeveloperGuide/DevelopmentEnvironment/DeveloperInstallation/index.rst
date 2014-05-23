@@ -54,36 +54,33 @@ First you need to check out all the sources you need to start working on DIRAC o
 
     It is a good idea to add the scripts directory to your $PATH.
 
-  8. It is a good idea to add the Install MySQL. DIRAC mainly uses *MySQL* as its database engine. There are many database structures used by DIRAC. Each system tipically has more than one database structure to keep its state. The first step is to install *MySQL* from your distribution. For rpm based distributions execute::
+  8. We now add MySQL. DIRAC mainly uses *MySQL* as its database engine. There are many database structures used by DIRAC. Each system tipically has more than one database structure to keep its state. The first step is to install *MySQL* from your distribution. For rpm based distributions execute::
 
-      yum install mysql-server
+      yum install mysql mysql-server
+      service mysqld start
   
     For debian based distributions execute::
   
       apt-get install mysql-server
     
-    If you have either another distribution or another operative system please head to `MySQL <http://www.mysql.com/>`_ to check how to install MySQL in your host.  Once MySQL is installed you need to create a database in MySQL for each database you want to use or develop. First create the database::
+    If you have either another distribution or another operative system please head to `MySQL <http://www.mysql.com/>`_ to check how to install MySQL in your host.  Once MySQL is installed you need to create a user to interact with the DB, e.g. the user *Dirac*::
 
-      mysqladmin -u root -p create yourdbname
+      > mysql -u root
+      
+      mysql> CREATE USER 'Dirac'@'localhost' IDENTIFIED BY 'yourpasswd';
+      Query OK, 0 rows affected (0.00 sec)
+
+
+    Now, you will need to create a database in MySQL for each database you want to use or develop. First create the database::
+
+      mysqladmin -u root create yourdbname
   
     Once the database has been created::
 
-      > mysql -u root -p yourdbname
-      Welcome to the MySQL monitor.  Commands end with ; or \g.
-      Your MySQL connection id is 42
-      Server version: 5.6.14 MySQL Community Server (GPL)
+      > mysql -u root yourdbname
+      ...
 
-      Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
-
-      Oracle is a registered trademark of Oracle Corporation and/or its
-      affiliates. Other names may be trademarks of their respective
-      owners.
-
-      Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-
-      mysql> grant all on yourdbname to yourusername identified by 'yourpasswd';
-      Query OK, 0 rows affected (0.01 sec)
-      mysql> grant all on yourdbname.* to yourusername identified by 'yourpasswd';
+      mysql> GRANT SELECT,INSERT,LOCK TABLES,UPDATE,DELETE,CREATE,DROP,ALTER ON yourdbname.* TO Dirac@'%' IDENTIFIED BY 'yourpasswd';
       Query OK, 0 rows affected (0.01 sec)
       mysql> flush privileges;
       Query OK, 0 rows affected (0.01 sec)
@@ -189,9 +186,11 @@ First you need to check out all the sources you need to start working on DIRAC o
 
   11. Now, it's time to deal with certificates. DIRAC understands certificates in *pem* format. That means that certificate set will consist of two files. Files ending in *cert.pem* can be world readable but just user writable since it contains the certificate and public key. Files ending in *key.pem* should be only user readable since they contain the private key. You will need two different sets certificates and the CA certificate that signed the sets. *Note: if any of the paths mentioned here does not yet exist, just create it with mkdir*
 
-    11.1. CA certificates: Place them under *$DEVROOT/etc/grid-security/certificates*. You can install them following the instructions `here <https://wiki.egi.eu/wiki/EGI_IGTF_Release>`_. In case you can't use a package manager like *apt* or *yum*. There are tarballs available to download the CA certificates. In that case you can use this script:
+    11.1. CA certificates: Place them under *$DEVROOT/etc/grid-security/certificates*. You can install them following the instructions `here <https://wiki.egi.eu/wiki/EGI_IGTF_Release>`_. In case you can't use a package manager like *apt* or *yum* there are tarballs available to download the CA certificates, so in that case you can use this script
 
-    .. literalinclude:: downloadCAs.sh
+
+      .. literalinclude:: downloadCAs.sh
+
 
       11.1.1. Dummy CA certificate. If you have your own user and host certificates you can skip this step, otherwise you'll need to create a dummy CA to generate user and host certificates::
 
@@ -205,7 +204,7 @@ First you need to check out all the sources you need to start working on DIRAC o
       11.2.1. In case you don't have access to any host or service certificates you can create one by doing::
 
           openssl genrsa -out hostkey.pem 2048
-          openssl req -new -key hostkey.pem -out hosteq.csr -subj "/O=$(whoami)-dom/OU=PersonalCA/CN=$(hostname -f)"
+          openssl req -new -key hostkey.pem -out hostreq.csr -subj "/O=$(whoami)-dom/OU=PersonalCA/CN=$(hostname -f)"
           openssl x509 -req -in hostreq.csr -CA cacert.pem -CAkey cakey.pem -CAcreateserial -out hostcert.pem -days 500 
 
       Place them at *$DEVROOT/etc/grid-security/hostcert.pem* and *$DEVROOT/etc/grid-security/hostkey.pem*.

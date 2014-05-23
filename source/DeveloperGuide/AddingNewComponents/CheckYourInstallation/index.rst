@@ -4,8 +4,8 @@ Check your installation
 
 If you are here, we suppose you have read the documentation that came before. Specifically:
 
-* you should know about our :ref:development_model
-* you should have your :ref:development_environment already set up, specifcally you should already have a developer installation. 
+* you should know about our :ref:`development_model`
+* you should have your :ref:`development_environment` already set up, specifcally you should already have a developer installation. 
 
 Within this part we'll check the basics, and we'll do few exercises.
 
@@ -113,7 +113,7 @@ Quite clear, isn't it? Often, you'll end up doing a lot of code like that:
 Playing with the Configuration Service
 --------------------------------------
 
-If you are here, it means that your developer installation contains a **dirac.cfg** file, that should stay in the $DIRACINSTALLATION/etc directory. 
+If you are here, it means that your developer installation contains a **dirac.cfg** file, that should stay in the $DIRACDEVS/etc directory. 
 We'll play a bit with it now.
 
 You have already done this:
