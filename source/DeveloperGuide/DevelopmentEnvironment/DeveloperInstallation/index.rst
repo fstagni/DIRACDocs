@@ -54,7 +54,7 @@ First you need to check out all the sources you need to start working on DIRAC o
 
     It is a good idea to add the scripts directory to your $PATH.
 
-  8. It is a good idea to add the Install MySQL. DIRAC mainly uses *MySQL* as its database engine. There are many database structures used by DIRAC. Each system tipically has more than one database structure to keep its state. The first step is to install *MySQL* from your distribution. For rpm based distributions execute::
+  8. We now add MySQL. DIRAC mainly uses *MySQL* as its database engine. There are many database structures used by DIRAC. Each system tipically has more than one database structure to keep its state. The first step is to install *MySQL* from your distribution. For rpm based distributions execute::
 
       yum install mysql-server
   
@@ -189,7 +189,7 @@ First you need to check out all the sources you need to start working on DIRAC o
 
   11. Now, it's time to deal with certificates. DIRAC understands certificates in *pem* format. That means that certificate set will consist of two files. Files ending in *cert.pem* can be world readable but just user writable since it contains the certificate and public key. Files ending in *key.pem* should be only user readable since they contain the private key. You will need two different sets certificates and the CA certificate that signed the sets. *Note: if any of the paths mentioned here does not yet exist, just create it with mkdir*
 
-    11.1. CA certificates: Place them under *$DEVROOT/etc/grid-security/certificates*. You can install them following the instructions `here <https://wiki.egi.eu/wiki/EGI_IGTF_Release>`_. In case you can't use a package manager like *apt* or *yum*. There are tarballs available to download the CA certificates. In that case you can use this script
+    11.1. CA certificates: Place them under *$DEVROOT/etc/grid-security/certificates*. You can install them following the instructions `here <https://wiki.egi.eu/wiki/EGI_IGTF_Release>`_. In case you can't use a package manager like *apt* or *yum* there are tarballs available to download the CA certificates, so in that case you can use this script
 
 
       .. literalinclude:: downloadCAs.sh
@@ -207,7 +207,7 @@ First you need to check out all the sources you need to start working on DIRAC o
       11.2.1. In case you don't have access to any host or service certificates you can create one by doing::
 
           openssl genrsa -out hostkey.pem 2048
-          openssl req -new -key hostkey.pem -out hosteq.csr -subj "/O=$(whoami)-dom/OU=PersonalCA/CN=$(hostname -f)"
+          openssl req -new -key hostkey.pem -out hostreq.csr -subj "/O=$(whoami)-dom/OU=PersonalCA/CN=$(hostname -f)"
           openssl x509 -req -in hostreq.csr -CA cacert.pem -CAkey cakey.pem -CAcreateserial -out hostcert.pem -days 500 
 
       Place them at *$DEVROOT/etc/grid-security/hostcert.pem* and *$DEVROOT/etc/grid-security/hostkey.pem*.

@@ -33,8 +33,8 @@ group.
    Overview/index
    CodingConvention/index
    AddingNewComponents/index
-   Framework/index
    CodeDocumenting/index  
+   Framework/index
    Internals/index
    REST/index
    

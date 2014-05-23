@@ -56,6 +56,12 @@ Now, you can try to run the service. To do that, simply::
 
 The ``-ddd`` is for running in DEBUG mode. At first, this will not work. Useful info will be printed out, and you'll have to work on your dirac.cfg to make it run. Once you are done, you are ready to go.
 
+If everything goes well, you should see something like::
+
+  2014-05-23 13:58:04 UTC Framework/Hello[MppQ] ALWAYS: Listening at dips://diracTutorial.cern.ch:3234/Framework/Hello 
+
+The URL displayed should be added to the local *dirac.cfg* in the URLs section.
+
 
 Installing the Service
 ------------------------
@@ -77,11 +83,11 @@ The Service can be also installed using the SystemAdministrator CLI interface (p
 
   > install service Framework Hello      
   
-The SystemAdministrator interface can also be used to remotely control the Service, start or stop it, uninstall, get the Service status, etc. and can be invoked in the standard way via a DIRAC client installation:
+The SystemAdministrator interface can also be used to remotely control the Service, start or stop it, uninstall, get the Service status, etc. and can be invoked in the standard way via a DIRAC client installation::
 
   > dirac-admin-sysadmin-cli --host=myDIRACServer
 
-As said in the previous section, in any case, if you are developing a service, you might test it without installing it, by simply running:
+As said in the previous section, in any case, if you are developing a service, you might test it without installing it, by simply running::
 
   > dirac-service Framework/Hello
 
