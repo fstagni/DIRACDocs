@@ -56,34 +56,31 @@ First you need to check out all the sources you need to start working on DIRAC o
 
   8. We now add MySQL. DIRAC mainly uses *MySQL* as its database engine. There are many database structures used by DIRAC. Each system tipically has more than one database structure to keep its state. The first step is to install *MySQL* from your distribution. For rpm based distributions execute::
 
-      yum install mysql-server
+      yum install mysql mysql-server
+      service mysqld start
   
     For debian based distributions execute::
   
       apt-get install mysql-server
     
-    If you have either another distribution or another operative system please head to `MySQL <http://www.mysql.com/>`_ to check how to install MySQL in your host.  Once MySQL is installed you need to create a database in MySQL for each database you want to use or develop. First create the database::
+    If you have either another distribution or another operative system please head to `MySQL <http://www.mysql.com/>`_ to check how to install MySQL in your host.  Once MySQL is installed you need to create a user to interact with the DB, e.g. the user *Dirac*::
 
-      mysqladmin -u root -p create yourdbname
+      > mysql -u root
+      
+      mysql> CREATE USER 'Dirac'@'localhost' IDENTIFIED BY 'yourpasswd';
+      Query OK, 0 rows affected (0.00 sec)
+
+
+    Now, you will need to create a database in MySQL for each database you want to use or develop. First create the database::
+
+      mysqladmin -u root create yourdbname
   
     Once the database has been created::
 
-      > mysql -u root -p yourdbname
-      Welcome to the MySQL monitor.  Commands end with ; or \g.
-      Your MySQL connection id is 42
-      Server version: 5.6.14 MySQL Community Server (GPL)
+      > mysql -u root yourdbname
+      ...
 
-      Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
-
-      Oracle is a registered trademark of Oracle Corporation and/or its
-      affiliates. Other names may be trademarks of their respective
-      owners.
-
-      Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-
-      mysql> grant all on yourdbname to yourusername identified by 'yourpasswd';
-      Query OK, 0 rows affected (0.01 sec)
-      mysql> grant all on yourdbname.* to yourusername identified by 'yourpasswd';
+      mysql> GRANT SELECT,INSERT,LOCK TABLES,UPDATE,DELETE,CREATE,DROP,ALTER ON yourdbname.* TO Dirac@'%' IDENTIFIED BY 'yourpasswd';
       Query OK, 0 rows affected (0.01 sec)
       mysql> flush privileges;
       Query OK, 0 rows affected (0.01 sec)
