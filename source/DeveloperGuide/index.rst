@@ -35,7 +35,4 @@ group.
    AddingNewComponents/index
    CodeDocumenting/index  
    Framework/index
-   Internals/index
    REST/index
-   
-   

@@ -2,5 +2,8 @@
 Workload Management System
 ==========================
 
-.. contents:: Table of contents
-   :depth: 3
+
+.. toctree::
+   :maxdepth: 1
+
+   JobPriorities/index
