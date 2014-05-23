@@ -189,9 +189,11 @@ First you need to check out all the sources you need to start working on DIRAC o
 
   11. Now, it's time to deal with certificates. DIRAC understands certificates in *pem* format. That means that certificate set will consist of two files. Files ending in *cert.pem* can be world readable but just user writable since it contains the certificate and public key. Files ending in *key.pem* sould be only user readable since they contain the private key. You will need two different sets certificates and the CA certificate that signed the sets. *Note: Please notice that if any of the paths mentioned here does not yet exist, please create it with mkdir*
 
-    11.1. CA certificates: Place them under *$DEVROOT/etc/grid-security/certificates*. You can install them following the instructions `here <https://wiki.egi.eu/wiki/EGI_IGTF_Release>`_. In case you can't use a package manager like *apt* or *yum*. There are tarballs available to download the CA certificates. In that case you can use this script:
+    11.1. CA certificates: Place them under *$DEVROOT/etc/grid-security/certificates*. You can install them following the instructions `here <https://wiki.egi.eu/wiki/EGI_IGTF_Release>`_. In case you can't use a package manager like *apt* or *yum*. There are tarballs available to download the CA certificates. In that case you can use this script
 
-    .. literalinclude:: downloadCAs.sh
+
+      .. literalinclude:: downloadCAs.sh
+
 
       11.1.1. Dummy CA certificate. If you have your own user and host certificates you can skip this step, otherwise you'll need to create a dummy CA to generate user and host certificates::
 
