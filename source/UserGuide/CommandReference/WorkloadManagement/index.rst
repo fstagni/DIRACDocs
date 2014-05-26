@@ -6,7 +6,8 @@ In this subsection all the Dirac workload management commands available are expl
 
 .. toctree::
    :maxdepth: 2
-
+    
+   dirac-wms-cpu-normalization
    dirac-wms-get-normalized-queue-length
    dirac-wms-get-queue-normalization
    dirac-wms-job-attributes

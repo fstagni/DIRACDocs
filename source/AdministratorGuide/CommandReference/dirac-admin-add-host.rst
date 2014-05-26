@@ -10,7 +10,7 @@ dirac-admin-add-host [option|cfgfile] ... Property=<Value> ...
 
 Arguments::
 
- Property=<Value>: Other properties to be added to the User like (Responsible=XXXX) 
+  Property=<Value>: Other properties to be added to the User like (Responsible=XXXX) 
 
  
 

@@ -2,6 +2,8 @@
 dirac-proxy-info
 =======================
 
+Obtain detailed info about user proxies.
+
 Usage::
 
   dirac-proxy-info.py (<options>|<cfgFile>)* 

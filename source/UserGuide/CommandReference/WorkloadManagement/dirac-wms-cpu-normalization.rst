@@ -2,7 +2,7 @@
 dirac-wms-cpu-normalization
 ==================================
 
-  Determine Normalization for current CPU
+Determine Normalization for current CPU. Used by jobs.
 
 Usage::
 

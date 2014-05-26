@@ -6,7 +6,6 @@ Usage::
 
   dirac-proxy-get-uploaded-info.py (<options>|<cfgFile>)* 
 
- 
 
 Options::
 

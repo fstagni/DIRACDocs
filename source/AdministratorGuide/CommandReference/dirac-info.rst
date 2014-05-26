@@ -2,7 +2,7 @@
 dirac-info
 =================
 
-  Report info about local DIRAC installation
+Report info about local DIRAC installation
 
 Usage::
 

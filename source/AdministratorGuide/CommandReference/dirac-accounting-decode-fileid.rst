@@ -2,7 +2,7 @@
 dirac-accounting-decode-fileid
 =====================================
 
-  Decode Accounting plot URLs
+Decode Accounting plot URLs
 
 Usage::
 

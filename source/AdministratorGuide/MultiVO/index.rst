@@ -157,14 +157,15 @@ Registry/VOMS
 /usr/etc/vomses
 ---------------
 
-DIRAC search for VOMS data in /usr/etc/vomses folder.
-Foreach VO create a file with the same name of VO and fill it in this way for every VOMS server.
+DIRAC search for VOMS data in ``/usr/etc/vomses`` folder.
+Foreach VO create a file with the same name of VO and fill 
+it in this way for every VOMS server.
 (Take data from http://operations-portal.egi.eu/vo)
 ::
 
    "<VO name>" "<VOMS server>" "<vomses port>" "<DN>" "<VO name>" "<https port>"
 
-::
+For example::
 
    [managai@dirac vomses]$ cat /usr/etc/vomses/superbvo.org 
    "superbvo.org" "voms2.cnaf.infn.it" "15009" "/C=IT/O=INFN/OU=Host/L=CNAF/CN=voms2.cnaf.infn.it" "superbvo.org" "8443"
@@ -174,8 +175,8 @@ Foreach VO create a file with the same name of VO and fill it in this way for ev
 Systems/Configuration - CE2CSAgent
 ----------------------------------
 
-CE2CSAgent retrieve CE info from BDII. Foreach VO should be an instance of CE2CSAgent
-::
+CE2CSAgent retrieve CE info from BDII. For each VO should 
+be an instance of the CE2CSAgent::
 
    Systems
    {
@@ -289,7 +290,8 @@ Resources/StorageElements/ProductionSandboxSE
 WorkloadManagement - PilotStatusAgent
 -------------------------------------
 
-Option value could be different, it depends on UI installed on server
+Option value could be different, it depends on UI 
+installed on server
 ::
 
    Systems/WorkloadManagement/<setup>/Agents/PilotStatusAgent/GridEnv = /etc/profile.d/grid-env
@@ -308,7 +310,7 @@ Systems/WorkloadManagement - TaskQueueDirector
          {
            TaskQueueDirector
            {
-             DIRACVersion = v6r7p25
+             DIRACVersion = v6r11p1
              Status = Active
              ListMatchDelay = 10
              extraPilotFraction = 1.0
@@ -345,7 +347,9 @@ Systems/WorkloadManagement - TaskQueueDirector
 DONE
 ----
 
-First VO configuration finished... upload shifter certificates, add some CE and test job submisison works properly (webportal Job Launchapad is useful for testing purpose)
+First VO configuration finished... Upload shifter certificates, 
+add some CE and test job submission works properly 
+(webportal Job Launchpad is useful for testing purpose)
 
 ------------------------------------
 Configuring another VO (e.g. pamela)
@@ -366,7 +370,7 @@ Registry
 Registry/VO
 -----------
 
-add pamela
+Add pamela
 ::
 
    Registry
@@ -400,7 +404,7 @@ add pamela
 Registry/Groups
 ---------------
 
-add pamela_user
+Add pamela_user
 ::
 
    Registry
@@ -425,7 +429,7 @@ add pamela_user
 Registry/VOMS
 -------------
 
-add pamela parameters...
+Add pamela parameters...
 ::
 
    Registry
@@ -483,6 +487,7 @@ Systems/Configuration - CE2CSAgent
            CE2CSAgent_pamela
            {
              Module = CE2CSAgent
+             #This parameter overwrites the default value
              VirtualOrganization = pamela
            }
          }
@@ -490,7 +495,7 @@ Systems/Configuration - CE2CSAgent
      }
    }
 
-as dirac_admin group memeber, enter dirac-admin-sysadmin-cli
+As dirac_admin group member, enter dirac-admin-sysadmin-cli
 ::
 
    (dirac.ba.infn.it)> install agent Configuration CE2CSAgent_pamela -m CE2CSAgent -p VirtualOrganization=pamela
@@ -576,7 +581,7 @@ Systems/WorkloadManagement - TaskQueueDirector
          {
            TaskQueueDirector
            {
-             DIRACVersion = v6r7p25
+             DIRACVersion = v6r11p1
              Status = Active
              ListMatchDelay = 10
              extraPilotFraction = 1.0

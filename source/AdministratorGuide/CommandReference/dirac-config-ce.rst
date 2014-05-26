@@ -10,7 +10,7 @@ dirac-config-ce [option]... [cfgfile]
 
 Arguments::
 
- cfgfile: DIRAC Cfg with description of the configuration (optional) 
+  cfgfile: DIRAC Cfg with description of the configuration (optional) 
 
  
 

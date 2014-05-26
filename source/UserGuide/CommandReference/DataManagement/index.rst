@@ -12,6 +12,7 @@ In this subsection the Data Management commands are collected.
    dirac-dms-change-replica-status
    dirac-dms-check-file-integrity
    dirac-dms-clean-directory
+   dirac-dms-create-replication-request
    dirac-dms-data-size
    dirac-dms-filecatalog-cli
    dirac-dms-fts-monitor
@@ -32,6 +33,7 @@ In this subsection the Data Management commands are collected.
    dirac-dms-replica-metadata
    dirac-dms-replicate-lfn
    dirac-dms-set-replica-status
+   dirac-dms-show-fts-status
    dirac-dms-show-se-status
    dirac-dms-user-lfns
    dirac-dms-user-quota

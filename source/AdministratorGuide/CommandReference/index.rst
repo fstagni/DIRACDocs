@@ -64,6 +64,7 @@ Managing Resources:
     dirac-admin-set-site-protocols
     dirac-admin-site-info
     dirac-admin-site-mask-logging
+    dirac-config-ce
     
 Workload management commands:
 
@@ -75,6 +76,7 @@ Workload management commands:
     dirac-admin-get-pilot-info
     dirac-admin-get-pilot-logging-info
     dirac-admin-get-pilot-output
+    dirac-admin-kill-pilot
     dirac-admin-pilot-summary
     dirac-admin-reoptimize-jobs
     dirac-admin-reset-job
@@ -116,7 +118,9 @@ Managing DIRAC installation:
     dirac-service
     dirac-setup-site
     dirac-configure
-    dirac-admin-get-CAs   
+    dirac-admin-get-CAs
+    dirac-info
+    dirac-version
         
 Managing DIRAC software:
 
@@ -130,6 +134,21 @@ Managing DIRAC software:
     dirac-distribution
     dirac-externals-requirements
     dirac-fix-ld-library-path
+    dirac-install-executor
+    dirac-install-mysql
+
+User convenience:
+
+.. toctree::
+    :maxdepth: 2
+    
+    dirac-accounting-report-cli
+    dirac-accounting-decode-fileid
+    dirac-cert-convert.sh
+    dirac-myproxy-upload
+    dirac-utils-file-adler
+    dirac-utils-file-md5
+
     
 Other commands:
 
@@ -141,11 +160,16 @@ Other commands:
     dirac-admin-get-proxy
     dirac-admin-proxy-upload
     dirac-admin-upload-proxy
+    dirac-proxy-get-uploaded-info
+    dirac-proxy-info
+    dirac-proxy-init
 
     dirac-admin-request-summary
     dirac-admin-select-requests
 
     dirac-admin-sysadmin-cli
+
+    dirac-admin-sort-cs-sites
 
     dirac-configuration-cli
     dirac-configuration-dump-local-cache
@@ -156,8 +180,19 @@ Other commands:
 
     dirac-rss-reassign-token
     dirac-rss-renew-token
+    dirac-rss-list-status
+    dirac-rss-set-status
+    dirac-rss-sync
+    dirac-rss-setup
+    dirac-rss-set-token
 
     dirac-stager-monitor-request
     dirac-stager-stage-files
 
     install_site.sh
+    
+    dirac-agent
+    dirac-executor
+    dirac-compile-externals
+    dirac-fix-mysql-script
+
