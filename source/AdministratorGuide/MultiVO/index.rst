@@ -154,11 +154,11 @@ Registry/VOMS
      }
    }
 
-/usr/etc/vomses
----------------
+$HOME/.glite/vomses
+-------------------
 
-DIRAC search for VOMS data in ``/usr/etc/vomses`` folder.
-Foreach VO create a file with the same name of VO and fill 
+DIRAC search for VOMS data in ``$HOME/.glite/vomses`` folder.
+For each VO create a file with the same name of VO and fill 
 it in this way for every VOMS server.
 (Take data from http://operations-portal.egi.eu/vo)
 ::
@@ -355,8 +355,10 @@ add some CE and test job submission works properly
 Configuring another VO (e.g. pamela)
 ------------------------------------
 
-/usr/etc/vomses
----------------
+$HOME/.glite/vomses
+-------------------
+Add the other VO following the same convention as above.
+
 
 Registry
 --------
