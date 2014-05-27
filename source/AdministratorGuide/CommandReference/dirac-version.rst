@@ -2,7 +2,7 @@
 dirac-version
 ====================
 
-v6r7
+Return the current dirac version used by the client.
 
 Example::
 

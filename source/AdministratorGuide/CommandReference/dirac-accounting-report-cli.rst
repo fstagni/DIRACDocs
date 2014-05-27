@@ -2,7 +2,7 @@
 dirac-accounting-report-cli
 ==================================
 
-  Command line interface to DIRAC Accounting ReportGenerator Service 
+Command line interface to DIRAC Accounting ReportGenerator Service 
 
 Usage::
 

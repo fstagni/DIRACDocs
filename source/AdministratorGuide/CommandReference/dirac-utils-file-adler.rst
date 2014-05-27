@@ -2,7 +2,7 @@
 dirac-utils-file-adler
 =============================
 
-  Calculate alder32 of the supplied file
+Calculate alder32 of the supplied file
 
 Usage::
 

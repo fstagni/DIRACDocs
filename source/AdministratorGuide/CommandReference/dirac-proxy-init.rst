@@ -2,10 +2,11 @@
 dirac-proxy-init
 =======================
 
+Obtain a user proxy.
+
 Usage::
 
   dirac-proxy-init.py (<options>|<cfgFile>)* 
-
  
 
 Options::

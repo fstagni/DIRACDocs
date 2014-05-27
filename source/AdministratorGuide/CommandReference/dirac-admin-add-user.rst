@@ -10,7 +10,7 @@ dirac-admin-add-user [option|cfgfile] ... Property=<Value> ...
 
 Arguments::
 
- Property=<Value>: Properties to be added to the User like (Phone=XXXX) 
+  Property=<Value>: Properties to be added to the User like (Phone=XXXX) 
 
  
 

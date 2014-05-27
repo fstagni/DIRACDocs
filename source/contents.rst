@@ -8,6 +8,5 @@ Documentation index
    UserGuide/index
    AdministratorGuide/index
    DeveloperGuide/index
-   CodeDocumentation/index
    
    

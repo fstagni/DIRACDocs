@@ -2,7 +2,7 @@
 dirac-utils-file-md5
 ===========================
 
-  Calculate md5 of the supplied file
+Calculate md5 of the supplied file
 
 Usage::
 

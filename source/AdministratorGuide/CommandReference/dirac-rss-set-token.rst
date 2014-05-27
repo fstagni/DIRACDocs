@@ -2,7 +2,7 @@
 dirac-rss-set-token
 ==========================
 
-  Set the token for the given element.
+Set the token for the given element.
 
 Usage::
 

@@ -2,7 +2,7 @@
 dirac-admin-sort-cs-sites
 ================================
 
-  Sort site names at CS in "/Resources" section. Sort can be alphabetic or by country postfix in a site name.
+Sort site names at CS in "/Resources" section. Sort can be alphabetic or by country postfix in a site name.
 
 Usage::
 
@@ -16,11 +16,8 @@ Example:
 
   dirac-admin-sort-cs-sites -C CLOUDS DIRAC
 
-  sort site names by country postfix in '/Resources/Sites/CLOUDS' and '/Resources/Sites/DIRAC' subsection
+  sort site names by country postfix in '/Resources/Sites/CLOUDS' and '/Resources/Sites/DIRAC' subsection.
 
- 
-
- 
 
 Options::
 

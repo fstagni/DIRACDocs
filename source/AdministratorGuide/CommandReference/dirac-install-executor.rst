@@ -2,19 +2,17 @@
 dirac-install-executor
 =============================
 
-2013-02-06 12:30:31 UTC Framework NOTICE: DIRAC Root Path = /afs/in2p3.fr/home/h/hamar/DIRAC-v6r7
-
-Do the initial installation and configuration of a DIRAC service
+Install an executor.
 
 Usage::
 
-  dirac-install-executor [option|cfgfile] ... System Service|System/Service
+  dirac-install-executor [option|cfgfile] ... System Executor|System/Executor
 
 Arguments::
 
   System:  Name of the DIRAC system (ie: WorkloadManagement)
 
-  Service: Name of the DIRAC service (ie: Matcher) 
+  Service: Name of the DIRAC executor (ie: JobPath) 
 
  
 

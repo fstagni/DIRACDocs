@@ -6,22 +6,21 @@ Compile DIRAC externals (does not require DIRAC code)
 
 Usage::
 
-  /afs/in2p3.fr/home/h/hamar/DIRAC-v6r7/scripts/dirac-compile-externals [options]...
+  dirac-compile-externals [options]...
 
 Options::
 
--D:  --destination=    : Destination where to build the externals
+  -D:  --destination=    : Destination where to build the externals
 
--t:  --type=           : Type of compilation (default: client)
+  -t:  --type=           : Type of compilation (default: client)
 
--e:  --externalsPath=  : Path to the externals sources
+  -e:  --externalsPath=  : Path to the externals sources
 
--v:  --version=        : Version of the externals to compile (default will be the latest commit)
+  -v:  --version=        : Version of the externals to compile (default will be the latest commit)
 
--i:  --pythonVersion=  : Python version to compile (default 26)
+  -i:  --pythonVersion=  : Python version to compile (default 26)
 
--f   --fixLinksOnly    : Only fix absolute soft links
+  -f   --fixLinksOnly    : Only fix absolute soft links
 
--j:  --makeJobs=       : Number of make jobs, by default is 1
-
+  -j:  --makeJobs=       : Number of make jobs, by default is 1
 

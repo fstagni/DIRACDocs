@@ -57,7 +57,7 @@ states of all its `Files`) and built in state machine, which automatizes state p
       :align: center 
 
 User is allowed to change only `File` statuses and in case of specific `Operation`'s types - `Operation` statuses, 
-as `Request` builtin observers will automatically propagete and update statues of parent objects.
+as `Request` builtin observers will automatically propagate and update statues of parent objects.
 
 
 CRUD
@@ -83,12 +83,12 @@ Construction of a new request is quite simple, one has to create a new `Request`
   >>> operation.addFile( opFile ) # # add File to Operation
   >>> request.addOperation( operation ) # # add Operation to Request
 
-Invoking `Request.addOperation` method will enqueue operation to the end of operatins list in the request. If you need 
+Invoking `Request.addOperation` method will enqueue operation to the end of operations list in the request. If you need 
 to modify execution order, you can use `Request.insertBefore` or `Request.insertAfter` methods. 
 Please notice there is no limit of `Operations` per `Request`, but it is not recommended to keep over there  
 more than a few. In case of `Files` in a single `Operation` the limit is set to one hundred, which seems to 
 be a reasonable number. In case you think this is not enough (or too much), please patch the code 
-(look for `MAX_FILES` in `Opereation` class).     
+(look for `MAX_FILES` in `Operation` class).     
  
 The `Request` and `Operation` classes are behaving as any iterable python object, i.e. you can loop over operations 
 in the request using::
@@ -161,7 +161,7 @@ Request validation
 
 The validation of a new Request that is about to enter the system for execution is checked at two levels:
 
-  * low-level: each property in `Request`, `Operation` and `File` classes is instrumeted to check if value provided 
+  * low-level: each property in `Request`, `Operation` and `File` classes is instrumented to check if value provided 
     to its setter has a meaningful type and value::
 
       >>> opFile.LFN = 1
@@ -182,10 +182,10 @@ The validation of a new Request that is about to enter the system for execution 
       TypeError: SubmitTime should be a datetime.datetime!
 
 
-  * high-level: additionally there is also a request validator helper class (`RequestValidator` or its global 
+  * high-level: additionally there is also a request `validator` helper class (`RequestValidator` or its global 
     instance `gRequestValidator`) - a gatekeeper checking if request 
-    is properly defined. The validator is blocking insertion of a new record to the `ReqDB` in case of missing or 
-    malformed attrubutes and returning `S_ERROR` describing the reason for rejection, i.e.::
+    is properly defined. The `validator` is blocking insertion of a new record to the `ReqDB` in case of missing or 
+    malformed attributes and returning `S_ERROR` describing the reason for rejection, i.e.::
 
       >>> from DIRAC.RequestManagementSystem.private.RequestValidator import gRequestValidator
       >>> from DIRAC.RequestManagementSystem.Client.Request import Request
@@ -208,7 +208,7 @@ The validation of a new Request that is about to enter the system for execution 
 A word of caution has to be clearly stated over here: both low- and high-level validation is not checking if 
 actual value provided during `Request` definition makes sense, i.e. if you put to the `Operation.TargetSE` unknown 
 name of target storage element from the validation point of view your request will be OK, but  it will 
-miserably fail during exection.    
+miserably fail during execution.    
 
 Request execution
 -----------------
@@ -223,8 +223,8 @@ a horrible complication for maintain request's state machine.
    :alt: Treating of Request in the RequestExecutionAgent.
    :align: center 
 
-The `RequestExecutingAgent` is using `ProcessPool` utility to create slave workers (subprocesses running `RequestTask`) 
-desingnated to execute requests read from `ReqDB`. Each worker is processing request execution using following steps:
+The `RequestExecutingAgent` is using the `ProcessPool` utility to create slave workers (subprocesses running `RequestTask`) 
+designated to execute requests read from `ReqDB`. Each worker is processing request execution using following steps:
  
   * downloading and setting up request's owner proxy
   * loop over waiting operations in the request
@@ -255,7 +255,7 @@ At the moment of writing following operation types are supported:
     - `ForwardDISET`
 
 This of course does not cover all possible needs for a specific VO, hence all developers are encouraged to create and keep
-new operation handlers in VO spin-off projects. Definition of a new operation type should be easy withing context of 
+new operation handlers in VO spin-off projects. Definition of a new operation type should be easy within the context of 
 the new RequestManagementSystem. All you need to do is to put in place operation handler (inherited from `OperationHandlerBase`) and/or
 extend `RequestValidator` to cope with the new type. The handler should be a functor and should override two methods: 
 constructor (__init__) and () operator ( __call__)::
@@ -444,8 +444,8 @@ to the web interface/scripts and so on.
 
 The `ReqProxy` is a simple service which start to work only if `ReqManager` is down for some reason and newly created requests cannot be
 inserted to the `ReqDB`. In such case the `ReqClient` is sending them  to one of the `ReqProxies`, where
-the request is serialised and dumped ot the file in the local file system for further processing. A separate background thread in the 
-`ReqProxy` is periodically trying to connect to the `ReqManager`, forwading saved requests to the place they can 
+the request is serialized and dumped to the file in the local file system for further processing. A separate background thread in the 
+`ReqProxy` is periodically trying to connect to the `ReqManager`, forwarding saved requests to the place they can 
 be eventually picked up for execution.  
 
 .. image:: ../../../_static/Systems/RMS/RequestProxy-flow.png
@@ -456,7 +456,7 @@ Installation
 ------------
 
 For the proper request processing there should be only one central instance of the `ReqManager` 
-service up and running - prefereably close to the hosts on which request processing agents are running. 
+service up and running - preferably close to the hosts on which request processing agents are running. 
 
 For the `RequestProxies` situation is quite opposite: they should be installed in the several different places 
 all over the world, preferably close to the biggest CEs or SEs used by the community. Take the LHCb VO as 
@@ -504,7 +504,7 @@ Upgrading from DIRAC v6r5
 -------------------------
 
 The DIRAC releases prior to v6r6 were using different model for request forwarding: each CE 
-was able to run its own RequestManager (local), preferebly with the file backend (which BTW is obsolete now). 
+was able to run its own RequestManager (local), preferably with the file backend (which BTW is obsolete now). 
 Requests created by jobs were put to the local RequestDB using local RequestManager URL. A separate locally running 
 ZuziaAgent [#]_ was picking them up and sending to the central RequestManager service.
 
@@ -520,6 +520,7 @@ For upgrading from the old to the new forwarding model you should follow this pr
 
 .. rubric:: Footnotes
  
-.. [#] Zuzia is a little Susan in Polish, the given name of a daugther of DIRAC team developer who had left the project a few years ago. 
+.. [#] Zuzia is a little Susan in Polish, the given name of a daugther of DIRAC team developer who
+  left the project a few years ago. 
 
 
