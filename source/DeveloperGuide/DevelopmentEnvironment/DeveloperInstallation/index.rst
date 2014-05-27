@@ -285,8 +285,7 @@ that directory *$DEVROOT*) and:
          use that one. Place your certificate in *$HOME/.globus/usercert.pem* 
          and *$HOME/.globus/userkey.pem*.
 
-      11.3.1. If you don't have a user certificate you will need to generate 
-              on like this::
+      11.3.1. If you don't have a user certificate you will need to generate on like this::
 
          openssl genrsa -out userkey.pem 2048
          openssl req -new -key userkey.pem -out userreq.csr -subj "/O=$(whoami)-dom/OU=PersonalCA/CN=$(whoami)"
