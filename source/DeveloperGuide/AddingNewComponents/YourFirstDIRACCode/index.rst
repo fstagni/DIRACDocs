@@ -25,7 +25,7 @@ This function should:
 * Get from the CS the registered Certification Authority for the user
 * if the CA is the expected one return S_OK, else return S_ERROR
 
-To code this exercise, albeit very simple, we will use TDD (Test Driven Development), and we will use the *unittest* and *mock* python packages, as explained in ref:`testing_environment`. What we will code here will be a real *unit test*, in the sense that we will test only this function, in isolation. In general, it is always an excellent idea to code a unit test for every development you do. We will put the unit test in DIRAC.Core.Utilities.test. The unit test has been fully coded already:
+To code this exercise, albeit very simple, we will use TDD (Test Driven Development), and we will use the *unittest* and *mock* python packages, as explained in :ref:`testing_environment`. What we will code here will be a real *unit test*, in the sense that we will test only this function, in isolation. In general, it is always an excellent idea to code a unit test for every development you do. We will put the unit test in DIRAC.Core.Utilities.test. The unit test has been fully coded already:
 
 
 .. code-block:: python
