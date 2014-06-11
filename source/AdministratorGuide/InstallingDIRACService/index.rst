@@ -400,6 +400,12 @@ or if using ``upstart`` (in RHEL6 for example), add a file ``/etc/init/dirac.con
       respawn
       exec /opt/dirac/sbin/runsvdir-start
 
+On specific machines, or if network is needed, it's necessary to make sure the ``runsvdir_start`` script is executed
+after a certain service is started. For example, on Amazon EC2, I recommend changing the first line by::
+
+      start on started elastic-network-interfaces
+
+
 Together with a script like (it assumes that in your server DIRAC is using *dirac* local user to run)::
 
       #!/bin/bash
