@@ -247,6 +247,8 @@ be taken:
         #
         #  The following options defined the MySQL DB connectivity
         #
+        # The following option define if you want or not install the mysql that comes with DIRAC on the machine
+        # InstallMySQL = True
         Database
         {
           #  User name used to connect the DB server
