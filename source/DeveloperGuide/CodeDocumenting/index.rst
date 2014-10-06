@@ -1,4 +1,4 @@
-.. _code_documentation:
+.. _code_documenting:
 
 ==================================
 Documenting your developments
