@@ -47,5 +47,4 @@ Agents associated with Configuration System:
    StalledJobAgent/index
    StatesAccountingAgent/index
    TaskQueueDirector/index
-   TaskQueueDirector/index 
 
