@@ -5,14 +5,14 @@ CE2CSAgent is the agent in charge of update sites parameters configuration for a
 - Queries BDII for unknown CE.
 - Queries BDII for CE information and put it to CS.
 
-The attributes of this agent are showed in the table below:
+The attributes of this agent are shown in the table below:
 
 +-----------------------+-----------------------------------+-------------------------------------------------+
 | **Name**              | **Description**                   | **Example**                                     |
 +-----------------------+-----------------------------------+-------------------------------------------------+
 | *AlternativeBDIIs*    | List of alternatives BDIIs        | AlternativeBDIIs = bdii01.in2p3.fr              |
 +-----------------------+-----------------------------------+-------------------------------------------------+
-| *BannedCSs*           | Banned Computing Elements         | BannedCSs = []                                  |
+| *BannedCEs*           | Banned Computing Elements         | BannedCEs = []                                  |
 +-----------------------+-----------------------------------+-------------------------------------------------+
 | *MailTo*              | E-mail of the person in charge of | MailTo = hamar@cppm.in2p3.fr                    |
 |                       | update the Sites configuration    |                                                 |
