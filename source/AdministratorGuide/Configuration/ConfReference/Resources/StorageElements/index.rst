@@ -1,4 +1,4 @@
-Resources / StorageElement - Subsections
+Resources / StorageElements - Subsections
 ========================================
 
 All the storages elements available for the users are described in this subsection. This information will be moved bellow the Sites section.
@@ -14,7 +14,19 @@ All the storages elements available for the users are described in this subsecti
 | *SITE-disk*                                 | Subsection. DIRAC name for the storage element   | CPPM-disk                   |
 +---------------------------------------------+--------------------------------------------------+-----------------------------+
 | *SITE-disk/BackendType*                     | Type of storage element. Possible values are:    | BackendType = dpm           |
-|                                             | dmp, DISET                                       |                             |
+|                                             | dmp, DISET, dCache, Storm                        |                             |
++---------------------------------------------+--------------------------------------------------+-----------------------------+
+| *SITE-disk/ReadAccess*                      | Allow read access                                | ReadAccess = Active         |
+|                                             | Possible values are: Active, InActive            |                             |
++---------------------------------------------+--------------------------------------------------+-----------------------------+
+| *SITE-disk/WriteAccess*                     | Allow write access                               | WriteAccess = Active        |
+|                                             | Possible values are: Active, InActive            |                             |
++---------------------------------------------+--------------------------------------------------+-----------------------------+
+| *SITE-disk/RemoveAccess*                    | Allow removal of files at this SE                | RemoveAccess = Active       |
+|                                             | Possible values are: Active, InActive            |                             |
++---------------------------------------------+--------------------------------------------------+-----------------------------+
+| *SITE-disk/SEType*                          | Type of SE                                       | SEType = T0D1               |
+|                                             | Possible values are: T0D1, T1D0, D1T0            |                             |
 +---------------------------------------------+--------------------------------------------------+-----------------------------+
 | *SITE-disk/AccessProtocol.<#>*              | Subsection. Access protocol number               | AccessProtocol.1            |
 +---------------------------------------------+--------------------------------------------------+-----------------------------+
