@@ -9,7 +9,7 @@ Web Portal User guide
   It can be easily extended by other VO or it can be integrated to other portal. 
   It is developed by taking into account what we learnt using the current web portal.
   
-# Therms
+#Therms:
 
 **Application** 
 
