@@ -2,16 +2,16 @@
 Web Portal User guide
 =====================
 
-  DIRAC WebApp project aims to produce the new Web Interface for the DIRAC Project. 
-  While partially keeping some concepts from the old DIRAC Web interface, it does include some new ideas to make more comfortable your DIRAC experience.
+DIRAC WebApp project aims to produce the new Web Interface for the DIRAC Project. 
+While partially keeping some concepts from the old DIRAC Web interface, it does include some new ideas to make more comfortable your DIRAC experience.
   
-  The DIRAC Web portal is a user friendly interface which allows user to interact to the DIRAC components. 
-  It can be easily extended by other VO or it can be integrated to other portal. 
-  It is developed by taking into account what we learnt using the current web portal.
+The DIRAC Web portal is a user friendly interface which allows user to interact to the DIRAC components. 
+It can be easily extended by other VO or it can be integrated to other portal. 
+It is developed by taking into account what we learnt using the current web portal.
 
-=======
+
 Therms:
-=======
+-------
 
 **Application** 
 
