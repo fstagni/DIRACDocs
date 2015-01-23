@@ -71,16 +71,13 @@ Menu structure
 Manage application and desktop
 ------------------------------
 
-
 You can manage the state of applications by by clicking to the following menu.
-
 .. image:: images/managemenuitems.png
    :scale: 50 %
    :alt: Applications and more
    :align: center
-   
 
- The Desktop menu item contains:
+The Desktop menu item contains:
 
    * New Desktop: You can create an empty desktop.
    * Save: You can save the desktop
@@ -144,7 +141,7 @@ Share application and desktop
 -----------------------------
 
 The applications/desktops can be shared. You can share an application/desktop by right click on the application/desktop what 
-you want to share (more information above in the `Manage application/desktop`_).
+you want to share (more information above in the `Manage application and desktop`_).
 
 **Share an application/desktop**
 
