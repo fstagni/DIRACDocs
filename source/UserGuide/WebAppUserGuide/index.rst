@@ -38,26 +38,20 @@ Two protocol is allowed: **http** and **htpps**.
 **http** protocol is very restricted. It only allows to access limited functionalities. It is recommended to the site administrators. The state of applications or
 desktops can not be saved.
 **https** protocol allow to access all functionalities of DIRAC depending on your role (proxy group). 
-The state of the application is not saved in the URL. The URL only contains the name of application or desktop. For example: `https://lhcb-portal-dirac.cern.ch/DIRAC/s:LHCb-Production/g:lhcb_prmgr/?view=tabs&theme=Grey&url_state=1|AllPlots`   
-
+The state of the application is not saved in the **URL**. The URL only contains the name of application or desktop. For example: `https://lhcb-portal-dirac.cern.ch/DIRAC/s:LHCb-Production/g:lhcb_prmgr/?view=tabs&theme=Grey&url_state=1|AllPlots`   
+Format of the URL when the Tab theme is used: 
+  1. https://: protocol
+  2. lhcb-portal-dirac.cern.ch/DIRAC/: host.
+  3. s:LHCb-Production: DIRAC setup.
+  4. g:lhcb_prmgr : role
+  5. view=tabs : it is the theme. It can be **desktop** and **tabs**.
+  6. theme=Grey: it is the look and feel.
+  7. &url_state=1 it is desktop or application.
+  8 |AllPlots it is the desktop name. the **Default** desktop is **. |AllPlots,*LHCbDIRAC.LHCbJobMonitor.classes.LHCbJobMonitor:AllUserJobs,* 
+  
   
 .. toctree::
    :maxdepth: 1
 
-
-   BrowseRemoteConfiguration/index
-   DataLoggingMonitor/index
-   ErrorConsole/index
-   JobMonitoring/index
-   ManageProxies/index
-   ManageRemoteConfiguration/index
-   Overview/index
-   PilotMonitor/index
-   PilotSummary/index
-   ProductionMonitor/index
-   ProxyActionLogs/index
-   RawIntegrity/index
-   ShowHistoryOfServerChanges/index
-   SiteSummary/index
-   StorageDirectorySummary/index
-
+   TabTheme/index
+   DesktopTheme/index
