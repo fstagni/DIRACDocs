@@ -12,8 +12,8 @@ In this section a detailed description of the Tab theme is presented:
 Main panel
 ----------
 The main panel consists of two widget:
-1. Menu 
-2. Desktop
+   1. Menu 
+   2. Desktop
 
 .. image:: images/maintab.png
    :scale: 50 %
@@ -23,13 +23,18 @@ The main panel consists of two widget:
 
 **Menu**
 
-It contains two menu:
+It contains three main menu:
 
 .. image:: images/menus.png
    :scale: 50 %
    :alt: main menus
    :align: center
 
+  #. It is the Intro panel
+  #. It is the Main panel
+  #. You can found more information about DIRAC.
+
+The default is the 2. You can change by clicking on the icons.
 
 **Desktop**
 
@@ -39,6 +44,23 @@ It is the container which contains various applications on different desktops.
 
 Menu structure
 --------------
+
+Menu consists of two widgets:
+   #. Desktops&Applications
+   #. Settings
+   
+.. image:: images/menustructure.png
+   :scale: 50 %
+   :alt: menu structure
+   :align: center
+   
+**Desktop&Applications**
+
+You can manage your applications and desktops. The menu structure:
+   * Web : it contains external links
+   * Tools : You can found DIRAC specific applications.
+   * Applications: You can found DIRAC and VO specific applications.
+   * OldPortal: It is link to the old portal.
 
 Manage application/desktop
 __________________________
