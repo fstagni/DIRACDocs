@@ -73,3 +73,33 @@ There is an other context menu which is available by right click on the desktop 
 
 Manage application and desktop
 ------------------------------
+
+You can manage the applications in two different ways.
+
+**First way:** Each application has an associated menu:
+
+.. image:: images/windowmenu.png
+   :scale: 50 %
+   :alt: window main menu.
+   :align: center 
+
+  * First icon:
+      #. Load state: We can apply a state to the open application.
+      #. Save: We can save the application.
+      #. Save As...: We can duplicate the application
+      #. Refresh states: We can refresh the states.
+      #. Manage states... We can delete the state or shared states.
+  * Second icon: We can pin and unpin an application. It is used to create a customized desktop.
+  * Third icon: We can hide the application
+  * Fourth icon: You can write help to the current application. The rest icons are the usual icons: minimize, maximize and exit.
+   
+
+**Second way:** We have to click on the application icon which is on the task bar.
+
+.. image:: images/rightclickmenu.png
+   :scale: 50 %
+   :alt: Tab bar application state menu
+   :align: center 
+
+The menu will be equivalent to previous menu.
+
