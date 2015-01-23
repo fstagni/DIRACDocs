@@ -51,8 +51,8 @@ The state of the application is not saved in the **URL**. The URL only contains 
       #. g:lhcb_prmgr : role
       #. view=tabs : it is the theme. It can be **desktop** and **tabs**.
       #. theme=Grey: it is the look and feel.
-      #. &url_state=1 it is desktop or application.
-      #. |AllPlots it is the desktop name. the **Default** desktop is **. 
+      #. &url_state=1: it is desktop or application.
+      #. |AllPlots : it is the desktop name. the **Default** desktop is **. 
       #. The state is a desktop: |AllPlots 
       #. The state is an application: *LHCbDIRAC.LHCbJobMonitor.classes.LHCbJobMonitor:AllUserJobs,*
    
@@ -60,14 +60,14 @@ The state of the application is not saved in the **URL**. The URL only contains 
    
    * Desktop theme
    
-    For example: https://lhcb-portal-dirac.cern.ch/DIRAC/s:LHCb-Production/g:lhcb_prmgr/?view=desktop&theme=Grey&url_state=1|AllPlots
+    For example: `https://lhcb-portal-dirac.cern.ch/DIRAC/s:LHCb-Production/g:lhcb_prmgr/?view=desktop&theme=Grey&url_state=1|AllPlots`
       #. https://: protocol
       #. lhcb-portal-dirac.cern.ch/DIRAC/: host.
       #. s:LHCb-Production: DIRAC setup.
       #. g:lhcb_prmgr : role
       #. view=desktop : it is the theme. It can be **desktop** and **tabs**.
       #. theme=Grey: it is the look and feel.
-      #. &url_state=1 it is desktop state. It can be 0 or 1.
+      #. &url_state=1: it is desktop state. It can be 0 or 1.
       #. The state is a desktop: url_state=1|AllPlots  
       #. The state is an application: url_state=0|LHCbDIRAC.LHCbJobMonitor.classes.LHCbJobMonitor:statename:0:0:1440:725:0:0,0,-1,-1,-1,-1
           
