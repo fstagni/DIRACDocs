@@ -65,19 +65,21 @@ Menu structure
    * Applications: You can found DIRAC and VO specific applications.
    * OldPortal: It is link to the old portal.
    * DIRAC it is an external link to DIRAC portal
-   * My Desktops it is contains all saved desktops desktops. You can see a **Default** desktop which contains all applications which belongs to the **Default** desktop. 
+   * My Desktops it is contains all saved desktops. You can see a **Default** desktop which contains all applications which belongs to the **Default** desktop. 
    * Shared: It contains all Shared desktops and applications.
    
 
 Manage application and desktop
 ------------------------------
 
-You can manage the state of applications by by clicking to the following menu.
+You can manage the state of applications and desktops by by clicking to the following menu.
 
 .. image:: images/managemenuitems.png
    :scale: 50 %
    :alt: Applications and more
    :align: center
+
+**Desktop**
 
 The Desktop menu item contains:
 
@@ -94,6 +96,8 @@ If you click on the delete menu item, a pop up window will appear:
    :align: center
 
 You can select the desktops to be deleted.
+
+**Application**
 
 The Application menu item contains:
    * Save

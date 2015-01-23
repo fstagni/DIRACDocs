@@ -74,6 +74,8 @@ There is an other context menu which is available by right click on the desktop 
 Manage application and desktop
 ------------------------------
 
+**Applications**
+
 You can manage the applications in two different ways.
 
 **First way:** Each application has an associated menu:
@@ -83,15 +85,15 @@ You can manage the applications in two different ways.
    :alt: window main menu.
    :align: center 
 
-  * First icon:
-      #. Load state: We can apply a state to the open application.
-      #. Save: We can save the application.
-      #. Save As...: We can duplicate the application
-      #. Refresh states: We can refresh the states.
-      #. Manage states... We can delete the state or shared states.
-  * Second icon: We can pin and unpin an application. It is used to create a customized desktop.
-  * Third icon: We can hide the application
-  * Fourth icon: You can write help to the current application. The rest icons are the usual icons: minimize, maximize and exit.
+* First icon:
+   #. Load state: We can apply a state to the open application.
+   #. Save: We can save the application.
+   #. Save As...: We can duplicate the application
+   #. Refresh states: We can refresh the states.
+   #. Manage states... We can delete the state or shared states.
+* Second icon: We can pin and unpin an application. It is used to create a customized desktop.
+* Third icon: We can hide the application
+* Fourth icon: You can write help to the current application. The rest icons are the usual icons: minimize, maximize and exit.
    
 
 **Second way:** We have to click on the application icon which is on the task bar.
@@ -103,3 +105,6 @@ You can manage the applications in two different ways.
 
 The menu will be equivalent to previous menu.
 
+**Desktops**
+
+You have to right click on the task bar to manage the desktops. The menu items have similar functionality tahn the application described above.
