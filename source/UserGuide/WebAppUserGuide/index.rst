@@ -75,7 +75,7 @@ The state of the application is not saved in the **URL**. The URL only contains 
 **Note:** If you have a state saved under Desktop theme, you can open using Tab theme. This works other way around as well.
 
    
-An video tutorial available on `https://www.youtube.com/watch?v=vKBpED0IyLc` link.
+A video tutorial is available on `https://www.youtube.com/watch?v=vKBpED0IyLc` link.
 
 .. toctree::
    :maxdepth: 1
