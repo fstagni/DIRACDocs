@@ -137,8 +137,8 @@ The applications within a desktop will be opened in different tab.
    :align: center
 
    
-Share application/desktop
--------------------------
+Share application and desktop
+-----------------------------
 
 The applications/desktops can be shared. You can share an application/desktop by right click on the application/desktop what 
 you want to share (more information above in the `Manage application/desktop`_).
