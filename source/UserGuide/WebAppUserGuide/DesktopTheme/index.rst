@@ -127,7 +127,7 @@ You have to do:
    #. copy the text (for example: desktop|zmathe|lhcb_prmgr|JobMonitorAll) and click OK on the pop up window:
    #. send the text (desktop|zmathe|lhcb_prmgr|JobMonitorAll) to the person
 
-.. image:: ../../images/share.png
+.. image:: ../TabTheme/images/share.png
    :scale: 50 %
    :alt: Share message box.
    :align: center
@@ -136,14 +136,14 @@ You have to do:
    
 You have to use the *State Loader* menu item:
 
-.. image:: ../../images/stateloader.png
+.. image:: ../images/stateloader.png
    :scale: 50 %
    :alt: State loader.
    :align: center
 
 The State Loader widget is the following:
 
-.. image:: ../../images/loader.png
+.. image:: ../images/loader.png
    :scale: 50 %
    :alt: Loader.
    :align: center
@@ -158,7 +158,7 @@ You have tree different way to load a shared state:
 
 If you click on Load, you load the shared desktop/application to you desktop. The name of the application will be the provided name. For example: newName.
 
-.. image:: ../../images/loaddesktop.png
+.. image:: ../images/loaddesktop.png
    :scale: 50 %
    :alt: Loaded desktop.
    :align: center
@@ -169,7 +169,7 @@ If you click on Load, you load the shared desktop/application to you desktop. Th
 This save the application/desktop *Shared* menu item. Which mean it keeps a pointer(reference) to the original desktop/application. 
 This will not load the application/desktop into your desktop.
 
-.. image:: ../../images/createlink.png
+.. image:: ../images/createlink.png
    :scale: 50 %
    :alt: Create link.
    :align: center
@@ -182,10 +182,10 @@ The desktop/application will be loaded to your desktop and it is saved under the
 
 **Delete shared applications/desktops**
 
-You have to click on the menu `Manage application and desktop`_ and then select application or desktop depending what you want to delete. 
+You have to click on the *Manage states...* menu more details `Manage application and desktop`_ and then select application or desktop depending what you want to delete. 
 For example: Let's delete the **newName** shared desktop.
 
-.. image:: ../../images/deletelink.png
+.. image:: ../images/deletelink.png
    :scale: 50 %
    :alt: Delete link.
    :align: center  
