@@ -31,6 +31,15 @@ Therms:
    The "**Desktop theme**" is similar to Microsoft Windows. It allows to work with a single desktop.
    The "**Tab theme**" is similar to web browser. Each desktop is a tab. The users can work with different desktops in the same time. 
     
+Concepts:
+---------
+
+Two protocol is allowed: **http** and **htpps**. 
+**http** protocol is very restricted. It only allows to access limited functionalities. It is recommended to the site administrators. The state of applications or
+desktops can not be saved.
+**https** protocol allow to access all functionalities of DIRAC depending on your role (proxy group). 
+The state of the application is not saved in the URL. The URL only contains the name of application or desktop. For example: https://lhcb-portal-dirac.cern.ch/DIRAC/s:LHCb-Production/g:lhcb_prmgr/?view=tabs&theme=Grey&url_state=1|AllPlots  
+
   
 .. toctree::
    :maxdepth: 1
