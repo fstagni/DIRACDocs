@@ -240,7 +240,10 @@ We have 3 look and feels:
    #. Grey it is the default
    #. Neptune
    #. Classic
-   
+
+You can automatically change the applications using *Automatic tab change* Note: After you set it you have to save the desktop. 
+Consequently, you can not have automatic tab change in the *Default* desktop. 
+    
 **Grey**
 
 .. image:: images/grey.png
