@@ -27,14 +27,14 @@ In the left corner you can see an icon, which is the menu.
    :alt: Desktop menu.
    :align: center
  
- In the right corner you can see the settings.
+In the right corner you can see the settings.
  
- .. image:: images/settings.png
+.. image:: images/settings.png
    :scale: 50 %
    :alt: Settings
    :align: center
  
- You can define the following:
+You can define the following:
       * You can switch between Tab and Desktop themes.
       * Group you can change the role
       * Setup: you can switch between different setups.
