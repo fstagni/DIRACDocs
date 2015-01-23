@@ -24,9 +24,10 @@ The main panel consists of two widget:
 **Menu**
 
 It contains two menu:
+
 .. image:: images/menus.png
    :scale: 50 %
-   :alt: Tab theme main view.
+   :alt: main menus
    :align: center
 
 
