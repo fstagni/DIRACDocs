@@ -8,6 +8,7 @@ In this section a detailed description of the Tab theme is presented:
     - `Menu structure`_
     - `Manage application and desktop`_
     - `Share application and desktop`_
+    - `Settings panel`_
 
 Main panel
 ----------
@@ -204,4 +205,62 @@ This will not load the application/desktop into your desktop.
 **Load & Create Link
 
 The desktop/application will be loaded to your desktop and it is saved under the **Shared** menu item. 
+
+**Delete shared applications/desktops**
+
+You have to click on the menu `Manage application and desktop`_ and then select application or desktop depending what you want to delete. 
+For example: Let's delete the **newName** shared desktop.
+
+.. image:: images/deletelink.png
+   :scale: 50 %
+   :alt: Delete link.
+   :align: center  
+
+You have to select what you want to delete state or a link. As it is a shared desktop what we want to delete we have to select *Links*. 
+You have to click on the Delete button.
+
+Settings panel
+--------------
+
+In the settings panel you can set up your portal. 
+You have to click on the **Settings** widget:
+
+.. image:: images/settings.png
+   :scale: 50 %
+   :alt: Settings.
+   :align: center  
+
+
+You can define the following:
+      * Group you can change the role
+      * Setup: you can switch between different setups.
+      * Theme you can change the look and feel and also you can switch between Tab and Desktop themes.
+       
+We have 3 look and feels:
+   #. Grey it is the default
+   #. Neptune
+   #. Classic
+   
+**Grey**
+
+.. image:: images/grey.png
+   :scale: 50 %
+   :alt: Grey look and feel.
+   :align: center  
+
+
+**Neptune**
+
+.. image:: images/neptune.png
+   :scale: 50 %
+   :alt: Neptune look and feel.
+   :align: center  
+
+
+**Classic**
+
+.. image:: images/classic.png
+   :scale: 50 %
+   :alt: Classic look and feel.
+   :align: center  
 
