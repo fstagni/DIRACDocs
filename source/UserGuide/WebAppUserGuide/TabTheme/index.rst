@@ -74,13 +74,11 @@ Manage application and desktop
 
 You can manage the state of applications by by clicking to the following menu.
 
-
 .. image:: images/managemenuitems.png
    :scale: 50 %
-   :alt: Applications and desktop menu
-   :align: right
- 
-
+   :alt: Applications and more
+   :align: center
+   
 
  The Desktop menu item contains:
 
@@ -163,5 +161,49 @@ You have to do the following steps to share an application/desktop:
    
 **Load a shared application or desktop**   
    
+You have to use the *State Loader* menu item:
 
- 
+.. image:: images/stateloader.png
+   :scale: 50 %
+   :alt: State loader.
+   :align: center
+
+The State Loader widget is the following:
+
+.. image:: images/loader.png
+   :scale: 50 %
+   :alt: Loader.
+   :align: center
+
+You have to provide the Shared State (for example: desktop|zmathe|lhcb_prmgr|JobMonitorAll) and a name (for example: newName).
+You have tree different way to load a shared state:
+   #. Load
+   #. Create Link
+   #. Load & Create Link
+   
+**Load**
+
+If you click on Load, you load the shared desktop/application to you desktop. The name of the application will be the provided name. For example: newName.
+
+.. image:: images/loaddesktop.png
+   :scale: 50 %
+   :alt: Loaded desktop.
+   :align: center
+
+
+**Create Link**
+
+This save the application/desktop *Shared* menu item. Which mean it keeps a pointer(reference) to the original desktop/application. 
+This will not load the application/desktop into your desktop.
+
+.. image:: images/createlink.png
+   :scale: 50 %
+   :alt: Create link.
+   :align: center
+
+
+
+**Load & Create Link
+
+The desktop/application will be loaded to your desktop and it is saved under the **Shared** menu item. 
+
