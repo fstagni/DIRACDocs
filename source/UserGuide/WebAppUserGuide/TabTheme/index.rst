@@ -75,7 +75,7 @@ Manage application and desktop
 You can manage the state of applications by by clicking to the following menu.
 .. image:: images/managemenuitems.png
    :scale: 50 %
-   :alt: managing the applications/desktops
+   :alt: applications and desktop menu
    :align: center
  
  The Desktop menu item contains:
