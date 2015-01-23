@@ -74,10 +74,10 @@ You can manage the state of applications by by clicking to the following menu:
 
 .. image:: images/manage.png
    :scale: 50 %
-   :alt: Main menu buttons
+   :alt: managing the applications/desktops
    :align: center
  
- The desktop contains:
+ The Desktop menu item contains:
    * New Desktop: You can create an empty desktop.
    * Save: You can save the desktop
    * Save As you can duplicate your desktop.
@@ -92,6 +92,13 @@ If you click on the delete menu item, a pop up window will appear:
 
 You can select the desktops to be deleted.
 
+The Application menu item contains:
+   * Save
+   * Save As
+   * Delete
+ 
+ These menu items have the same functionalities as the Desktop menu items.
+ 
 **Context menu**
 
 You have another possibility to manage applications and desktops. You have to right click on the application/desktop
@@ -137,7 +144,7 @@ you want to share (more information above in the `Manage application/desktop`_).
 
 **Share an application/desktop**
 
-You have to do the following steps to share an application:
+You have to do the following steps to share an application/desktop:
    #. right click on the desktop/application what you want to share.
    #. choose the menu item: Share desktop or Share Application.
    #. copy the text (for example: desktop|zmathe|lhcb_prmgr|JobMonitorAll) and click OK on the pop up window:
