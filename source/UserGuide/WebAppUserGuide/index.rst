@@ -50,6 +50,8 @@ Format of the URL when the Tab theme is used:
   8 |AllPlots it is the desktop name. the **Default** desktop is **. |AllPlots,*LHCbDIRAC.LHCbJobMonitor.classes.LHCbJobMonitor:AllUserJobs,* 
   
   
+An video tutorial available on `https://www.youtube.com/watch?v=vKBpED0IyLc` link.
+
 .. toctree::
    :maxdepth: 1
 
