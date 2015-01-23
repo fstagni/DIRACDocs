@@ -103,8 +103,92 @@ You can manage the applications in two different ways.
    :alt: Tab bar application state menu
    :align: center 
 
-The menu will be equivalent to previous menu.
+The menu is equivalent to previous menu.
 
 **Desktops**
 
-You have to right click on the task bar to manage the desktops. The menu items have similar functionality tahn the application described above.
+You have to right click on the task bar to manage the desktops. The menu items have similar functionality than the application described above.
+
+Share application and desktop
+-----------------------------
+
+**Share an application/desktop**
+
+You have to open the main menu more details: `Menu structure`_
+
+.. image:: images/sharedesk.png
+   :scale: 50 %
+   :alt: Share message box.
+   :align: center
+   
+
+You have to do:
+   #. click on the menu item: Share
+   #. copy the text (for example: desktop|zmathe|lhcb_prmgr|JobMonitorAll) and click OK on the pop up window:
+   #. send the text (desktop|zmathe|lhcb_prmgr|JobMonitorAll) to the person
+
+.. image:: ../../images/share.png
+   :scale: 50 %
+   :alt: Share message box.
+   :align: center
+   
+**Load a shared application or desktop**   
+   
+You have to use the *State Loader* menu item:
+
+.. image:: ../../images/stateloader.png
+   :scale: 50 %
+   :alt: State loader.
+   :align: center
+
+The State Loader widget is the following:
+
+.. image:: ../../images/loader.png
+   :scale: 50 %
+   :alt: Loader.
+   :align: center
+
+You have to provide the Shared State (for example: desktop|zmathe|lhcb_prmgr|JobMonitorAll) and a name (for example: newName).
+You have tree different way to load a shared state:
+   #. Load
+   #. Create Link
+   #. Load & Create Link
+   
+**Load**
+
+If you click on Load, you load the shared desktop/application to you desktop. The name of the application will be the provided name. For example: newName.
+
+.. image:: ../../images/loaddesktop.png
+   :scale: 50 %
+   :alt: Loaded desktop.
+   :align: center
+
+
+**Create Link**
+
+This save the application/desktop *Shared* menu item. Which mean it keeps a pointer(reference) to the original desktop/application. 
+This will not load the application/desktop into your desktop.
+
+.. image:: ../../images/createlink.png
+   :scale: 50 %
+   :alt: Create link.
+   :align: center
+
+
+
+**Load & Create Link**
+
+The desktop/application will be loaded to your desktop and it is saved under the **Shared** menu item. 
+
+**Delete shared applications/desktops**
+
+You have to click on the menu `Manage application and desktop`_ and then select application or desktop depending what you want to delete. 
+For example: Let's delete the **newName** shared desktop.
+
+.. image:: ../../images/deletelink.png
+   :scale: 50 %
+   :alt: Delete link.
+   :align: center  
+
+You have to select what you want to delete state or a link. As it is a shared desktop what we want to delete we have to select *Links*. 
+You have to click on the Delete button.
