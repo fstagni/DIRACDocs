@@ -68,11 +68,11 @@ Menu structure
    * Shared: It contains all Shared desktops and applications.
    
 Manage application/desktop
-__________________________
+--------------------------
 
-You can manage the state of applications by by clicking to the following menu:
+You can manage the state of applications by by clicking to the following menu.
 
-.. image:: images/manage.png
+.. image:: images/managemenuitems.png
    :scale: 50 %
    :alt: managing the applications/desktops
    :align: center
