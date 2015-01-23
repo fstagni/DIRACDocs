@@ -52,7 +52,7 @@ Menu consists of two widgets:
 .. image:: images/menustructure.png
    :scale: 50 %
    :alt: menu structure
-   :align: center
+   :align: right
    
 **Desktop&Applications**
 
