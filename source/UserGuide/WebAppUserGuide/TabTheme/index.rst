@@ -138,7 +138,23 @@ The applications within a desktop will be opened in different tab.
    :alt: Tab view
    :align: center
 
-   
+In the right corner of the Tab theme you can see two icons.
+
+*First icon* You can access to a specific application by clicking on the first icon. This is very useful when you have lot of application open in a desktop.
+
+.. image:: images/tabmenu.png
+   :scale: 50 %
+   :alt: Tab menu
+   :align: center
+
+
+*Second icon* You can write help to the current application. 
+
+.. image:: images/helpmenu.png
+   :scale: 50 %
+   :alt: Help menu
+   :align: center
+
 Share application and desktop
 -----------------------------
 
