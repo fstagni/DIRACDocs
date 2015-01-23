@@ -45,16 +45,16 @@ The state of the application is not saved in the **URL**. The URL only contains 
    * Tab theme:
    
    Format of the URL when the Tab theme is used: 
-   #. https://: protocol
-   #. lhcb-portal-dirac.cern.ch/DIRAC/: host.
-   #. s:LHCb-Production: DIRAC setup.
-   #. g:lhcb_prmgr : role
-   #. view=tabs : it is the theme. It can be **desktop** and **tabs**.
-   #. theme=Grey: it is the look and feel.
-   #. &url_state=1 it is desktop or application.
-   #. |AllPlots it is the desktop name. the **Default** desktop is **. 
-   #. The state is a desktop: |AllPlots 
-   #. The state is an application: *LHCbDIRAC.LHCbJobMonitor.classes.LHCbJobMonitor:AllUserJobs,*
+      #. https://: protocol
+      #. lhcb-portal-dirac.cern.ch/DIRAC/: host.
+      #. s:LHCb-Production: DIRAC setup.
+      #. g:lhcb_prmgr : role
+      #. view=tabs : it is the theme. It can be **desktop** and **tabs**.
+      #. theme=Grey: it is the look and feel.
+      #. &url_state=1 it is desktop or application.
+      #. |AllPlots it is the desktop name. the **Default** desktop is **. 
+      #. The state is a desktop: |AllPlots 
+      #. The state is an application: *LHCbDIRAC.LHCbJobMonitor.classes.LHCbJobMonitor:AllUserJobs,*
    
    For example: desktop and application: |AllPlots,*LHCbDIRAC.LHCbJobMonitor.classes.LHCbJobMonitor:AllUserJobs,* 
    
@@ -72,7 +72,7 @@ The state of the application is not saved in the **URL**. The URL only contains 
       #. The state is an application: url_state=0|LHCbDIRAC.LHCbJobMonitor.classes.LHCbJobMonitor:statename:0:0:1440:725:0:0,0,-1,-1,-1,-1
           
   
-**Note** If you have a state saved under Desktop theme, you can open using Tab theme. This works other way around as well.
+**Note:** If you have a state saved under Desktop theme, you can open using Tab theme. This works other way around as well.
 
    
 An video tutorial available on `https://www.youtube.com/watch?v=vKBpED0IyLc` link.
