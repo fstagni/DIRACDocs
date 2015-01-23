@@ -8,7 +8,7 @@ In this section a detailed description of the Desktop theme is presented:
     - `Menu structure`_
     - `Manage application and desktop`_
     - `Share application and desktop`_
-    - `Settings`_
+    
 
 Main widget
 -----------
@@ -134,12 +134,7 @@ You have to do:
    
 **Load a shared application or desktop**   
    
-You have to use the *State Loader* menu item:
-
-.. image:: ../TabTheme/images/stateloader.png
-   :scale: 50 %
-   :alt: State loader.
-   :align: center
+You have to use the *State Loader* menu item more details:`Menu structure`_
 
 The State Loader widget is the following:
 
@@ -158,7 +153,7 @@ You have tree different way to load a shared state:
 
 If you click on Load, you load the shared desktop/application to you desktop. The name of the application will be the provided name. For example: newName.
 
-.. image:: ../TabTheme/images/loaddesktop.png
+.. image:: images/loaddesktop.png
    :scale: 50 %
    :alt: Loaded desktop.
    :align: center
@@ -169,7 +164,7 @@ If you click on Load, you load the shared desktop/application to you desktop. Th
 This save the application/desktop *Shared* menu item. Which mean it keeps a pointer(reference) to the original desktop/application. 
 This will not load the application/desktop into your desktop.
 
-.. image:: ../TabTheme/images/createlink.png
+.. image:: images/createlink.png
    :scale: 50 %
    :alt: Create link.
    :align: center
@@ -182,7 +177,7 @@ The desktop/application will be loaded to your desktop and it is saved under the
 
 **Delete shared applications/desktops**
 
-You have to click on the *Manage states...* menu more details `Manage application and desktop`_ and then select application or desktop depending what you want to delete. 
+You have to click on the *Manage states...* menu more details `Menu structure`_ and then select application or desktop depending what you want to delete. 
 For example: Let's delete the **newName** shared desktop.
 
 .. image:: ../TabTheme/images/deletelink.png
