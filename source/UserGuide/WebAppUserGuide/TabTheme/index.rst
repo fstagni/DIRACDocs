@@ -131,3 +131,24 @@ The applications within a desktop will be opened in different tab.
    
 Share application/desktop
 -------------------------
+
+The applications/desktops can be shared. You can share an application/desktop by right click on the application/desktop what 
+you want to share (more information above in the `Manage application/desktop`_).
+
+**Share an application/desktop**
+
+You have to do the following steps to share an application:
+   #. right click on the desktop/application what you want to share.
+   #. choose the menu item: Share desktop or Share Application.
+   #. copy the text (for example: desktop|zmathe|lhcb_prmgr|JobMonitorAll) and click OK on the pop up window:
+   #. send the text (desktop|zmathe|lhcb_prmgr|JobMonitorAll) to the person
+
+.. image:: images/share.png
+   :scale: 50 %
+   :alt: Share message box.
+   :align: center
+   
+**Load a shared application or desktop**   
+   
+
+ 
