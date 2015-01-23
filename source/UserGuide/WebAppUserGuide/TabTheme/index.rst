@@ -11,7 +11,9 @@ In this section a detailed description of the Tab theme is presented:
 
 Main panel
 ----------
-The main panel consists of two widget:
+
+
+ The main panel consists of two widget:
    1. Menu 
    2. Desktop
 
@@ -23,7 +25,7 @@ The main panel consists of two widget:
 
 **Menu**
 
-It contains three main menu:
+ It contains three main menu:
 
 .. image:: images/menus.png
    :scale: 50 %
@@ -34,18 +36,18 @@ It contains three main menu:
   #. It is the Main panel
   #. You can found more information about DIRAC.
 
-The default is the 2. You can change by clicking on the icons.
+ The default is 2. You can change by clicking on the icons.
 
 **Desktop**
 
-It is the container which contains various applications on different desktops.
+ It is the container which contains various applications on different desktops.
 
 
 
 Menu structure
 --------------
 
-Menu consists of two widgets:
+ Menu consists of two widgets:
    #. Desktops&Applications
    #. Settings
    
@@ -56,14 +58,75 @@ Menu consists of two widgets:
    
 **Desktop&Applications**
 
-You can manage your applications and desktops. The menu structure:
+ You can manage your applications and desktops. The menu structure:
    * Web : it contains external links
    * Tools : You can found DIRAC specific applications.
    * Applications: You can found DIRAC and VO specific applications.
    * OldPortal: It is link to the old portal.
-
+   * DIRAC it is an external link to DIRAC portal
+   * My Desktops it is contains all saved desktops desktops. You can see a **Default** desktop which contains all applications which belongs to the **Default** desktop. 
+   * Shared: It contains all Shared desktops and applications.
+   
 Manage application/desktop
 __________________________
 
+You can manage the state of applications by by clicking to the following menu:
+
+.. image:: images/manage.png
+   :scale: 50 %
+   :alt: Menu buttons
+   :align: center
+ 
+ The desktop contains:
+   * New Desktop: You can create an empty desktop.
+   * Save: You can save the desktop
+   * Save As you can duplicate your desktop.
+   * Delete You can delete different desktops.
+
+If you click on the delete menu item, a pop up window will appear:    
+.. image:: images/manage.png
+   :scale: 50 %
+   :alt: Delete menu
+   :align: center
+
+You can select the desktops to be deleted.
+
+**Context menu**
+
+You have another possibility to manage applications and desktops. You have to right click on the application/desktop
+what you want to modify.
+
+.. image:: images/contextmenu.png
+   :scale: 50 %
+   :alt: Context menu
+   :align: center
+
+You have few additional menu items:
+   * Make public: Used to make public an application/desktop to everyone. 
+   * Share desktop: Used to share the desktop within a specific user.
+   * Share application: Used to share the application within a specific user.
+   * Make private: revoke the access to the desktop/application.
+   * Switch to presenter view: The applications will be open in a single desktop.
+   * Switch to tab view: The applications opened in different tabs.
+   
+**Presenter view**
+
+The application which belongs to a desktop will be opened in a single tab. You change the layout of the desktop using the buttons in the right corner of the panel (The buttons are in the red rectangle).  
+
+.. image:: images/presenterview.png
+   :scale: 50 %
+   :alt: Presenter view
+   :align: center
+
+**Tab view ***
+
+The applications within a desktop will be opened in different tab.
+
+.. image:: images/tabview.png
+   :scale: 50 %
+   :alt: Tab view
+   :align: center
+
+   
 Share application/desktop
 -------------------------
