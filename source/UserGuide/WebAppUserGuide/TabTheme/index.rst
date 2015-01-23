@@ -74,7 +74,7 @@ You can manage the state of applications by by clicking to the following menu:
 
 .. image:: images/manage.png
    :scale: 50 %
-   :alt: Menu buttons
+   :alt: Main menu buttons
    :align: center
  
  The desktop contains:
@@ -118,7 +118,7 @@ The application which belongs to a desktop will be opened in a single tab. You c
    :alt: Presenter view
    :align: center
 
-**Tab view ***
+**Tab view**
 
 The applications within a desktop will be opened in different tab.
 
