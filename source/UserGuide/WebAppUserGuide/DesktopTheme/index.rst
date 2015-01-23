@@ -177,7 +177,7 @@ The desktop/application will be loaded to your desktop and it is saved under the
 
 **Delete shared applications/desktops**
 
-You have to click on the *Manage states...* menu more details `Menu structure`_ and then select application or desktop depending what you want to delete. 
+You have to click on the *Manage states...* menu more details `Manage application and desktop`_ and then select application or desktop depending what you want to delete. 
 For example: Let's delete the **newName** shared desktop.
 
 .. image:: ../TabTheme/images/deletelink.png
