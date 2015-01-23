@@ -84,7 +84,8 @@ You can manage the state of applications by by clicking to the following menu:
    * Delete You can delete different desktops.
 
 If you click on the delete menu item, a pop up window will appear:    
-.. image:: images/manage.png
+
+.. image:: images/delete.png
    :scale: 50 %
    :alt: Delete menu
    :align: center
