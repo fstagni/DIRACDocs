@@ -122,7 +122,7 @@ You have few additional menu items:
    
 **Presenter view**
 
-The application which belongs to a desktop will be opened in a single tab. You change the layout of the desktop using the buttons in the right corner of the panel (The buttons are in the red rectangle).  
+The application which belongs to a desktop will be opened in a single tab. You can change the layout of the desktop using the buttons in the right corner of the panel (The buttons are in the red rectangle).  
 
 .. image:: images/presenterview.png
    :scale: 50 %
@@ -218,7 +218,7 @@ This will not load the application/desktop into your desktop.
 
 
 
-**Load & Create Link
+**Load & Create Link**
 
 The desktop/application will be loaded to your desktop and it is saved under the **Shared** menu item. 
 
@@ -246,6 +246,11 @@ You have to click on the **Settings** widget:
    :alt: Settings.
    :align: center  
 
+
+.. image:: images/settingspanel.png
+   :scale: 50 %
+   :alt: Settings panel.
+   :align: center  
 
 You can define the following:
       * Group you can change the role
