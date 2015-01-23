@@ -74,12 +74,16 @@ Manage application and desktop
 
 You can manage the state of applications by by clicking to the following menu.
 
+
 .. image:: images/managemenuitems.png
    :scale: 50 %
-   :alt: applications and desktop menu
-   :align: center
+   :alt: Applications and desktop menu
+   :align: right
  
+
+
  The Desktop menu item contains:
+
    * New Desktop: You can create an empty desktop.
    * Save: You can save the desktop
    * Save As you can duplicate your desktop.
