@@ -14,3 +14,4 @@ User Guide
    WebPortalReference/index
    CommandReference/index
    Tutorials/index
+   WebAppUserGuide/index
