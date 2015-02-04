@@ -119,12 +119,16 @@ that directory *$DEVROOT*) and:
     2.7, but it is highly suggested to use python 2.7) you can install all 
     the required packages by hand. First, you'll need to install few 
     packages for your distribution, e.g. you will need gcc, python-devel, 
-    openssl-devel, mysql, mysql-devel, python-pip. Then, you can use pip to 
-    install specific python tools::
+    openssl-devel, mysql, mysql-devel, python-pip. In case you use ubuntu, you may 
+    find some issues due recent changes in SSL. 
+    This `link <http://www.techstacks.com/howto/enable-sslv2-and-tlsv12-in-openssl-101c-on-ubuntu-1304.html>`_ may help you.
+    
+    Then, you can use pip to install specific python tools like::
 
           pip install GSI
           pip install MySQL-python
           pip install mock
+          pip install importlib
 
     Now, remember to update the $PYTHONPATH with the directory where you put 
     your DIRAC code (and the code of possible extensions). Note: for those 
