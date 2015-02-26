@@ -9,30 +9,42 @@ Transformation System
    :depth: 4
   
 
-The Transformation System (TS) is used to automatise common tasks related to the production activity. As an example, the TS can handle the generation of Data Re-processing jobs as soon as a 'pre-defined' data-set is available or Data Replication to 'pre-defined' SE destinations as soon as the first replica is registered in the Catalog.
+The Transformation System (TS) is used to automatise common tasks related to production activities. Just to make some baic examples, the TS can handle the generation of Simulation jobs, or Data Re-processing jobs as soon as a 'pre-defined' data-set is available, or Data Replication to 'pre-defined' SE destinations as soon as the first replica is registered in the Catalog.
 
-For each high-level production task, the production manager has to create a specific Transformation. The main features of a Transformation are the following:
+The lingo used here needs a little explanation: throughout this document the terms "transformation" and "production" are often used to mean the same thing:
 
-- Type (*e.g.* MC Simulation, Data Reprocessing, Removal, Replication)
-- Plugin (Standard, etc.)
-- It can have Input Files or not
+- A *"production"* is a transformation managed by the TS that is a "Data Processing" transformation (e.g. Simulation, Merge, DataReconstruction...). A Production ends up creating jobs in the WMS.
+- A "Data Manipulation" transformation replicates, or remove, data from storage elements. A "Data Manipulation" transformation ends up creating requests in the RMS (Request Management System).
 
-The main features of the TS are:
+For each high-level production task, the production manager creates a transformation. Each transformation can have different parameters. The main parameters of a Transformation are the following:
 
-- Generation of many identical tasks, differing by one parameter (it can be the Input File or not)
-- Possibility to easily extend the number of tasks 
-- One single high-level object (the Transformation) associated to a given production for global monitoring
+- Type (*e.g.* Simulation, DataProcessing, Removal, Replication)
+- Plugin (Standard, BySize, etc.)
+- The possibility of having Input Files.
+
+Within the TS a user can (for example):
+
+- Generate several identical tasks, differing by few parameters (e.g. Input Files list)
+- Extend the number of tasks 
+- have one single high-level object (the Transformation) associated to a given production for global monitoring
 
 Disadvantages:
 
-- The submission is slow, since there is no use of Parametric jobs
-- It's not possible to use ISB to ship local files as for 'normal' Jobs
+- For very large installations, the submission may be percieved as slow, since there is no use (not yet) of Parametric jobs. 
+
+Several improvements have been made in the TS to handle scalability, and extensibility issues. While the system structure remains intact, "tricks" like threading and caching have been extensively applied.
+
+It's not possible to use ISB (Input Sandbox) to ship local files as for 'normal' Jobs (this should not be considered, anyway, a disadvantage).
 
 ------------
 Architecture
 ------------
 
-The TS is composed by Services, DB, Agents and Clients (in the following we refer to the current installed DIRAC version, v6r10p20).
+The TS is a standard DIRAC system, and therefore it is composed by components in the following categories: Services, DBs, Agents. A technical drawing explaining the interactions between the various components follow.
+
+.. image:: ../../../_static/Systems/TS/TS-technical.png
+   :alt: Transformation System schema.
+   :align: center 
 
 * **Services**
 
@@ -42,7 +54,7 @@ The TS is composed by Services, DB, Agents and Clients (in the following we refe
 * **DB**
 
   * TransformationDB:
-    it's used to collect and serve the necessary information in order to automate the task of job preparation for high level  transformations. This class is typically used as a base class for more specific data processing databases. Here below the DB tables:
+    it's used to collect and serve the necessary information in order to automate the task of job preparation for high level transformations. This class is typically used as a base class for more specific data processing databases. Here below the DB tables:
 
   ::
 
@@ -54,7 +66,6 @@ The TS is composed by Services, DB, Agents and Clients (in the following we refe
       +------------------------------+
       | AdditionalParameters         |
       | DataFiles                    |
-      | Replicas                     |
       | TaskInputs                   |
       | TransformationFileTasks      |
       | TransformationFiles          |
@@ -65,7 +76,7 @@ The TS is composed by Services, DB, Agents and Clients (in the following we refe
       +------------------------------+
 
 
-  **Note** that since version v6r10, there are important changes in the TransformatioDB, as explained in the `release notes <https://github.com/DIRACGrid/DIRAC/wiki/DIRAC-v6r10#transformationdb>`_ (for example the Replicas table can be removed). Also, it is highly suggested to move to InnoDB. 
+  **Note** that since version v6r10, there are important changes in the TransformatioDB, as explained in the `release notes <https://github.com/DIRACGrid/DIRAC/wiki/DIRAC-v6r10#transformationdb>`_ (for example the Replicas table can be removed). Also, it is highly suggested to move to InnoDB. For new installations, all these improvements will be installed automatically.
 
 * **Agents**
 
@@ -73,21 +84,21 @@ The TS is composed by Services, DB, Agents and Clients (in the following we refe
 
   * WorkflowTaskAgent: it takes workflow tasks created in the TransformationDB and it submits to the WMS
 
+  * RequestTaskAgent: it takes request tasks created in the TransformationDB and submits to the RMS. Both RequestTaskAgent and WorkflowTaskAgent inherits from the same agent, "TaskManagerAgentBase", whose code contains large part of the logic that will be executed. But, TaskManagerAgentBase should not be run standalone.
+
   * MCExtensionAgent: it extends the number of tasks given the Transformation definition. To work it needs to know how many events each production will need, and how many events each job will produce. It is only used for 'MCSimulation' type
 
   * TransformationCleaningAgent: it cleans up the finalised Transformations
 
-  * RequestTaskAgent: it takes request tasks created in the TransformationDB and submits to the RMS
-
   * InputDataAgent: it updates the transformation files of active Transformations given an InputDataQuery fetched from the Transformation Service
 
-  * ValidateOutputDataAgent: it runs few integrity checks
+  * ValidateOutputDataAgent: it runs few integrity checks prior to finalise a Production.
 
-The complete list can be found in the `DIRAC project GitHub repository <https://github.com/DIRACGrid/DIRAC/tree/integration/TransformationSystem/Agent>`_ (ADD a schema).
+The complete list can be found in the `DIRAC project GitHub repository <https://github.com/DIRACGrid/DIRAC/tree/integration/TransformationSystem/Agent>`_ .
 
 * **Clients**
 
-  * TaskManager: it contains WorkflowsTasks and RequestTasks modules, for managing jobs and requests tasks, i.e. it contains classes wrapping the logic of how to 'transform' a Task in a job/request
+  * TaskManager: it contains WorkflowsTasks and RequestTasks modules, for managing jobs and requests tasks, i.e. it contains classes wrapping the logic of how to 'transform' a Task in a job/request. WorkflowTaskAgent uses WorkflowTasks, RequestTaskAgent uses RequestTasks.
 
   * TransformationClient: class that contains client access to the transformation DB handler (main client to the service/DB). It exposes the functionalities available in the DIRAC/TransformationHandler. This inherits the DIRAC base Client for direct execution of server functionality
 
