@@ -55,7 +55,7 @@ The menu structure:
    :alt: detailed menu.
    :align: center 
 
- The states of the applications are available when you click on the application name.
+The states of the applications are available when you click on the application name.
  
 .. image:: images/appmenu.png
    :scale: 50 %
@@ -123,6 +123,7 @@ You have to open the main menu more details: `Menu structure`_
    
 
 You have to do:
+
    #. click on the menu item: Share
    #. copy the text (for example: desktop|zmathe|lhcb_prmgr|JobMonitorAll) and click OK on the pop up window:
    #. send the text (desktop|zmathe|lhcb_prmgr|JobMonitorAll) to the person
@@ -145,6 +146,7 @@ The State Loader widget is the following:
 
 You have to provide the Shared State (for example: desktop|zmathe|lhcb_prmgr|JobMonitorAll) and a name (for example: newName).
 You have tree different way to load a shared state:
+
    #. Load
    #. Create Link
    #. Load & Create Link
