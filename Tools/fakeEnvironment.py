@@ -35,6 +35,7 @@ sys.modules[ 'MySQLdb.cursors' ] = mock.Mock()
 
 #FIXME: do we need all them ??
 
+sys.modules[ 'irods' ]                           = mock.Mock()
 sys.modules[ 'pylab' ]                           = mock.Mock()
 sys.modules[ 'pytz' ]                            = mock.Mock()
 sys.modules[ 'numpy' ]                           = mock.Mock()

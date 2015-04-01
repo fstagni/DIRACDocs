@@ -33,11 +33,11 @@ Main panel
    :alt: main menus
    :align: center
 
-  #. It is the Intro panel
-  #. It is the Main panel
-  #. You can found more information about DIRAC.
+#. It is the Intro panel
+#. It is the Main panel
+#. You can found more information about DIRAC.
 
- The default is 2. You can change by clicking on the icons.
+The default is 2. You can change by clicking on the icons.
 
 **Desktop**
 
@@ -196,6 +196,7 @@ The State Loader widget is the following:
 
 You have to provide the Shared State (for example: desktop|zmathe|lhcb_prmgr|JobMonitorAll) and a name (for example: newName).
 You have tree different way to load a shared state:
+
    #. Load
    #. Create Link
    #. Load & Create Link
