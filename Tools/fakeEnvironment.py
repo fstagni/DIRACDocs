@@ -35,6 +35,7 @@ sys.modules[ 'MySQLdb.cursors' ] = mock.Mock()
 
 #FIXME: do we need all them ??
 
+sys.modules[ 'suds' ]                            = mock.Mock()
 sys.modules[ 'irods' ]                           = mock.Mock()
 sys.modules[ 'pylab' ]                           = mock.Mock()
 sys.modules[ 'pytz' ]                            = mock.Mock()
@@ -53,7 +54,9 @@ sys.modules[ 'dateutil' ]                        = mock.Mock()
 sys.modules[ 'dateutil.relativedelta' ]          = mock.Mock()
 sys.modules[ 'matplotlib.backends' ]             = mock.Mock()
 sys.modules[ 'matplotlib.backends.backend_agg' ] = mock.Mock()
-
-
+sys.modules[ 'fts3' ]                            = mock.Mock()
+sys.modules[ 'fts3.rest' ]                       = mock.Mock()
+sys.modules[ 'fts3.rest.client' ]                = mock.Mock()
+sys.modules[ 'fts3.rest.client.easy' ]           = mock.Mock()
 #...............................................................................
 #EOF#EOF#EOF#EOF#EOF#EOF#EOF#EOF#EOF#EOF#EOF#EOF#EOF#EOF#EOF#EOF#EOF#EOF#EOF#EOF
