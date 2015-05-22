@@ -82,7 +82,7 @@ The TS is a standard DIRAC system, and therefore it is composed by components in
 
   * TransformationAgent: it processes transformations found in the TransformationDB and creates the associated tasks, by connecting input files with tasks given a plugin. It's not useful for MCSimulation type
 
-  * WorkflowTaskAgent: it takes workflow tasks created in the TransformationDB and it submits to the WMS
+  * WorkflowTaskAgent: it takes workflow tasks created in the TransformationDB and it submits to the WMS. Since version `v6r13 <https://github.com/DIRACGrid/DIRAC/wiki/DIRAC-v6r13#changes-for-transformation-system>`_  there are some new capabilities in the form of TaskManager plugins.
 
   * RequestTaskAgent: it takes request tasks created in the TransformationDB and submits to the RMS. Both RequestTaskAgent and WorkflowTaskAgent inherits from the same agent, "TaskManagerAgentBase", whose code contains large part of the logic that will be executed. But, TaskManagerAgentBase should not be run standalone.
 
