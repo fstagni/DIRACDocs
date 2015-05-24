@@ -19,7 +19,7 @@ Main panel
    2. Desktop
 
 .. image:: images/maintab.png
-   :scale: 50 %
+   :scale: 30 %
    :alt: Tab theme main view.
    :align: center
 
@@ -41,7 +41,7 @@ The default is 2. You can change by clicking on the icons.
 
 **Desktop**
 
- It is the container which contains various applications on different desktops.
+ It is a container which contains various applications on different desktops.
 
 
 
@@ -129,7 +129,7 @@ You have few additional menu items:
 The application which belongs to a desktop will be opened in a single tab. You can change the layout of the desktop using the buttons in the right corner of the panel (The buttons are in the red rectangle).  
 
 .. image:: images/presenterview.png
-   :scale: 50 %
+   :scale: 30 %
    :alt: Presenter view
    :align: center
 
@@ -138,7 +138,7 @@ The application which belongs to a desktop will be opened in a single tab. You c
 The applications within a desktop will be opened in different tab.
 
 .. image:: images/tabview.png
-   :scale: 50 %
+   :scale: 30 %
    :alt: Tab view
    :align: center
 
@@ -147,7 +147,7 @@ In the right corner of the Tab theme you can see two icons.
 *First icon* You can access to a specific application by clicking on the first icon. This is very useful when you have lot of application open in a desktop.
 
 .. image:: images/tabmenu.png
-   :scale: 50 %
+   :scale: 30 %
    :alt: Tab menu
    :align: center
 
@@ -155,7 +155,7 @@ In the right corner of the Tab theme you can see two icons.
 *Second icon* You can write help to the current application. 
 
 .. image:: images/helpmenu.png
-   :scale: 50 %
+   :scale: 30 %
    :alt: Help menu
    :align: center
 
@@ -206,7 +206,7 @@ You have tree different way to load a shared state:
 If you click on Load, you load the shared desktop/application to you desktop. The name of the application will be the provided name. For example: newName.
 
 .. image:: images/loaddesktop.png
-   :scale: 50 %
+   :scale: 30 %
    :alt: Loaded desktop.
    :align: center
 
@@ -273,7 +273,7 @@ Consequently, you can not have automatic tab change in the *Default* desktop.
 **Grey**
 
 .. image:: images/grey.png
-   :scale: 50 %
+   :scale: 30 %
    :alt: Grey look and feel.
    :align: center  
 
@@ -281,7 +281,7 @@ Consequently, you can not have automatic tab change in the *Default* desktop.
 **Neptune**
 
 .. image:: images/neptune.png
-   :scale: 50 %
+   :scale: 30 %
    :alt: Neptune look and feel.
    :align: center  
 
@@ -289,7 +289,7 @@ Consequently, you can not have automatic tab change in the *Default* desktop.
 **Classic**
 
 .. image:: images/classic.png
-   :scale: 50 %
+   :scale: 30 %
    :alt: Classic look and feel.
    :align: center  
 
