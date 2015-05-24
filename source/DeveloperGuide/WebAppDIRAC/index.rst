@@ -1,4 +1,4 @@
-.. _development_model:
+.. _webappdirac:
 
 ===========
 WebAppDIRAC

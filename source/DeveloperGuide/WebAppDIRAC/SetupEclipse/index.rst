@@ -1,4 +1,4 @@
-.. _branching_model:
+.. _webappdirac_setupeclipse:
 
 =============
 Setup Eclipse
@@ -40,7 +40,7 @@ Advantages of the IDEs:
 Install Eclipse
 ---------------
 
-   * You can download from: `Eclipse IDE <https://www.eclipse.org>`_‎. 
+   * You can download from: `Eclipse IDE <https://www.eclipse.org>`_
    * installation instructions can be found: `Eclipse wiki <http://wiki.eclipse.org/Eclipse/Installation>`_
 
 Install ExtJS
@@ -101,11 +101,13 @@ Make default JavaScript profile
 
    * In the same window ("Spket JavaScript Profile") click on the Extjs profile and after make it default by clicking on the "Default" button. 
    * in the "Configuration panel" click on the "General"->"Editors"->"File Associations"
+
    .. image:: images/fileass.png
       :scale: 30 %
       :alt: Spket file associations
       :align: center
-   * Please select *.js and then select "Spket JavaScript Editor" and click on the "Default button"
+
+   * Please select \*.js and then select "Spket JavaScript Editor" and click on the "Default button"
    * Restart Eclipse.
 
 Auto-complete feature
