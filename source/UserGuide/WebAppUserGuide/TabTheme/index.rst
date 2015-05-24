@@ -41,7 +41,7 @@ The default is 2. You can change by clicking on the icons.
 
 **Desktop**
 
- It is the container which contains various applications on different desktops.
+ It is a container which contains various applications on different desktops.
 
 
 
