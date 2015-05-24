@@ -16,3 +16,9 @@ If you are not familiar with some of the web technologies, or there has been a w
 those technologies, please visit the W3CSchool web site (`<http://www.w3schools.com/>`_). 
 There, you can find tutorials that you can use to learn or to refresh your knowledge for web-programming. 
 
+.. toctree::
+   :maxdepth: 1
+
+   SetupEclipse/index
+   InstallWebAppDIRAC/index
+   
