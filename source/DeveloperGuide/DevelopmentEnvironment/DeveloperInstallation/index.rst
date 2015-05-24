@@ -4,7 +4,6 @@
 Setting up a development installation
 ======================================
 
--------------------------------------
 Sharing your development
 -------------------------------------
 
@@ -17,7 +16,6 @@ In any case, it's now time to setup a developer installation.
 A developer installation is a "closed" installation: an installation that 
 can, even, be used while being disconnected from the network.
 
--------------------------------------------
 Setting up your development installation
 -------------------------------------------
 
@@ -35,7 +33,7 @@ that directory *$DEVROOT*) and:
 
   1. Go to your *$DEVROOT* directory
   2. Check out DIRAC source code. DIRAC source is hosted on *github.com*. 
-  So, you have to do::
+     So, you have to do::
 
       git clone git@github.com:yourusername/DIRAC.git
 
@@ -119,17 +117,21 @@ that directory *$DEVROOT*) and:
     2.7, but it is highly suggested to use python 2.7) you can install all 
     the required packages by hand. First, you'll need to install few 
     packages for your distribution, e.g. you will need gcc, python-devel, 
-    openssl-devel, mysql, mysql-devel, python-pip. Then, you can use pip to 
-    install specific python tools::
+    openssl-devel, mysql, mysql-devel, python-pip. In case you use ubuntu, you may 
+    find some issues due recent changes in SSL. 
+    This `link <http://www.techstacks.com/howto/enable-sslv2-and-tlsv12-in-openssl-101c-on-ubuntu-1304.html>`_ may help you.
+    
+    Then, you can use pip to install specific python tools like::
 
           pip install GSI
           pip install MySQL-python
           pip install mock
+          pip install importlib
 
     Now, remember to update the $PYTHONPATH with the directory where you put 
     your DIRAC code (and the code of possible extensions). Note: for those 
     of you with OSX Lion or newer take a look 
-    `here <http://bruteforce.gr/bypassing-clang-error-unknown-argument.html>`_ 
+    `this page <http://bruteforce.gr/bypassing-clang-error-unknown-argument.html>`_ 
     if you can't install MySQL-python...
 
     9.2. The second possibility is to use the same script that is used for 
@@ -248,7 +250,7 @@ that directory *$DEVROOT*) and:
     11.1. CA certificates: Place them under 
     *$DEVROOT/etc/grid-security/certificates*. You can install them 
     following the instructions 
-    `here <https://wiki.egi.eu/wiki/EGI_IGTF_Release>`_. In case you 
+    `EGI_IGTF_Release page <https://wiki.egi.eu/wiki/EGI_IGTF_Release>`_. In case you 
     can't use a package manager like *apt* or *yum* there are tarballs 
     available to download the CA certificates, so in that case you can 
     use this script

@@ -1,6 +1,5 @@
 .. _eclipse_environment:
 
-=======================
 Configuring *Eclipse*
 =======================
 
@@ -17,9 +16,9 @@ As it has been true for the previous paragraph, this guide will NOT explain the 
 Two extensions are required for developing DIRAC with *Eclipse*. To install them go to 
 *Help->Install new software->top right button "Add..." -> Insert name and URL* and then select the software to install in the list.
 
- - *pyDev* : Use `http://pydev.org/updates` as the URL to install from. For more info go `here <http://pydev.org/updates>`_.
+ - *pyDev* : Use `http://pydev.org/updates` as the URL to install from. For more info go `Pydev updates page <http://pydev.org/updates>`_.
  - *EGit* : Git team provider for eclipse. The latest of Eclipse come with this extension ready to be installed. If this is not the case, use `http://download.eclipse.org/egit/updates` as the URL. 
-   For more info go `here <http://www.eclipse.org/egit/>`_.
+   For more info go `Eclipse site <http://www.eclipse.org/egit/>`_.
  
 Now you need to configure the *pyDev* plugin. Go to *Window->Preferences* (*Eclipse->preferences* if you're in a MacOSX box). 
 In the preferences pane go to *Pydev->Editor*, select 2 as the tab length and click "Replace tabs with spaces when typing". 
