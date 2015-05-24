@@ -31,29 +31,22 @@ We would like to highlight some disadvantages of the text editors:
 Advantages of the IDEs:
 
    * code quality: Each developer can use the same template
-
-   * auto-complete feature: When you type a class name and after press a dot the IDE show the 
-   possible methods as well as a short description of the method
-
+   * auto-complete feature: When you type a class name and after press a dot the IDE show the possible methods as well as a short description of the method
    * easy to manage the code
-
-   * it is easy to create tasks: When required to change some code in the comment we can add //TODO and text; 
-   This will appears a Tasks list
-
+   * it is easy to create tasks: When required to change some code in the comment we can add //TODO and text; This will appears a Tasks list
    * easy to navigate between classes. etc.
+
 
 Install Eclipse
 ---------------
 
    * You can download from: `Eclipse IDE <https://www.eclipse.org>`_‎. 
-
    * installation instructions can be found: `Eclipse wiki <http://wiki.eclipse.org/Eclipse/Installation>`_
 
 Install ExtJS
 -------------
 
-   * download from `Sencha page <http://www.sencha.com/products/extjs/>`_ and un-zip it. 
-   Note if you have installed WebAppDIRAC, you can found it under WebApp/static/extjs directory.
+   * download from `Sencha page <http://www.sencha.com/products/extjs/>`_ and un-zip it. Note if you have installed WebAppDIRAC, you can found it under WebApp/static/extjs directory.
 
 Eclipse and ExtJS
 -----------------
@@ -86,40 +79,34 @@ Please give a name and use the following link: `<http://www.agpad.com/update/>`_
 Create Spket profile for ExtJs (Configuration panel):
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-#. Click "Eclipse" -> "Preferences…" You will see the following configuration form:
+   * Click "Eclipse" -> "Preferences…" You will see the following configuration form:
 
-.. image:: images/spket.png
-   :scale: 30 %
-   :alt: Javascript Spket
-   :align: center
+   .. image:: images/spket.png
+      :scale: 30 %
+      :alt: Javascript Spket
+      :align: center
 
-#. select "Spket JavaScript Profile" and click to the New button and then type ExtJs.
+   * select "Spket JavaScript Profile" and click to the New button and then type ExtJs.
+   
+     .. image:: images/spketprofile.png
+        :scale: 30 %
+        :alt: Spket profile
+        :align: center
 
-.. image:: images/spketprofile.png
-   :scale: 30 %
-   :alt: Spket profile
-   :align: center
-
-#. Click "Add Library" select ExtJs
-
-#. Click "Add Folder" you have to add the path of the ExtJs folder (more details in <https://github.com/DIRACGrid/WebAppDIRAC/wiki/_preview#wiki-extjs>` section).
+   * Click "Add Library" select ExtJs
+   * Click "Add Folder" you have to add the path of the ExtJs folder (more details in <https://github.com/DIRACGrid/WebAppDIRAC/wiki/_preview#wiki-extjs>` section).
 
 Make default JavaScript profile
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-   * In the same window ("Spket JavaScript Profile") click on the Extjs profile and after make it 
-default by clicking on the "Default" button. 
-
+   * In the same window ("Spket JavaScript Profile") click on the Extjs profile and after make it default by clicking on the "Default" button. 
    * in the "Configuration panel" click on the "General"->"Editors"->"File Associations"
-
-.. image:: images/fileass.png
-   :scale: 30 %
-   :alt: Spket file associations
-   :align: center
-   
-Please select *.js and then select "Spket JavaScript Editor" and click on the "Default button"
-
-Now We propose to restart Eclipse.
+   .. image:: images/fileass.png
+      :scale: 30 %
+      :alt: Spket file associations
+      :align: center
+   * Please select *.js and then select "Spket JavaScript Editor" and click on the "Default button"
+   * Restart Eclipse.
 
 Auto-complete feature
 @@@@@@@@@@@@@@@@@@@@@
@@ -135,17 +122,16 @@ You can download from `<https://zmathe.web.cern.ch/zmathe/extjs-template.xml>`_.
 In order to use the template you have to import to your Spket profile:
 
 #. Click "Eclipse" -> "Preferences…" 
- 
 #. In the "Preferences" window select "Spket->Editors->JavaScript Editor->Formatter"
+#. Click on the "Import button" 
+#. Apply
 
 .. image:: images/formater.png
    :scale: 30 %
    :alt: Spket file associations
    :align: center
    
-#. Click on the "Import button" 
 
-#. Apply
 
 NOTE:
 @@@@@
