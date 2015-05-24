@@ -1,8 +1,8 @@
 .. _developer_guide:
 
-==================================
+===============
 Developer Guide
-==================================
+===============
 
 The DIRAC Developer Guide is describing procedures, rules and practical details for developing 
 new DIRAC components. The section :ref:`development_model` describes the general code management
@@ -36,3 +36,4 @@ group.
    CodeDocumenting/index  
    Framework/index
    REST/index
+   WebAppDIRAC/index
