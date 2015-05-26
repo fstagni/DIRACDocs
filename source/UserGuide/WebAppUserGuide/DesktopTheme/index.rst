@@ -16,7 +16,7 @@ Main widget
 When you open the web portal you will get an empty desktop.
 
 .. image:: images/desktop.png
-   :scale: 50 %
+   :scale: 30 %
    :alt: Desktop theme main view.
    :align: center
    
@@ -156,7 +156,7 @@ You have tree different way to load a shared state:
 If you click on Load, you load the shared desktop/application to you desktop. The name of the application will be the provided name. For example: newName.
 
 .. image:: images/loaddesktop.png
-   :scale: 50 %
+   :scale: 30 %
    :alt: Loaded desktop.
    :align: center
 
