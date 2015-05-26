@@ -475,3 +475,62 @@ by the server is shown in the textarea.
   
 Debugging an application
 ------------------------
+
+In order to debug an application, a debugging tools are needed to be used. In **Firefox** you can install and use the Firebug toolset which can be also used in **Chrome** but in a light version.
+
+In Chrome you can use developer tools.
+
+DIRAC web framework provides two modes of working regarding the CS. One is the development mode, which means that the JavaScripts are loaded as are, so that they can be easily debugged. The other mode is the production mode where JavaScripts are minimized and compiled before loaded. Those JavaScripts are lighter in memory but almost useless regarding the debugging process.
+
+In order to set up the production mode, you have to set the **DevelopMode** parameter into the web.cfg file as shown as follows (by default this parameter is set to **True**)::
+
+      WebApp
+      {
+        DevelopMode = False
+      
+        Schema
+        {
+          Applications
+          {
+            Job Monitor = DIRAC.JobMonitor
+            Accounting = DIRAC.AccountingPlot
+            Configuration Manager = DIRAC.ConfigurationManager
+            File Catalog = DIRAC.FileCatalog
+            Notepad = DIRAC.Notepad
+            My First Application = DIRAC.MyApp
+          }
+          TestLink = link|http://google.com
+        }
+      }
+
+      
+Before you can use the compiled version of the JavaScript files, you have to compiled them first. 
+For this reason you have to execute the python script **dirac-webapp-compile**. 
+In order to run the script, you have to download and install a tool called Sencha Cmd ( `<http://www.sencha.com/products/sencha-cmd/download>`_ ). 
+You can also refer to `<http://docs.sencha.com/extjs/4.2.1/#!/guide/command>`_ and read 
+the System Setup section for detailed installation.
+
+Inheritance of applications
+---------------------------
+
+The inheritance of an application is done in both SS and CS. In this case let suppose that we want to inherit the **MyApp** application. Let name this new application **MyNewApp**.
+
+The procedure for creating a new application is the same one as explained in the previous section.
+
+When creating the python file, the Python class, namely **DIRAC.MyNewApp.classes.MyNewApp**, has to inherit from **DIRAC.MyApp.classes.MyApp**. Be aware that before you can inherit, firstly you have to import the parent file. The code would look like as follows::
+      
+      from WebAppDIRAC.WebApp.handler.MyAppHandler import MyAppHandler
+      import random
+      
+      class MyNewAppHandler(MyAppHandler):
+      
+        AUTH_PROPS = "authenticated"
+
+When creating the main JavaScript file, in this case named **MyNewApp.js**, there are two parts 
+that differ from the obvious development.
+First of all, the ExtJS class to be developed, namely **DIRAC.MyNewApp.classes.MyNewApp** has to extend **DIRAC.MyApp.classes.MyApp** instead of **Ext.dirac.core.Module**.
+
+Next, when defining the buildUI method, first of all the parent buildUI has to be called before any other changes take place.
+
+User credentials and user properties
+------------------------------------
