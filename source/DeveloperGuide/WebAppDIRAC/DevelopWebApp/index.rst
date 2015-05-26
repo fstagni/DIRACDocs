@@ -534,3 +534,46 @@ Next, when defining the buildUI method, first of all the parent buildUI has to b
 
 User credentials and user properties
 ------------------------------------
+
+For some functionalities of the applications you have to distinguish between various kind of users. 
+For example, in the configuration manager, the whole configuration can be browsed, but also it can be 
+managed and edited. The management functionality shall be allowed only for the users that have the property of **CSAdministrator**.
+
+On the client side, these properties of a user can be accessed via the 
+**GLOBAL.USER_CREDENTIALS.properties** variable. On the server side the list of user properties is 
+contained in **self.getSessionData().properties**. 
+So in the case of configuration manager, at the client side we use the following code::
+      
+   if (("properties" in GLOBAL.USER_CREDENTIALS) && (Ext.Array.indexOf(GLOBAL.USER_CREDENTIALS.properties, "CSAdministrator") != -1)) { …
+
+At the server side of configuration manager we did a method to check whether an user is a configuration manager or not::
+   
+   def __authorizeAction(self):
+     data = SessionData().getData()
+     isAuth = False
+     if "properties" in data["user"]:
+       if "CSAdministrator" in data["user"]["properties"]:
+         isAuth = True
+     return isAuth
+     
+Be aware that sometimes **properties** list is not part of the credentials object so it can be checked first for 
+its existence before it can be used.
+
+Using predefined widgets
+------------------------
+
+DIRAC framework provides already implemented widgets which can be 
+found under (`<https://github.com/DIRACGrid/WebAppDIRAC/tree/integration/WebApp/static/core/js/utils>`_). 
+More details about the widgets can be found in the developer documentation: 
+`<https://localhost:8443/DIRAC/static/doc/index.html>`_ or in the portal (`<https://hostname/DIRAC/static/doc/index.html>`_).
+
+Create your first example
+-------------------------
+
+We already prepared a simple example using predefined widgets
+(You can found more information `<https://hostname/DIRAC/static/doc/index.html>`_ and 
+you can have a look the code in github: (`<https://github.com/DIRACGrid/WebAppDIRAC/tree/integration/WebApp/static/DIRAC>`_).
+
+NOTE: Please make sure that your application will compile. You have to use::
+
+   dirac-webapp-compile
