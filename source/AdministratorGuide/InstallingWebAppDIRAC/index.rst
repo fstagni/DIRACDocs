@@ -482,10 +482,11 @@ You have to add the **site.conf** the following line::
 Install WebAppDIRAC
 -------------------
 
-* python dirac-install -t server $installCfg
-* source $installDir/bashrc
-* dirac-configure $installCfg $DEBUG
-* dirac-setup-site $DEBUG
+* Install:
+      * python dirac-install -t server $installCfg
+      * source $installDir/bashrc
+      * dirac-configure $installCfg $DEBUG
+      * dirac-setup-site $DEBUG
 
 $installCfg::
    
@@ -517,3 +518,10 @@ $installCfg::
      Project = LHCb
      WebApp = yes
     }
+
+   
+* Update using: **dirac-admin-sysadmin-cli**
+  
+         * dirac-admin-sysadmin-cli -H hostname
+         * update version of DIRAC, for example v8r1
+       
