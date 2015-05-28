@@ -1,6 +1,6 @@
-==================================
+===================
 Administrator Guide
-==================================
+===================
 
 .. toctree::
    :maxdepth: 1
@@ -14,5 +14,4 @@ Administrator Guide
    DIRACSites/index
    MultiVO/index
    CommandReference/index
-
-   
+   InstallingWebAppDIRAC/index
