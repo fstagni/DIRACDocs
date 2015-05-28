@@ -21,4 +21,5 @@ There, you can find tutorials that you can use to learn or to refresh your knowl
 
    SetupEclipse/index
    InstallWebAppDIRAC/index
+   DevelopWebApp/index
    
