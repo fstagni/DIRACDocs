@@ -146,6 +146,34 @@ Is also possible to check logs for services and agents using SAC::
     2011-03-16 14:29:15 UTC WorkloadManagement/JobMonitoring  INFO: Sending records to security log service...
     2011-03-16 14:29:15 UTC WorkloadManagement/JobMonitoring  INFO: Data sent to security log service
 
+As of v6r13 it is now possible to check the history of installed components in DIRAC with show installations::
+
+    [sergiovm.cern.ch]> show installations
+    
+      Num          Host                   Name                    Module                 System            Type        Installed on      Uninstalled on    
+    ------------------------------------------------------------------------------------------------------------------------------------------------------ 
+    |  1  |  sergiovm.cern.ch  | InstalledComponentsDB  | InstalledComponentsDB  |     Framework      |     DB     | 01-06-2015 16:12 |                  | 
+    ------------------------------------------------------------------------------------------------------------------------------------------------------ 
+    |  2  |  sergiovm.cern.ch  |  ComponentMonitoring   |  ComponentMonitoring   |     Framework      |  service   | 01-06-2015 16:12 |                  | 
+    ------------------------------------------------------------------------------------------------------------------------------------------------------ 
+    |  3  |  sergiovm.cern.ch  |         Server         |         Server         |   Configuration    |  service   | 01-06-2015 16:12 |                  | 
+    ------------------------------------------------------------------------------------------------------------------------------------------------------ 
+    |  4  |  sergiovm.cern.ch  |  SystemAdministrator   |  SystemAdministrator   |     Framework      |  service   | 01-06-2015 16:12 |                  | 
+    ------------------------------------------------------------------------------------------------------------------------------------------------------ 
+
+Accepted parameters by show installations:
+
+* **list**: Changes the display mode of the results
+* **current**: Show only the components that are still installed
+* **-n <name>**: Show only installations of the component with the given name
+* **-h <host>**: Show only installations in the given host
+* **-s <system>**: Show only installations of components from the given system
+* **-m <module>**: Show only installations of the given module
+* **-t <type>**: Show only installations of the given type
+* **-itb <date>**: Show installations made before the given date ('dd-mm-yyyy')
+* **-ita <date>**: Show installations made after the given date ('dd-mm-yyyy')
+* **-utb <date>**: Show installations of components uninstalled before the given date ('dd-mm-yyyy')
+* **-uta <date>**: Show installations of components uninstalled after the given date ('dd-mm-yyyy')
 
 
 Managing DIRAC services and agents
