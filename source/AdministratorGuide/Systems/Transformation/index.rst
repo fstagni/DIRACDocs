@@ -130,7 +130,7 @@ Configuration
   * Agents must be configured in the Systems/Transformation/[VO]/Agents section
   * The *Transformation Types* to be treated by the agent must be configured if and only if they are different from those set in the 'Operations' section. This is useful, for example, in case one wants several agents treating different transformation types, *e.g.*: one WorkflowTaskAgent for DataReprocessing transformations, a second for Merge and MCStripping, etc. Advantage is speedup.
   * For the WorkflowTaskAgent and RequestTaskAgent some options must be added manually
-  * An example of working configuration is give below
+  * An example of working configuration is give below, where 2 specific WorkflowTaskAgents, each treating a different subset of transformation types have been added. Also notice the shifterProxy set by each one.
 
   ::
 
@@ -151,6 +151,7 @@ Configuration
           TaskUpdateStatus += Matched
           TaskUpdateStatus += Completed
           TaskUpdateStatus += Failed
+          shifterProxy = ProductionManager
           #Flag to eanble task submission
           SubmitTasks = yes
           #Flag for checking reserved tasks that failed submission
@@ -159,6 +160,24 @@ Configuration
           MonitorTasks = yes
           PollingTime = 120
           MonitorFiles = yes
+        }
+        WorkflowTaskAgent-RealData
+        {
+          #@@-phicharp@lhcb_admin - 2015-06-05 16:44:11
+          TransType = DataReconstruction
+          TransType += DataStripping
+          shifterProxy = DataProcessing
+          LoadName = WorkflowTaskAgent-RealData
+          Module = WorkflowTaskAgent
+        }
+        WorkflowTaskAgent-Simulation
+        {
+          #@@-phicharp@lhcb_admin - 2015-06-05 16:44:11
+          TransType = Simulation
+          TransType += MCSimulation
+          shifterProxy = SimulationProcessing
+          LoadName = WorkflowTaskAgent-RealData
+          Module = WorkflowTaskAgent
         }
         RequestTaskAgent
         {
