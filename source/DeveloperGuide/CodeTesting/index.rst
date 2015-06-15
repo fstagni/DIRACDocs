@@ -1,19 +1,22 @@
 .. _testing_environment:
 
-=================
+====================
 Testing (VO)DIRAC
-=================
+====================
 
 
 Who should read this document
------------------------------
+------------------------------------------
 
 - *All (VO)DIRAC developers* should read, at least, the sections about unit tests and integration tests
+- *All software testers* should read fully this document
 - *All (VO)DIRAC developers coordinators* should read fully this document
+
+NB: if you are a developer coordinator, you better be most and foremost, a development instructor, and a software tester.
 
 
 Why this document should be interesting for you
------------------------------------------------
+---------------------------------------------------------------
 
 - Because you want your code to work as expected
 - Because preventing disasters is better than fixing them afterwards
@@ -21,7 +24,7 @@ Why this document should be interesting for you
 
 
 What we mean by testing
------------------------
+------------------------------------------
 
 Every large enough software project needs to be carefully tested, monitored and evaluated to assure that minimum standards of quality are being attained by the development process. A primary purpose of that is to detect software and configuration failures so that defects may be discovered and corrected before making official release and to check if software meets requirements and works as expected. Testing itself could also speed up the development process rapidly tracing problems introduced with the new code. 
 
@@ -32,11 +35,14 @@ The topic of software testing is very complicated by its own nature, but dependi
 - *unit tests*, in which the responsible person for one source file is proving that his code is written in a right way,
 - *integration tests* that should cover whole group of modules combined together to accomplish one well defined task, 
 - *regression tests* that seek for errors in existing functionality after patches, functionality enhancements and or configuration   changes have been made to the software,  
-- *certification tests* (or *system tests*), which are run against the integrated and compiled system, treating it as a black box and trying   to evaluate the system's compliance with its specified requirements. 
+- *certification tests* (or *system tests*), which are run against the integrated and compiled system, treating it as a black box and trying to evaluate the system's compliance with its specified requirements. 
+
+If your unit tests are not passing, you should not think yet to start the integration tests. Similarly, if your unit tests show some broken software, you should not bother running any system test.
+
 
 
 Unit tests
-==========
+-----------------------
 
 In DIRAC the unit tests should be prepared for the developer herself, integration tests could be developed in groups of code responsible persons, for regression tests the responsible person should be a complete subsystem (i.e. WMS, DMS, SMS etc..) manager, while certification tests should be prepared and performed by release managers.
 
@@ -106,6 +112,8 @@ So from this point the whole developing cycle can start again and again and agai
 
 Test doubles
 ------------
+
+Unit tests should run in *isolation*. Which means that they should run without having DIRAC fully installed, because, remember, they should just test the code logic. If, to run a unit test in DIRAC, you need a dirac.cfg file to be present, you are failing your goal.
 
 To isolate the code being tested from depended-on components it is convenient and sometimes necessary to use *test doubles*: 
 simplified objects or procedures, that behaves and looks like the their real-intended counterparts, but are actually simplified versions 
@@ -377,7 +385,7 @@ All test modules should follow those conventions:
 
 
 Integration and System tests
-=============================
+----------------------------------
 
 Integration and system tests should not be defined at the same level of the unit tests. 
 The reason is that, in order to properly run such tests, an environment might need to be defined. 
@@ -392,8 +400,9 @@ The TestDIRAC repository
 The GIT repository ``https://github.com/DIRACGrid/TestDIRAC`` contains some integration and system tests. 
 These tests are not only used for the certification process. Some of them, in fact, might be extremely useful for the developers.
 
+
 Integration tests
-~~~~~~~~~~~~~~~~~
+-----------------
 
 **Integration** is a quite vague term. Within DIRAC, we define as integration test every test that does not fall in the unit test category, 
 but that does not need external systems to complete.
@@ -448,22 +457,104 @@ Within section :ref:`adding_new_components` we will develop one of these tests a
 
 
 Validation and System tests
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------
 
 Validation and System tests are black-box tests. As such, coding them should not require knowledge of the inner design of the code or logic. 
 At the same time, to run them you'll require a DIRAC server installation.
 Examples of a system test might be: send jobs on the Grid, and expecting them to be completed after hours. Or, replicate a file or two.
 
-Validation and system tests are usually coded by software testers. 
+Validation and system tests are usually coded by software testers. The TestDIRAC repository contains a minimal set of test jobs, but since most of the test jobs that you can run are VO specific, we suggest you to expand the list. 
+
 
 
 
 Continuous Integration software
 -------------------------------
 
-There are several tools, on the free market, for so-called *Continuous Integration*, or simply CI_. The most used right now is probably Jenkins_, which is also our recommendation. While rWhat can Jenkins do for you?
+There are several tools, on the free market, for so-called *Continuous Integration*, or simply CI_. The most used right now is probably Jenkins_, which is also our recommendation. If you have looked in the `TestDIRAC <https://github.com/DIRACGrid/TestDIRAC>`_ repository (and if you haven't yet, you should, now!) you will see also a Jenkins folder.
+
+What can Jenkins do for you? Several things, in fact:
+
+- it can run all the unit tests
+- it can run `Pylint <http://www.pylint.org/>`_ (of which we didn't talk about yet, but, that you should use, and for which it exists a nice documentation that you should probably read) (ah, use `this file <https://github.com/DIRACGrid/TestDIRAC/blob/master/Jenkins/config/pylint/DIRAC.pylint.rc>`_ as configuration file.
+- (not so surprisingly) it can run all the integration tests
+- (with some tuning) it can run some of the system tests
+
+For example, the TestDIRAC.Jenkins.dirac_ci.sh adds some nice stuff, like:
+
+- a function to install DIRAC (yes, fully), configure it, install all the databases, install all the services, and run them!
+- a function that runs the Pilot, so that a Jenkins node will look exactly like a Grid WN. Just, it will not start running the JobAgent
+
+What can you do with those above? You can run the Integration tests you read above!
+
+How do I do that?
+
+- you need a MySQL DB somewhere. Empty. To be used only for testing purposes.
+- you need to configure the Jenkins jobs. What follows is an example of Jenkins job for system tests::
 
 
+   #!/bin/bash
+   
+   export DIRACBRANCH=v6r13
+   
+   export PRERELEASE=True
+   export DEBUG=True
+   
+   export DB_USER=Dirac
+   export DB_PASSWORD=password
+   export DB_ROOTUSER=admin
+   export DB_ROOTPWD=password
+   export DB_HOST=db-test.example.org
+   export DB_PORT=5501
+   
+   git clone git://github.com/DIRACGrid/TestDIRAC.git
+   source TestDIRAC/Jenkins/dirac_ci.sh
+   
+   stopRunsv
+   
+   fullInstallDIRAC
+   
+   echo "**** INSTALLATION DONE ****"
+   echo "**** STARTING INTEGRATION TESTS ****"
+   
+   echo "**** FRAMEWORK TESTS (partially skipped) ****"
+   python $WORKSPACE/TestDIRAC/Integration/Framework/testInstalledComponentsDB.py -dd
+   #python $WORKSPACE/TestDIRAC/Integration/Framework/testComponentInstallUninstall.py -dd
+   
+   echo "**** RMS TESTS ****"
+   python $WORKSPACE/TestDIRAC/Integration/RequestManagementSystem/TestClientReq.py -dd
+   
+   echo "**** WMS TESTS ****"
+   python $WORKSPACE/TestDIRAC/Integration/WorkloadManagementSystem/TestJobDB.py -dd
+   python $WORKSPACE/TestDIRAC/Integration/WorkloadManagementSystem/TestJobLoggingDB.py -dd
+   python $WORKSPACE/TestDIRAC/Integration/WorkloadManagementSystem/TestTaskQueueDB.py -dd
+   python $WORKSPACE/TestDIRAC/Integration/WorkloadManagementSystem/TestClientWMS.py $WORKSPACE/TestDIRAC/Integration/WorkloadManagementSystem/sb.cfg -dd
+   python $WORKSPACE/TestDIRAC/Integration/WorkloadManagementSystem/TestSandboxStoreClient.py $WORKSPACE/TestDIRAC/Integration/WorkloadManagementSystem/sb.cfg -dd
+   python $WORKSPACE/TestDIRAC/Integration/WorkloadManagementSystem/TestJobWrapper.py -dd
+   
+   echo "**** DMS TESTS ****"
+   # Run the DFC test as user without admin privileges 
+   echo "Getting a non privileged user"
+   dirac-proxy-init -C $WORKSPACE/user/client.pem -K $WORKSPACE/user/client.key $DEBUG
+   python $WORKSPACE/TestDIRAC/Integration/DataManagementSystem/TestClientDFC.py -dd
+   
+   # Run it with the admin privileges
+   echo "getting the prod role again"
+   dirac-proxy-init -g prod -C $WORKSPACE/user/client.pem -K $WORKSPACE/user/client.key $DEBUG
+   python $WORKSPACE/TestDIRAC/Integration/DataManagementSystem/TestClientDFC.py -dd
+   
+   python $WORKSPACE/TestDIRAC/Integration/DataManagementSystem/TestClientFTS.py -dd
+   
+   echo "**** TS TESTS ****"
+   python $WORKSPACE/TestDIRAC/Integration/TransformationSystem/TestClientTransformation.py -dd
+   
+   echo "**** TESTS OVER ****"
+   
+   echo "**** Now stopping/removing stuff ****"
+   
+   clean
+   
+   echo "*** DONE ****"
 
 
 Footnotes
