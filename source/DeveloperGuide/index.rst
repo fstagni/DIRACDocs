@@ -33,7 +33,8 @@ group.
    Overview/index
    CodingConvention/index
    AddingNewComponents/index
-   CodeDocumenting/index  
+   CodeDocumenting/index
+   CodeTesting/index
    Framework/index
    REST/index
    WebAppDIRAC/index
