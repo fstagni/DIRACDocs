@@ -4,13 +4,17 @@
 Testing (VO)DIRAC
 =================
 
+
 Who should read this document
 -----------------------------
+
 - *All (VO)DIRAC developers* should read, at least, the sections about unit tests and integration tests
 - *All (VO)DIRAC developers coordinators* should read fully this document
 
+
 Why this document should be interesting for you
 -----------------------------------------------
+
 - Because you want your code to work as expected
 - Because preventing disasters is better than fixing them afterwards
 - Because it's your duty, as developer, to verify that a new version of DIRAC fits your VO needs.
@@ -34,7 +38,9 @@ The topic of software testing is very complicated by its own nature, but dependi
 Unit tests
 ==========
 
-In DIRAC the unit tests should be prepared for the developer herself, integration tests could be developed in groups of code responsible persons, for regression tests the responsible person should be a complete subsystem (i.e. WMS, DMS, SMS etc..) manager, while certification tests should be prepared and performed by release managers.  
+In DIRAC the unit tests should be prepared for the developer herself, integration tests could be developed in groups of code responsible persons, for regression tests the responsible person should be a complete subsystem (i.e. WMS, DMS, SMS etc..) manager, while certification tests should be prepared and performed by release managers.
+
+
 Tools and methodology
 ---------------------
 
