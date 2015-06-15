@@ -8,6 +8,7 @@ Administrator Guide
    SetupStructure/index
    GettingStarted/index
    InstallingDIRACService/index
+   InstallingWebAppDIRAC/index
    SystemAdministratorInterface/index
    Configuration/index
    Systems/index

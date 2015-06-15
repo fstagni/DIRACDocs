@@ -1,4 +1,5 @@
 Pilots 2.0
+===========
 
 The main point of DIRAC version v6r12 is the introduction of a new type of pilot, that is, for most parts, an implementation of the points discussed within https://github.com/DIRACGrid/DIRAC/wiki/Pilots-2.0:-generic,-configurable-pilots. These changes will be transparent to VOs.
 Also, several changes of the Data Management system are done.

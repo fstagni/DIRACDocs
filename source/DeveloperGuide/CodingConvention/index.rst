@@ -53,7 +53,7 @@ Module Coding Conventions
 **R3**
   Each module should define the following variables in its global scope::
   
-    __RCSID__ = "$Id: $"
+    __RCSID__ = "$Id$"
 
   this is the SVN macro substituted by the module revision number. 
   

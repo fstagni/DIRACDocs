@@ -1,4 +1,4 @@
-.. _webappdirac_installwebappdirac:
+.. _installwebappdirac:
 
 ===================
 Install WebAppDIRAC
