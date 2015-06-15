@@ -1,45 +1,40 @@
 .. _testing_environment:
 
 ==============================
-Setting up testing environment
+Testing (VO)DIRAC
 ==============================
 
-Every large enough software project needs to be carefully tested, monitored and evaluated to assure that minimum standards of 
-quality are being attained by the development process. A primary purpose of that is to detect software and configuration failures so that 
-defects may be discovered and corrected before making official release and to check if software meets requirements and works as 
-expected. Testing itself could also speed up the development process rapidly tracing problems introduced with 
-the new code. 
+Who should read this document
+-----------------------------
+- *All (VO)DIRAC developers* should read, at least, the sections about unit tests and integration tests
+- *All (VO)DIRAC developers coordinators* should read fully this document
 
-DIRAC is not different from that scenario, with the exception that service-oriented architecture paradigm, which is one of the basic 
-concepts of the project, making the quality assurance and testing process the real challenge. However as DIRAC becomes more and more popular 
-and now is being used by several different communities, the main question is not: *to test or not to test?*, but rather: *how to test in a 
-efficient way?*
+Why this document should be interesting for you
+-----------------------------------------------
+- Because you want your code to work as expected
+- Because preventing disasters is better than fixing them afterwards
+- Because it's your duty, as developer, to verify that a new version of DIRAC fits your VO needs.
 
-The topic of software testing is very complicated by its own nature, but depending on the testing method employed, the testing process itself
-can be implemented at any time in the development phase and ideally should cover many different levels of the system: 
+
+What we mean by testing
+-----------------------
+
+Every large enough software project needs to be carefully tested, monitored and evaluated to assure that minimum standards of quality are being attained by the development process. A primary purpose of that is to detect software and configuration failures so that defects may be discovered and corrected before making official release and to check if software meets requirements and works as expected. Testing itself could also speed up the development process rapidly tracing problems introduced with the new code. 
+
+DIRAC is not different from that scenario, with the exception that service-oriented architecture paradigm, which is one of the basic concepts of the project, making the quality assurance and testing process the real challenge. However as DIRAC becomes more and more popular and now is being used by several different communities, the main question is not: *to test or not to test?*, but rather: *how to test in an efficient way?*
+
+The topic of software testing is very complicated by its own nature, but depending on the testing method employed, the testing process itself can be implemented at any time in the development phase and ideally should cover many different levels of the system: 
 
 - *unit tests*, in which the responsible person for one source file is proving that his code is written in a right way,
 - *integration tests* that should cover whole group of modules combined together to accomplish one well defined task, 
-- *regression tests* that seek for errors in existing functionality after patches, functionality enhancements and/or configuration 
-  changes have been made to the software,  
-- *certification tests* (or *system tests*), which are run against the integrated and compiled system, treating it as a black box and trying 
-  to evaluate the system's compliance with its specified requirements. 
-
-In DIRAC project unit tests should be prepared for the developer herself, integration tests could be developed in groups of code responsible persons,
-for regression tests the responsible person should be a complete subsystem (i.e. WMS, DMS, SMS etc..) manager, while certification tests should be 
-prepared and performed by release managers.  
-
-This document will first try to formulate the basic requirements for the lowest level of testing: unit tests, on top of which any complicated 
-and fully featured testing framework could be defined. 
-
-The second part will look into integration and system tests. 
-
+- *regression tests* that seek for errors in existing functionality after patches, functionality enhancements and or configuration   changes have been made to the software,  
+- *certification tests* (or *system tests*), which are run against the integrated and compiled system, treating it as a black box and trying   to evaluate the system's compliance with its specified requirements. 
 
 
 Unit tests
 ==========
 
-
+In DIRAC the unit tests should be prepared for the developer herself, integration tests could be developed in groups of code responsible persons, for regression tests the responsible person should be a complete subsystem (i.e. WMS, DMS, SMS etc..) manager, while certification tests should be prepared and performed by release managers.  
 Tools and methodology
 ---------------------
 
@@ -62,27 +57,15 @@ This could be obtained by objects mocking technique, where all fragile component
 equivalents - test doubles. For that it is recommended to use mock_ module, which should be accessible in DIRAC externals for server installation.
 Hence it is clear that knowledge of mock_ module API is essential.  
 
-Unit tests are typically created by the developer who will also write the code that is being tested. 
-The tests may therefore share the same blind spots with the code: for example, a developer does not realize that certain 
-input parameters must be checked, most likely neither the test nor the code will verify these input parameters. 
-If the developer misinterprets the requirements specification for the module being developed, both the tests and the code will be wrong. 
-Hence if the developer is going to prepare her own unit tests, she should pay attention and take extra care to implement proper testing 
-suite, checking for every spot of possible failure (i.e. interactions with other components) and not trusting that someone else's code is 
-always returning proper type and/or values. 
+Unit tests are typically created by the developer who will also write the code that is being tested. The tests may therefore share the same blind spots with the code: for example, a developer does not realize that certain input parameters must be checked, most likely neither the test nor the code will verify these input parameters. If the developer misinterprets the requirements specification for the module being developed, both the tests and the code will be wrong. Hence if the developer is going to prepare her own unit tests, she should pay attention and take extra care to implement proper testing suite, checking for every spot of possible failure (i.e. interactions with other components) and not trusting that someone else's code is always returning proper type and/or values. 
 
 Testing the code, and so proper code developing cycle, can be done in four well defined steps:
 
 Step 1. **Preparation**
 
-The first step on such occasions is to find all possible use cases scenarios. The code [#]_ should be read carefully to isolate
-all the paths of executions. For each of such cases the developer should prepare, formulate and define all required inputs and outputs,  
-configurations, internal and external objects states, underlying components etc.. Spending more time on this preparation phase will help to 
-understand all possible branches, paths and points of possible failures inside the code and accelerate the second step, which is the test suite
-implementation. 
+The first step on such occasions is to find all possible use cases scenarios. The code [#]_ should be read carefully to isolate all the paths of executions. For each of such cases the developer should prepare, formulate and define all required inputs and outputs, configurations, internal and external objects states, underlying components etc.. Spending more time on this preparation phase will help to understand all possible branches, paths and points of possible failures inside the code and accelerate the second step, which is the test suite implementation. 
 
-Amongst all scenarios one is very special - so special, that it even has got its own name: *the main success scenario*. This is the path 
-in execution process, in which it is assumed that all components are working fine so the  system is producing results correct to the last bit. 
-The developer should focus on this scenario first, as all the others are most probably branching from it if some error condition would appear. 
+Amongst all scenarios one is very special - so special, that it even has got its own name: *the main success scenario*. This is the path in execution process, in which it is assumed that all components are working fine so the  system is producing results correct to the last bit. The developer should focus on this scenario first, as all the others are most probably branching from it if some error condition would appear. 
 
 Step 2. **Implementation**
 
@@ -106,9 +89,8 @@ only her own code and nothing else.
 
 Step 3. **Test execution** 
 
-Every developer is encouraged to execute her test suites by herself. Execution code of test suite should be put into unit test module 
-in a various ways. Of course once the test results are obtained, it is the high time for fixing all places in the tested code, in which 
-tests have failed.
+Every developer is encouraged to execute her test suites by herself. Execution code of test suite should be put into unit test module in a various ways. Of course once the test results are obtained, it is the high time for fixing all places in the tested code, in which tests have failed.
+
 
 Step 4. **Refactoring**
 
@@ -470,12 +452,19 @@ Validation and system tests are usually coded by software testers.
 
 
 
+Continuous Integration software
+-------------------------------
+
+There are several tools, on the free market, for so-called *Continuous Integration*, or simply CI_. The most used right now is probably Jenkins_, which is also our recommendation. While rWhat can Jenkins do for you?
+
+
+
+
 Footnotes
 ---------
 
 .. [#] Or even better software requirements document, if any of such exists. Otherwise this is a great opportunity to prepare one.
-.. [#] To better understand this term, think about a movie industry: if a scene movie makers are going to film is potentially dangerous and unsafe 
-       for the leading actor, his place is taken over by a stunt double.
+.. [#] To better understand this term, think about a movie industry: if a scene movie makers are going to film is potentially dangerous and unsafe for the leading actor, his place is taken over by a stunt double.
 .. [#] And eventually is killing him with a gun. At least in a TV show.
 .. [#] You may ask: *isn't it silly?* No, in fact it isn't. Validation of input parameters is one of the most important tasks during testing. 
 
@@ -486,3 +475,5 @@ Footnotes
 .. _TestSuite: http://docs.python.org/library/unittest.html#unittest.TestSuite
 .. _TestLoader: http://docs.python.org/library/unittest.html#unittest.TestLoader
 .. _mock: http://www.voidspace.org.uk/python/mock/
+.. _CI: https://en.wikipedia.org/wiki/Continuous_integration
+.. _Jenkins: https://jenkins-ci.org/
