@@ -111,3 +111,18 @@ illustrated by the following code snippet:
 
      
 Note that the service is always returning the result in the form of S_OK/S_ERROR structure. 
+
+
+When should a service be developed?
+-------------------------------------
+
+Write a service every time you need to expose some information, that is usually stored in a database.
+
+There are anyway cases for which it is not strictly needed to write a service, specifically when all the following are true:
+- when you never need to expose the data written in the DB (i.e. the DB is, for the DIRAC point of view, Read-Only)
+- when the components writing in it have local access. 
+
+The advise is anyway to always write the service, because:
+- if later on you'll need it, you won't need to change anything but the service itself
+- db-independent logic should stay out of the database class itself.
+
