@@ -38,10 +38,8 @@ Agents associated with Configuration System:
 .. toctree::
    :maxdepth: 2
    
-   InputDataAgent/index
    JobCleaningAgent/index
    JobHistoryAgent/index
-   MightyOptimizer/index
    PilotStatusAgent/index
    SiteDirector/index
    StalledJobAgent/index
