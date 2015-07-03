@@ -9,5 +9,6 @@ In this subsection are described the databases, services and URLs related with W
    Databases/index
    Services/index
    Agents/index
+   Executors/index
    JobWrapper/index
    URLs/index
