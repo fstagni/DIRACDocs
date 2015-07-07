@@ -19,4 +19,5 @@ the configuration are defined.
    Groups/index
    Hosts/index
    Users/index
-   
+   VO/index
+
