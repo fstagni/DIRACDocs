@@ -24,8 +24,8 @@ names longer than necessary.
 VOMSServers subsection
 ------------------------
 
-This subsection of the VO section contains parameters of all the VOMS servers that can
-be used with the given VO. It has a subsection per each VOMS server ( <VOMS_SERVER> ), the
+This subsection of the VO/<VO_NAME> section contains parameters of all the VOMS servers that can
+be used with the given <VO_NAME>. It has a subsection per each VOMS server ( <VOMS_SERVER> ), the
 name of the section is the host name of the VOMS server. These parameters are used in order
 to create appropriate *vomses* and *vomsdir* directories when installing DIRAC clients.
 
