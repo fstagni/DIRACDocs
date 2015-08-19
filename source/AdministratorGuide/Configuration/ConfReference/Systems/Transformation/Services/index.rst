@@ -1,4 +1,4 @@
-Systems / RequestManagement / <INSTANCE> / Service - Sub-subsection
+Systems / RequestManagement / <INSTANCE> / Services - Sub-subsection
 =====================================================================
 
 All the services have common options to be configured for each one. Those options are
@@ -29,7 +29,7 @@ presented in the following table:
 | *Authorization/Default* | Define to who is required the authorization  | Default = all               |
 +-------------------------+----------------------------------------------+-----------------------------+
 
-DataStore services are:
+Transformation services are:
 
 .. toctree::
    :maxdepth: 2
