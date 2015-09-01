@@ -173,16 +173,17 @@ An important aspect and general rule is to NOT replace the object, unless you ha
 Error code
 ~~~~~~~~~~~~~~~~~~~~~~
 
-The best practice is to use the errors at your disposal in the standard python module errno.
+The best practice is to use the errors at your disposal in the standard python module `errno <https://docs.python.org/2/library/errno.html>`_.
 If, for a reason or another, no error there would match your need, there are already "DIRAC standard" errors defined in *DErrno* ( Core/Utilities/DErrno.py)
 
-In case the error you would need does not exist yet as a number, there are 4 things you need to do:
+In case the error you would need does not exist yet as a number, there are 5 things you need to do:
   * Think whether it really does not match any existing error number
+  * Declare the global variable corresponding to your error in DErrno.py
   * Update the *dErrorCode* dictionary in DErrno.py
   * Update the *dStrError* dictionary in DErrno.py
   * Think again whether you really need that
   
-Refer to the python file for more detailed explanations on these two dictionary.
+Refer to the python file for more detailed explanations on these two dictionary. Note that there is a range of number defined for each system (see DErrno.py)
 
 There is a third dictionary that can be filled, which is called *compatErrorString*. This one is used for error comparison. To illustrate its purpose suppose the following existing code:
 
