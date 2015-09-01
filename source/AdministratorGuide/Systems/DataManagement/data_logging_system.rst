@@ -19,13 +19,13 @@ This is the architecture chosen for the Data Logging System:
 .. image:: ../../../_static/Systems/DMS/dls-architecture.png
    
 The different classes are:
- * DLMethodCall: it is the class to save data when a method is called. Method's name is saved. There is an attribute to know the parent method call and the order of call. Thank to this two attributes, it is possible to construct the sequence.*
- * DLAction: an action is a method call on one LFN. DLMethodCall can have many DLAction. For example for the method replicateAndRegister, it is possible to pass a list of LFN to replicate all LFNin the storage element. The status of the operation can be find here to know if the operation was a success or a failure.*
- * DLSequence: a sequence of method call. For example, the first method call is "A" which calls "B" and "C", this is a sequence. Each DLMethodCall has a reference on its DLSequence and vice versa. DLSequence objects have a stack, we will see after how this stack is used.*
+ * DLMethodCall: it is the class to save data when a method is called. Method's name is saved. There is an attribute to know the parent method call and the order of call. Thank to this two attributes, it is possible to construct the sequence.
+ * DLAction: an action is a method call on one LFN. DLMethodCall can have many DLAction. For example for the method replicateAndRegister, it is possible to pass a list of LFN to replicate all LFNin the storage element. The status of the operation can be find here to know if the operation was a success or a failure.
+ * DLSequence: a sequence of method call. For example, the first method call is "A" which calls "B" and "C", this is a sequence. Each DLMethodCall has a reference on its DLSequence and vice versa. DLSequence objects have a stack, we will see after how this stack is used.
  * DLCaller: a name of a caller. It is needed to know "who", i.e. which method, which script, called the first decorated method method.*
- * DLFile: an LFN*
- * DLStorageElement: an SE*
- * DLThreadPool: this class contains a dictionary whose keys are thread id and  whose values are DLSequence objects. This class is necessary because DLSequence object are accessed from different methods for a same thread. The system is thread safe thanks to this class.*
+ * DLFile: an LFN
+ * DLStorageElement: an SE
+ * DLThreadPool: this class contains a dictionary whose keys are thread id and  whose values are DLSequence objects. This class is necessary because DLSequence object are accessed from different methods for a same thread. The system is thread safe thanks to this class.
 
 
 Decorator
@@ -69,42 +69,42 @@ The __call__ method is called every time that a decorated method or function is 
 
 .. code-block:: python
 
-    def __call__( self, *args, **kwargs ):
-		   """ method called each time when a decorate function is called
-		       get information about the function and create a sequence of method calls
-		   """
-		    result = None
-		    exception = None
-		    isCalled = False
-		    isMethodCallCreate = False
-		    try:
-		      self.setCaller()
-		      localArgsDecorator = self.getAttribute( args[0] )
-		      methodCallArgsDict = self.getMethodCallArgs( localArgsDecorator, *args )
-		      actionArgs = self.getActionArgs( localArgsDecorator, *args, **kwargs )
-		      methodCall = self.createMethodCall( methodCallArgsDict )
-		      isMethodCallCreate = True
-		      self.initializeAction( methodCall, actionArgs )
-		      try :
-		        isCalled = True
-		        result = self.func( *args, **kwargs )
-		      except Exception as e:
-		        exception = e
-		        raise
-		    except NoLogException :
-		      if not isCalled :
-		        result = self.func( *args, **kwargs )
-		    except DLException as e:
-		      if not isCalled :
-		        result = self.func( *args, **kwargs )
-		      gLogger.error( 'unexpected Exception in DLDecorator.call %s' % e )
-		    finally:
-		      if isMethodCallCreate :
-		        self.setActionStatus( result, methodCall, exception )
-		        self.popMethodCall()
-		      if self.isSequenceComplete() :
-		        self.insertSequence()
-		    return result
+   def __call__( self, *args, **kwargs ):
+   """ method called each time when a decorate function is called
+       get information about the function and create a sequence of method calls
+   """
+    result = None
+    exception = None
+    isCalled = False
+    isMethodCallCreate = False
+    try:
+      self.setCaller()
+      localArgsDecorator = self.getAttribute( args[0] )
+      methodCallArgsDict = self.getMethodCallArgs( localArgsDecorator, *args )
+      actionArgs = self.getActionArgs( localArgsDecorator, *args, **kwargs )
+      methodCall = self.createMethodCall( methodCallArgsDict )
+      isMethodCallCreate = True
+      self.initializeAction( methodCall, actionArgs )
+      try :
+        isCalled = True
+        result = self.func( *args, **kwargs )
+      except Exception as e:
+        exception = e
+        raise
+    except NoLogException :
+      if not isCalled :
+        result = self.func( *args, **kwargs )
+    except DLException as e:
+      if not isCalled :
+        result = self.func( *args, **kwargs )
+      gLogger.error( 'unexpected Exception in DLDecorator.call %s' % e )
+    finally:
+      if isMethodCallCreate :
+        self.setActionStatus( result, methodCall, exception )
+        self.popMethodCall()
+      if self.isSequenceComplete() :
+        self.insertSequence()
+    return result
     
 The different steps are:
  * *Call of setCaller method: this method get the sequence from the DLThreadPool class. If there is no sequence associated to this thread id, a DLSequence oject is created and we get the caller from the stack of calls.*
@@ -161,7 +161,7 @@ These key-words are variables that can be find in DIRAC/DataManagementSystem/Cli
 Default case
 ^^^^^^^^^^^^
 
-Here is an example when the prototype of a method is simple, no tuple, no dictionary except for the lfn parameter :
+Here is an example when the prototype of a method is simple, no tuple, no dictionary except for the lfn parameter:
 
 .. code-block:: python
 
@@ -170,7 +170,7 @@ Here is an example when the prototype of a method is simple, no tuple, no dictio
 
 "getActionArgsFunction" is not passed to the decorator here because the default function to extract arguments is the right one.
 
-Here is an other example :
+Here is an other example:
 
 .. code-block:: python
 
@@ -183,7 +183,7 @@ In this prototype the argument named sourceSE is a nominal one. For this paramet
 Tuple case
 ^^^^^^^^^^
 
-Some methods take in paramaters a tuple, there is some specifics futures for this. Here is an example of a decoration :
+Some methods take in paramaters a tuple, there is some specifics futures for this. Here is an example of a decoration:
 
 .. code-block:: python
 
@@ -199,7 +199,7 @@ It also mecessary to specify the structure of the tuple with the arument tupleAr
 Execute File Catalog case
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This clase is special because the decorated method is very generic, it is the w_execute method. This method forwards the call to the right catalog. To know the name of method and their arguments, a dictionnary is needed :
+This clase is special because the decorated method is very generic, it is the w_execute method. This method forwards the call to the right catalog. To know the name of method and their arguments, a dictionnary is needed:
 
 .. code-block:: python
 
@@ -240,12 +240,12 @@ This clase is special because the decorated method is very generic, it is the w_
     }
  
  
-Here the only arguments of all method wanted to be logged are self and dl_files. It is a dictionnaryin which the keys are lfn and values can be :
+Here the only arguments of all method wanted to be logged are self and dl_files. It is a dictionnaryin which the keys are lfn and values can be:
  * String, in that case it is needed to precise the name of the string with the parameter 'valueName'.
  * Dictionnary, in that case, it is needed to know which keys it is needed to get value and the name of the value. This is the aim of the 'keysToGet' argument
  
  
-Here is how the w_execute method is decorated :
+Here is how the w_execute method is decorated:
 
 .. code-block:: python
 
@@ -261,11 +261,12 @@ It is more or less the same as the File Catalog class, just the function for ext
 
 .. code-block:: python
 
-  @DataLoggingDecorator( getActionArgsFunction = 'ExecuteSE', attributesToGet = {'methodName' : 'methodName', 'targetSE' : 'name' },className = 'StorageElement', methods_to_log = dataLoggingMethodsToLog )
+  @DataLoggingDecorator( getActionArgsFunction = 'ExecuteSE', attributesToGet = {'methodName' : 'methodName', 'targetSE' : 'name' },
+        className = 'StorageElement', methods_to_log = dataLoggingMethodsToLog )
   def __executeMethod( self, lfn, *args, **kwargs ):
   
 Future features
 ---------------
 
-If there is no case for the method you want to decorate, it is possible to add new features. All arguments passed to the decorator shall be nominated. The function to extract argument shall started by 'extractArgs'. In the decoration, you just need to pass what is after  'extractArgs' in the name of the function.
+If there is no case for the method you want to decorate, it is possible to add new features. All arguments passed to the decorator shall be nominated. The function to extract argument shall started by 'extractArgs'. In the decoration, you just need to pass what is after  'extractArgs' in the name of the function to the "getActionArgsFunction" argument.
 
