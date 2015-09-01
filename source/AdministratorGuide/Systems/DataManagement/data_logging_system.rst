@@ -1,11 +1,9 @@
--------------------
 Data Logging System
--------------------
-
+==================================
 :author:  Berger Corentin
-:date:    Thu, 20th Aug 2015
-:version: first 
+:date:    Thu, 20th Aug 2015 
 
+----
 Goal
 ----
 The goal of the DLS is to track all operations made on data files. The DLS is totally transparent and it is flexible.
@@ -19,17 +17,16 @@ Architecture
 This is the architecture chosen for the Data Logging System:
 
 .. image:: ../../../_static/Systems/DMS/dls-architecture.png
-   :alt: uml schema
-   :align: center
    
 The different classes are:
- * *DLMethodCall: it is the class to save data when a method is called. Method's name is saved. There is an attribute to know the parent method call and the order of call. Thank to this two attributes, it is possible to construct the sequence.*
- * *DLAction: an action is a method call on one LFN. DLMethodCall can have many DLAction. For example for the method replicateAndRegister, it is possible to pass a list of LFN to replicate all LFNin the storage element. The status of the operation can be find here to know if the operation was a success or a failure.*
- * *DLSequence: a sequence of method call. For example, the first method call is "A" which calls "B" and "C", this is a sequence. Each DLMethodCall has a reference on its DLSequence and vice versa. DLSequence objects have a stack, we will see after how this stack is used.*
- * *DLCaller: a name of a caller. It is needed to know "who", i.e. which method, which script, called the first decorated method method.*
- * *DLFile: an LFN*
- * *DLStorageElement: an SE*
- * *DLThreadPool: this class contains a dictionary whose keys are thread id and  whose values are DLSequence objects. This class is necessary because DLSequence object are accessed from different methods for a same thread. The system is thread safe thanks to this class.*
+ * DLMethodCall: it is the class to save data when a method is called. Method's name is saved. There is an attribute to know the parent method call and the order of call. Thank to this two attributes, it is possible to construct the sequence.*
+ * DLAction: an action is a method call on one LFN. DLMethodCall can have many DLAction. For example for the method replicateAndRegister, it is possible to pass a list of LFN to replicate all LFNin the storage element. The status of the operation can be find here to know if the operation was a success or a failure.*
+ * DLSequence: a sequence of method call. For example, the first method call is "A" which calls "B" and "C", this is a sequence. Each DLMethodCall has a reference on its DLSequence and vice versa. DLSequence objects have a stack, we will see after how this stack is used.*
+ * DLCaller: a name of a caller. It is needed to know "who", i.e. which method, which script, called the first decorated method method.*
+ * DLFile: an LFN*
+ * DLStorageElement: an SE*
+ * DLThreadPool: this class contains a dictionary whose keys are thread id and  whose values are DLSequence objects. This class is necessary because DLSequence object are accessed from different methods for a same thread. The system is thread safe thanks to this class.*
+
 
 Decorator
 ---------
@@ -38,7 +35,9 @@ This section will explain how the decorator of the Data Logging System works.
 
 The DLS decorator is a class and there are some specific features for that type of decorator. Here is the minimum for a decorator written as a class:
 
- def DataLoggingDecorator( function = None, **kwargs ):
+.. code-block:: python
+
+  def DataLoggingDecorator( function = None, **kwargs ):
     if function:
         return _DataLoggingDecorator( function )
     else:
@@ -46,7 +45,7 @@ The DLS decorator is a class and there are some specific features for that type 
         return _DataLoggingDecorator( function, **kwargs )
       return wrapper
 
- class _DataLoggingDecorator( object ):
+  class _DataLoggingDecorator( object ):
     def __init__( self, func , **kwargs ):
       self.func = func
       functools.wraps( func )( self )
@@ -69,43 +68,44 @@ The __get__ method is called everytime the _DataLoggingDecorator class is access
 
 The __call__ method is called every time that a decorated method or function is called. This is where all data will be saved, where object will be created, etc. Here is the code of the __call__ method in the _DataLoggingDecorator class:
 
+.. code-block:: python
 
- def __call__( self, *args, **kwargs ):
-    """ method called each time when a decorate function is called
-        get information about the function and create a sequence of method calls
-    """
-    result = None
-    exception = None
-    isCalled = False
-    isMethodCallCreate = False
-    try:
-      self.setCaller()
-      localArgsDecorator = self.getAttribute( args[0] )
-      methodCallArgsDict = self.getMethodCallArgs( localArgsDecorator, *args )
-      actionArgs = self.getActionArgs( localArgsDecorator, *args, **kwargs )
-      methodCall = self.createMethodCall( methodCallArgsDict )
-      isMethodCallCreate = True
-      self.initializeAction( methodCall, actionArgs )
-      try :
-        isCalled = True
-        result = self.func( *args, **kwargs )
-      except Exception as e:
-        exception = e
-        raise
-    except NoLogException :
-      if not isCalled :
-        result = self.func( *args, **kwargs )
-    except DLException as e:
-      if not isCalled :
-        result = self.func( *args, **kwargs )
-      gLogger.error( 'unexpected Exception in DLDecorator.call %s' % e )
-    finally:
-      if isMethodCallCreate :
-        self.setActionStatus( result, methodCall, exception )
-        self.popMethodCall()
-      if self.isSequenceComplete() :
-        self.insertSequence()
-    return result
+    def __call__( self, *args, **kwargs ):
+		   """ method called each time when a decorate function is called
+		       get information about the function and create a sequence of method calls
+		   """
+		    result = None
+		    exception = None
+		    isCalled = False
+		    isMethodCallCreate = False
+		    try:
+		      self.setCaller()
+		      localArgsDecorator = self.getAttribute( args[0] )
+		      methodCallArgsDict = self.getMethodCallArgs( localArgsDecorator, *args )
+		      actionArgs = self.getActionArgs( localArgsDecorator, *args, **kwargs )
+		      methodCall = self.createMethodCall( methodCallArgsDict )
+		      isMethodCallCreate = True
+		      self.initializeAction( methodCall, actionArgs )
+		      try :
+		        isCalled = True
+		        result = self.func( *args, **kwargs )
+		      except Exception as e:
+		        exception = e
+		        raise
+		    except NoLogException :
+		      if not isCalled :
+		        result = self.func( *args, **kwargs )
+		    except DLException as e:
+		      if not isCalled :
+		        result = self.func( *args, **kwargs )
+		      gLogger.error( 'unexpected Exception in DLDecorator.call %s' % e )
+		    finally:
+		      if isMethodCallCreate :
+		        self.setActionStatus( result, methodCall, exception )
+		        self.popMethodCall()
+		      if self.isSequenceComplete() :
+		        self.insertSequence()
+		    return result
     
 The different steps are:
  * *Call of setCaller method: this method get the sequence from the DLThreadPool class. If there is no sequence associated to this thread id, a DLSequence oject is created and we get the caller from the stack of calls.*
@@ -138,7 +138,7 @@ There are two flags in the __call__ method of the _DataLoggingDecorator class:
  * *isMethodCallCreated: this flag is True if a DLMethodCall has been created and added to the sequence. Like that we know if we have to set the status of actions and to pop it from sequence.*
  * *isCalled: this flag is set to true when the method or function is called. Like that if there is an exception from the decorator, we know whether the method has already been called or not.*
  
- 
+
 The decoration
 --------------
 
@@ -157,18 +157,23 @@ There are five special key-words for the argsPosition list because their names c
   * *dl_ignore_argument: key_word when the parameter has to be ignored.*
    
 These key-words are variables that can be find in DIRAC/DataManagementSystem/Client/DataLogging/DLUtilities file.
- 
+
+
 Default case
 ^^^^^^^^^^^^
 
 Here is an example when the prototype of a method is simple, no tuple, no dictionary except for the lfn parameter :
 
-	@DataLoggingDecorator( argsPosition = ['self', dl_files, 'fileName', dl_targetSE, 'guid', 'path', 'checksum'] )
-  def putAndRegister( self, lfn, fileName, diracSE, guid = None, path = None, checksum = None ):
+.. code-block:: python
+
+   @DataLoggingDecorator( argsPosition = ['self', dl_files, 'fileName', dl_targetSE, 'guid', 'path', 'checksum'] )
+   def putAndRegister( self, lfn, fileName, diracSE, guid = None, path = None, checksum = None ):
 
 "getActionArgsFunction" is not passed to the decorator here because the default function to extract arguments is the right one.
 
 Here is an other example :
+
+.. code-block:: python
 
   @DataLoggingDecorator( argsPosition = ['self', dl_files, dl_targetSE, ( dl_srcSE, 'sourceSE' ), 'destPath', 'localCache', 'catalog' ] )
   def replicateAndRegister( self, lfn, destSE, sourceSE = '', destPath = '', localCache = '' , catalog = '' ):
@@ -181,7 +186,10 @@ Tuple case
 
 Some methods take in paramaters a tuple, there is some specifics futures for this. Here is an example of a decoration :
 
-	@DataLoggingDecorator( argsPosition = ['self', dl_tuple, 'catalog'], getActionArgsFunction = 'Tuple', tupleArgsPosition = [dl_files, 'physicalFile', 'fileSize', dl_targetSE, 'fileGuid', 'checksum' ] )
+.. code-block:: python
+
+	@DataLoggingDecorator( argsPosition = ['self', dl_tuple, 'catalog'], getActionArgsFunction = 'Tuple',
+	 tupleArgsPosition = [dl_files, 'physicalFile', 'fileSize', dl_targetSE, 'fileGuid', 'checksum' ] )
   def registerFile( self, fileTuple, catalog = '' ):
 	
 It is necessary to use a special function to extract arguments. This is specify with the parameter getActionArgsFunction = 'Tuple'.
@@ -193,8 +201,10 @@ Execute File Catalog case
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This clase is special because the decorated method is very generic, it is the w_execute method. This method forwards the call to the right catalog. To know the name of method and their arguments, a dictionnary is needed :
-  
-  dataLoggingMethodsToLog = {
+
+.. code-block:: python
+
+   dataLoggingMethodsToLog = {
     'addFile' :
       {'argsPosition' : ['self', dl_files],
        'keysToGet' : { 'PFN':'PFN', 'Size':'Size', dl_targetSE:'SE', 'GUID':'GUID', 'Checksum':'Checksum'} },
@@ -227,8 +237,9 @@ This clase is special because the decorated method is very generic, it is the w_
     'changePathOwner' :
       {'argsPosition' : ['self', dl_files]},
     'changePathGroup' :
-      {'argsPosition' : ['self', dl_files] },
+      {'argsPosition' : ['self', dl_files] }
     }
+ 
  
 Here the only arguments of all method wanted to be logged are self and dl_files. It is a dictionnaryin which the keys are lfn and values can be :
  * String, in that case it is needed to precise the name of the string with the parameter 'valueName'.
@@ -236,6 +247,8 @@ Here the only arguments of all method wanted to be logged are self and dl_files.
  
  
 Here is how the w_execute method is decorated :
+
+.. code-block:: python
 
     @DataLoggingDecorator( getActionArgsFunction = 'ExecuteFC', attributesToGet = {'methodName' : 'call'}, methods_to_log = dataLoggingMethodsToLog )
     def w_execute( self, *parms, **kws ):
@@ -246,6 +259,9 @@ Execute Storage Element case
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 It is more or less the same as the File Catalog class, just the function for extracting argument change.
+
+.. code-block:: python
+
   @DataLoggingDecorator( getActionArgsFunction = 'ExecuteSE', attributesToGet = {'methodName' : 'methodName', 'targetSE' : 'name' },className = 'StorageElement', methods_to_log = dataLoggingMethodsToLog )
   def __executeMethod( self, lfn, *args, **kwargs ):
   
