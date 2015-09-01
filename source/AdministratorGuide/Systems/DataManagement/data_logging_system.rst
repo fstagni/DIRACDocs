@@ -59,8 +59,7 @@ The DLS decorator is a class and there are some specific features for that type 
       # do something else
       return ret
 
-
-Function DataLoggingDecorator allows to pass some arguments to the decorator. A test is made to know if a function is passed. "function" argument is always passed in first position during the decoration, by default it is None. If function is not None, an object of class _DataLoggingDecorator is returned. Else, a wrapper is needed because the decoration of the function is like that: DataLoggingDecorator(**kargs)(func). It is not possible to use *args because of the default value of parameter function.
+Function DataLoggingDecorator allows to pass some arguments to the decorator. A test is made to know if a function is passed. "function" argument is always passed in first position during the decoration, by default it is None. If function is not None, an object of class _DataLoggingDecorator is returned. Else, a wrapper is needed because the decoration of the function is like that: DataLoggingDecorator(\*\*kargs)(func). It is not possible to use \*args because of the default value of parameter function.
 
 In the __init__ method of _DataLoggingDecorator class the function is saved as an instance attribute because there will be as many instances of _DataLoggingDecorator class as decorated methods. The second line in this method is a special feature. It replaces special information like docstring or function name of the object by the special information of the decorated method.
 
@@ -146,7 +145,7 @@ Because there are many methods to decorate and each has its own prototype, some 
 
  * *argsPosition: this is a list of strings and tuples. It is used to know the name of all method's arguments for their extraction :*
    * *String : use a string when the argument's name is the name we want to save*
-   * *Tuple : use a tuple when the argument can be passed both in *args and **kwargs, and when the name of the argument is not the name we want to save. The structure of tuples shall be ('nameWanted', 'nameInPrototype').*  
+   * *Tuple : use a tuple when the argument can be passed both in *args and ``*````*``kwargs, and when the name of the argument is not the name we want to save. The structure of tuples shall be ('nameWanted', 'nameInPrototype').*  
  * *getActionArgsFunction: a string to know which function will be called to extract arguments passed ot the decorated method.*
 
 There are five special key-words for the argsPosition list because their names can be different for a same parameter in prototype and because there are interesting arguments:
@@ -188,9 +187,9 @@ Some methods take in paramaters a tuple, there is some specifics futures for thi
 
 .. code-block:: python
 
-	@DataLoggingDecorator( argsPosition = ['self', dl_tuple, 'catalog'], getActionArgsFunction = 'Tuple',
+ @DataLoggingDecorator( argsPosition = ['self', dl_tuple, 'catalog'], getActionArgsFunction = 'Tuple',
 	 tupleArgsPosition = [dl_files, 'physicalFile', 'fileSize', dl_targetSE, 'fileGuid', 'checksum' ] )
-  def registerFile( self, fileTuple, catalog = '' ):
+ def registerFile( self, fileTuple, catalog = '' ):
 	
 It is necessary to use a special function to extract arguments. This is specify with the parameter getActionArgsFunction = 'Tuple'.
 
