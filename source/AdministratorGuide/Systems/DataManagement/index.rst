@@ -162,4 +162,5 @@ In order to configure and test support for FTS transfers in your DIRAC installat
 
 Using this script, the request to the FTS server will be formulated following the information configured in DIRAC, and will be submitted form your client to the selected FTS server with your local credential. Make sure you are using a proxy that is authorized at your FTS server (usually only some specific users in the VO are allowed, contact the administrators of the site offering you this server in case of doubts).
 
-.. include:: agents.rst 
+.. include:: agents.rst
+.. include:: data_logging_system.rst 
