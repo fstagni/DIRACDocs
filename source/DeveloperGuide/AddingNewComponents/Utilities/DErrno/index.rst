@@ -84,7 +84,7 @@ In order to address the problems raised earlier, the DError object has been crea
 
 .. code-block:: python
   
-  from DIRAC import DError
+  from DIRAC.Core.Utilities import DError
   import errno
   
   def func1():
@@ -140,7 +140,7 @@ Since we have to be compatible with the old system, a utility method has been wr
 
 .. code-block:: python
  
-  from DIRAC import DErrno 
+  from DIRAC.Core.Utilities import DErrno 
   import errno
  
   res = func1()
