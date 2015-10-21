@@ -220,7 +220,7 @@ for a reason or another, you could add an entry in the *compatErrorString* which
     
     
 Extension specific Error codes
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In order to add extension specific error, you need to create in your extension the file Core/Utilities/DErrno.py, which will contain the following dictionary:
   * extra_dErrName: keys are the error name, values the number of it
