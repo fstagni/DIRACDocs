@@ -218,4 +218,26 @@ You happen to modify *func1* and decide to return the appropriate DError object,
 The test done in the main function will not be satisfied anymore. The cleanest way is obviously to update the test, but if ever this would not be possible,
 for a reason or another, you could add an entry in the *compatErrorString* which would state that "File does not exist" is *compatible* with errno.ENOENT. 
     
+    
+Extension specific Error codes
+~~~~~~~~~~~~~~~~~~~~~~
+
+In order to add extension specific error, you need to create in your extension the file Core/Utilities/DErrno.py, which will contain the following dictionary:
+  * extra_dErrName: keys are the error name, values the number of it
+  * extra_dErrorCode: same as dErrorCode. keys are the error code, values the name (we don't simply revert the previous dict in case we do not have a one to one mapping)
+  * extra_dStrError: same as dStrError, Keys are the error code, values the error description
+  * extra_compatErrorString: same as compatErrorString. The compatible error strings are added to the existing one, and not replacing them.
+
+
+Example of extension file :
+
+.. code-block:: python
+
+  extra_dErrName = { 'ELHCBSPE' : 3001 }
+  extra_dErrorCode = { 3001 : 'ELHCBSPE'}
+  extra_dStrError = { 3001 : "This is a description text of the specific LHCb error" }
+  extra_compatErrorString = { 3001 : ["living easy, living free"],
+                          DErrno.ERRX : ['An error message for ERRX that is specific to LHCb']} # This adds yet another compatible error message
+                                                                                                # for an error defined in the DIRAC DErrno
+
 
