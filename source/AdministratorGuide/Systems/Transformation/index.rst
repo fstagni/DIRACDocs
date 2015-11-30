@@ -3,7 +3,7 @@ Transformation System
 =====================
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
 .. contents:: Table of contents
    :depth: 4
@@ -94,7 +94,7 @@ The TS is a standard DIRAC system, and therefore it is composed by components in
 
   * ValidateOutputDataAgent: it runs few integrity checks prior to finalise a Production.
 
-The complete list can be found in the `DIRAC project GitHub repository <https://github.com/DIRACGrid/DIRAC/tree/integration/TransformationSystem/Agent>`_ .
+The complete list can be found in the `DIRAC project GitHub repository <https://github.com/DIRACGrid/DIRAC/tree/integration/TransformationSystem/Agent>`_.
 
 * **Clients**
 
@@ -197,13 +197,96 @@ Configuration
           TransType += Replication
         }
 
+-------
+Plugins
+-------
+
+Transformation plugins are used to group input files according to different criteria. These are:
+
+* Standard: group files by replicas (tasks create based on the file location)
+* BySize: group files until they reach a certain size (Input size in Gb)
+* ByShare: group files given the share (specified in the CS) and location
+* Broadcast: take files at the source SE and broadcast to a given number of locations (used for replication)
+
+ByJobType plugin
+^^^^^^^^^^^^^^^^
+By default the Standard plugin sets job's destination depending on the location of its input data. Starting from v6r13 a new **ByJobType**
+TaskManager plugin has been introduced, so that different rules for site destinations can be specified for each JobType.
+In order to use the ByJobType plugin, one has to:
+
+* Set CS section Operations/Transformations/DestinationPlugin = ByJobType
+* Set the JobType in the job workflow of the transformation, *e.g.*:
+
+
+  ::
+
+        from DIRAC.TransformationSystem.Client.Transformation import Transformation
+        from DIRAC.Interfaces.API.Job import Job
+
+        t = Transformation()
+        job = Job()
+        ...
+
+        job.setType('DataReprocessing')
+        t.setBody ( job.workflow.toXML() )
+
+* Define the actual rules for each JobType in the CS section Operation/JobTypeMapping, as in the following example:
+
+  ::
+
+        JobTypeMapping
+        {
+          AutoAddedSites = LCG.CERN.ch
+          AutoAddedSites += LCG.IN2P3.fr
+          AutoAddedSites += LCG.CNAF.it
+          AutoAddedSites += LCG.PIC.es
+          AutoAddedSites += LCG.GRIDKA.de
+          AutoAddedSites += LCG.RAL.uk
+          AutoAddedSites += LCG.SARA.nl
+          AutoAddedSites += LCG.RRCKI.ru
+          DataReconstruction
+          {
+            Exclude = ALL
+            Allow
+            {
+              LCG.NIKHEF.nl = LCG.SARA.nl
+              LCG.UKI-LT2-QMUL.uk = LCG.RAL.uk
+              LCG.CPPM.fr = LCG.SARA.nl
+              LCG.USC.es = LCG.PIC.es
+              LCG.LAL.fr = LCG.CERN.ch
+              LCG.LAL.fr += LCG.IN2P3.fr
+              LCG.BariRECAS.it = LCG.CNAF.it
+              LCG.CBPF.br = LCG.CERN.ch
+              VAC.Manchester.uk = LCG.RAL.uk
+            }
+          }
+          Merge
+          {
+            Exclude = ALL
+            Allow
+            {
+              LCG.NIKHEF.nl = LCG.SARA.nl
+            }
+          }
+        }
+
+
+  * By default, all sites are allowed to do every job
+  * "AutoAddedSites" contains the list of sites allowed to run jobs with files in their local SEs
+  * Sections under "JobTypeMapping" correspond to the different JobTypes one may want to define, *e.g.*: DataReconstruction, Merge, etc.
+  * For each JobType one has to define:
+
+    * "Exclude": the list of sites that will be removed as destination sites ("ALL" for all sites)
+    * "Allow": the list of 'helpers', specifying sites helping another site
+
+  * In the example above all sites in "AutoAddedSites" are allowed to run jobs with input files in their local SEs. These sites won't be excluded, even if set in the Exclude list. For DataReconstruction jobs, jobs having input files at LCG.NIKHEF.nl local SEs can run both at LCG.NIKHEF.nl and at LCG.SARA.nl, etc.
+
 ---------
 Use-cases
 ---------
 
--------------
-MC Simulation 
--------------
+MC Simulation
+=============
 
 Generation of many identical jobs which don't need Input Files and having as varying parameter a variable built from @{JOB_ID}.
 
@@ -234,9 +317,8 @@ The WorkflowTaskAgent uses the TaskManager client to transform a 'Task' into a '
     t.setStatus("Active")
     t.setAgentType("Automatic")
 
--------------
 Re-processing
--------------
+=============
 
 Generation of identical jobs with Input Files.
 
@@ -281,9 +363,8 @@ Generation of identical jobs with Input Files.
   * *Transformation Type* = 'DataReprocessing'
   * If the 'MonitorFiles' option is enabled in the agent configuration, failed jobs are automatically rescheduled
 
--------------------------------
 Data management transformations
--------------------------------
+===============================
 
 Generation of bulk data removal/replication requests from a fixed file list or as a result of a DFC query
 
@@ -337,9 +418,8 @@ Generation of bulk data removal/replication requests from a fixed file list or a
 * This script remove all replicas of each file. We should verify how to remove only a subset of replicas (SourceSE?)
 * If you add non existing files to a Transformation, you won't get any particular status, the Transformation just does not progress
 
----------------------------------------
 Data replication based on Catalog Query
----------------------------------------
+=======================================
 
 * Example of data replication (file list as a result of a DFC query, example taken from CTA)
 
@@ -372,8 +452,7 @@ Actions on transformations
 * **Stop**
 * **Flush:** It has a meaning only depending on the plugin used, for example the 'BySize' plugin, used *e.g.* for merging productions, creates a task if there are enough files in input to have at least a certain size: 'flush' will make the 'BySize' plugin to ignore such requirement
 * **Complete:** The transformation can be archived by the TransformationCleaningAgent. Archived means that the data produced stay, but not the entries in the TransformationDB
-* **Clean:** The transformation is cleaned by the TransformationCleaningAgent: jobs are killed and removed from WMS; produced and stored files are removed from the Storage Elements
-
+* **Clean:** The transformation is cleaned by the TransformationCleaningAgent: jobs are killed and removed from WMS
 
 
 
