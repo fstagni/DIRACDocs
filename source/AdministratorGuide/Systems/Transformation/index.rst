@@ -201,16 +201,20 @@ Configuration
 Plugins
 -------
 
-Transformation plugins are used to group input files according to different criteria. These are:
+There are two different types of plugins, i.e. TransformationAgent plugins and TaskManager plugins. The first are used to 'group' the input files of the tasks according to different criteria, while the latter are used to specify the tasks destinations.
+
+TransformationAgent plugins
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Standard: group files by replicas (tasks create based on the file location)
 * BySize: group files until they reach a certain size (Input size in Gb)
 * ByShare: group files given the share (specified in the CS) and location
 * Broadcast: take files at the source SE and broadcast to a given number of locations (used for replication)
 
-ByJobType plugin
-^^^^^^^^^^^^^^^^
-By default the Standard plugin sets job's destination depending on the location of its input data. Starting from v6r13 a new **ByJobType**
+TaskManager plugins
+^^^^^^^^^^^^^^^^^^^
+
+By default the standard plugin (BySE) sets job's destination depending on the location of its input data. Starting from v6r13 a new **ByJobType**
 TaskManager plugin has been introduced, so that different rules for site destinations can be specified for each JobType.
 In order to use the ByJobType plugin, one has to:
 
@@ -452,7 +456,7 @@ Actions on transformations
 * **Stop**
 * **Flush:** It has a meaning only depending on the plugin used, for example the 'BySize' plugin, used *e.g.* for merging productions, creates a task if there are enough files in input to have at least a certain size: 'flush' will make the 'BySize' plugin to ignore such requirement
 * **Complete:** The transformation can be archived by the TransformationCleaningAgent. Archived means that the data produced stay, but not the entries in the TransformationDB
-* **Clean:** The transformation is cleaned by the TransformationCleaningAgent: jobs are killed and removed from WMS
+* **Clean:** The transformation is cleaned by the TransformationCleaningAgent: jobs are killed and removed from WMS. Produced and stored files are removed from the Storage Elements, when "OutputDirectories" parameter is set for the transformation.
 
 
 
