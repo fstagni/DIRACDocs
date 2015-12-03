@@ -26,12 +26,12 @@ For simplicity and reproducibility, it's probably a good idea to start from a fr
 This means that, you may want to start by moving to a temporary directory and issue the following:
   
   > mkdir $(date +"20%y%m%d") && cd $(date +"20%y%m%d")
-
+  
 which will create a clean directory with today's date. We then clone the DIRAC repository and rename the created "origin" remote in "release":
   
   > git clone git@github.com:DIRACGrid/DIRAC.git
   > git remote rename origin release
-
+  
 
 
 Merging *Pull Requests*
@@ -55,7 +55,7 @@ Let's take an example of a patch created against *release* branch *rel-v6r10* wh
 the new release branch *rel-v6r11* is already in production. This can be accomplished
 by the following sequence of commands::
   
-  > get fetch release
+  > git fetch release
  
 This will bring all the changes from the central repository including all the 
 *release* branches.::
