@@ -24,11 +24,11 @@ Starting
 
 For simplicity and reproducibility, it's probably a good idea to start from a fresh copy in a clean directory.
 This means that, you may want to start by moving to a temporary directory and issue the following:
-
+  
   > mkdir $(date +"20%y%m%d") && cd $(date +"20%y%m%d")
 
 which will create a clean directory with today's date. We then clone the DIRAC repository and rename the created "origin" remote in "release":
-
+  
   > git clone git@github.com:DIRACGrid/DIRAC.git
   > git remote rename origin release
 
