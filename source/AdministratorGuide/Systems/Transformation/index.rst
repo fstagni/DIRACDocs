@@ -248,7 +248,7 @@ In order to use the ByJobType plugin, one has to:
           AutoAddedSites += LCG.RAL.uk
           AutoAddedSites += LCG.SARA.nl
           AutoAddedSites += LCG.RRCKI.ru
-          DataReconstruction
+          DataReprocessing
           {
             Exclude = ALL
             Allow
