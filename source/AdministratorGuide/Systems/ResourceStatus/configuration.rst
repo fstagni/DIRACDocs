@@ -1,3 +1,5 @@
+.. _rss-configuration:
+
 =================
 RSS Configuration
 =================
