@@ -1,5 +1,5 @@
-Systems / Transformation / <INSTANCE> / Agents / TransformationAgent - Sub-subsection
-=====================================================================================
+Systems / Transformation / <INSTANCE> / Agents / InputDataAgent - Sub-subsection
+================================================================================
 
 +------------------------------+-------------------------------+------------------------------+
 | **Name**                     | **Description**               | **Example**                  |
