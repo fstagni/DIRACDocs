@@ -80,10 +80,6 @@ Let's do it one by one to make it easier::
     $ dirac-rss-sync --element Resource -o LogLevel=VERBOSE
     $ dirac-rss-sync --element Node -o LogLevel=VERBOSE
 
-You can check the DB. You will find there are 4 times StorageElements on the
-ResourceStatus table ( if you are still using the default config of step 0 ). If
-not, please report and DO NOT ACTIVATE RSS.
-
 ---------------------------------------
 Initialize Statuses for StorageElements
 ---------------------------------------
