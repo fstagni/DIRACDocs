@@ -277,13 +277,13 @@ In order to use the ByJobType plugin, one has to:
 
   * By default, all sites are allowed to do every job
   * "AutoAddedSites" contains the list of sites allowed to run jobs with files in their local SEs
-  * Sections under "JobTypeMapping" correspond to the different JobTypes one may want to define, *e.g.*: DataReconstruction, Merge, etc.
+  * Sections under "JobTypeMapping" correspond to the different JobTypes one may want to define, *e.g.*: DataReprocessing, Merge, etc.
   * For each JobType one has to define:
 
     * "Exclude": the list of sites that will be removed as destination sites ("ALL" for all sites)
     * "Allow": the list of 'helpers', specifying sites helping another site
 
-  * In the example above all sites in "AutoAddedSites" are allowed to run jobs with input files in their local SEs. These sites won't be excluded, even if set in the Exclude list. For DataReconstruction jobs, jobs having input files at LCG.NIKHEF.nl local SEs can run both at LCG.NIKHEF.nl and at LCG.SARA.nl, etc.
+  * In the example above all sites in "AutoAddedSites" are allowed to run jobs with input files in their local SEs. These sites won't be excluded, even if set in the Exclude list. For DataReprocessing jobs, jobs having input files at LCG.NIKHEF.nl local SEs can run both at LCG.NIKHEF.nl and at LCG.SARA.nl, etc.
 
 ---------
 Use-cases
