@@ -3,12 +3,12 @@ Systems / Transformation / <INSTANCE> / Agents / TransformationAgent - Sub-subse
 
 The TransformationAgent processes transformations found in the transformation database.
 
-This Agent also reads some options from operations_transformations_:
+This Agent also reads some options from :ref:`operations_transformations`:
 
 * DataProcessing
 * DataManipulation
 
-And from Operations/TransformationPlugins/<Plugin> , depending on the Plugin used
+And from :ref:`operations_transformationplugins` , depending on the Plugin used
 for the Transformation.
 
 * SortedBy
