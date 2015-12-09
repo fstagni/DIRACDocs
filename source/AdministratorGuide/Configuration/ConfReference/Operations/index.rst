@@ -11,6 +11,7 @@ This section allows to configure options concerning to:
 - Job description
 - Service Shifters
 - Virtual Organization special parameters
+- Transformations
 
 In the short term, most of this schema will be moved into [vo]/[setup] dependent sections in order to allow better support for multi-VO installations.
 
@@ -24,3 +25,4 @@ In the short term, most of this schema will be moved into [vo]/[setup] dependent
    Pilots/index
    Shifter/index
    VOs/index
+   Transformations/index
