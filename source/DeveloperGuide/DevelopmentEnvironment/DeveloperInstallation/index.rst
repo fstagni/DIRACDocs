@@ -39,9 +39,9 @@ that directory *$DEVROOT*) and:
 
     git clone https://github.com/fstagni/DIRAC.git
 
-  This will create a *$DEVROOT/DIRAC* for you.
-  If you don't intend to develop DIRAC and just need it for developing 
-  extensions do::
+This will create a *$DEVROOT/DIRAC* for you.
+If you don't intend to develop DIRAC and just need it for developing 
+extensions do::
 
     git clone https://github.com/DIRACGrid/DIRAC.git
 
@@ -69,7 +69,7 @@ directory. For instance::
 
     ./Core/scripts/dirac-deploy-scripts.py
 
-  It is a good idea to add the scripts directory to your $PATH.
+It is a good idea to add the scripts directory to your $PATH.
 
 8. We now add MySQL. DIRAC mainly uses *MySQL* as its database engine. 
 There are many database structures used by DIRAC. Each system typically 
@@ -95,12 +95,12 @@ execute::
     Query OK, 0 rows affected (0.00 sec)
 
 
-  Now, you will need to create a database in MySQL for each database you 
-  want to use or develop. First create the database::
+Now, you will need to create a database in MySQL for each database you 
+want to use or develop. First create the database::
 
     mysqladmin -u root create yourdbname
 
-  Once the database has been created::
+Once the database has been created::
 
     > mysql -u root yourdbname
     ...
@@ -110,51 +110,51 @@ execute::
     mysql> flush privileges;
     Query OK, 0 rows affected (0.01 sec)
 
-  With the previous steps you've created a database called *yourdbname* 
-  and authorized user *yourusername* with password *yourpasswd* to use it. 
+With the previous steps you've created a database called *yourdbname* 
+and authorized user *yourusername* with password *yourpasswd* to use it. 
 
 9. Now you need to install the required python packages for DIRAC to be 
 able to run. There are two ways of doing that:
 
-  9.1. If you want to use your own python (which has to be python 2.7) you can install all 
-  the required packages by hand. First, you'll need to install few 
-  packages for your distribution, e.g. you will need gcc, python-devel (python all-dev), 
-  openssl-devel (libssl-dev), mysql-client, mysql-devel, libmysqlclient-dev, python-pip. In case you use ubuntu, you may 
-  find some issues due recent changes in SSL. 
-  This `link <http://www.techstacks.com/howto/enable-sslv2-and-tlsv12-in-openssl-101c-on-ubuntu-1304.html>`_ may help you.
-  
-  Then, you can use pip to install specific python tools like::
+9.1. If you want to use your own python (which has to be python 2.7) you can install all 
+the required packages by hand. First, you'll need to install few 
+packages for your distribution, e.g. you will need gcc, python-devel (python all-dev), 
+openssl-devel (libssl-dev), mysql-client, mysql-devel, libmysqlclient-dev, python-pip. In case you use ubuntu, you may 
+find some issues due recent changes in SSL. 
+This `link <http://www.techstacks.com/howto/enable-sslv2-and-tlsv12-in-openssl-101c-on-ubuntu-1304.html>`_ may help you.
 
-        pip install GSI
-        pip install MySQL-python
-        pip install mock
-        pip install importlib
-        pip install simplejson
-        pip install pyparsing
-        pip install coverage
-        pip install pytest
-        pip install pytest-cov
-        pip install pylint
-        pip install sqlalchemy
-        pip install pexpect
-        pip install requests
+Then, you can use pip to install specific python tools like::
 
-  Now, remember to update the $PYTHONPATH with the directory where you put 
-  your DIRAC code (and the code of possible extensions). Note: for those 
-  of you with OSX Lion or newer take a look 
-  `this page <http://bruteforce.gr/bypassing-clang-error-unknown-argument.html>`_ 
-  if you can't install MySQL-python...
+     pip install GSI
+     pip install MySQL-python
+     pip install mock
+     pip install importlib
+     pip install simplejson
+     pip install pyparsing
+     pip install coverage
+     pip install pytest
+     pip install pytest-cov
+     pip install pylint
+     pip install sqlalchemy
+     pip install pexpect
+     pip install requests
 
-  9.2. The second possibility is to use the same script that is used for 
-  the server installations. This is needed if you don't have python 
-  2.7 available for your system or you just want to get the DIRAC External 
-  binaries for you platform::
+Now, remember to update the $PYTHONPATH with the directory where you put 
+your DIRAC code (and the code of possible extensions). Note: for those 
+of you with OSX Lion or newer take a look 
+`this page <http://bruteforce.gr/bypassing-clang-error-unknown-argument.html>`_ 
+if you can't install MySQL-python...
 
-        scripts/dirac-install -X -t server -i 27
+9.2. The second possibility is to use the same script that is used for 
+the server installations. This is needed if you don't have python 
+2.7 available for your system or you just want to get the DIRAC External 
+binaries for you platform::
 
-  This may take a while if there aren't externals available for your 
-  platform and they have to be compiled. In any case, we suggest to try 
-  with the first alternative.
+     scripts/dirac-install -X -t server -i 27
+
+This may take a while if there aren't externals available for your 
+platform and they have to be compiled. In any case, we suggest to try 
+with the first alternative.
 
 
 10. Last step is to to configure DIRAC. There are 2 ways to do that: the 
@@ -167,86 +167,86 @@ DIRAC will first check into your local "dirac.cfg" file (it can be in your
 home as .dirac.cfg, or in etc/ directory, see the link above). If this 
 will not be found, it will look for such info in the CS servers available.
 
-  When you develop locally, you don't need to access any CS server: instead, you need to have total control. So, you need to work a bit on the local dirac.cfg file. There is not much else needed, just create your own etc/dirac.cfg. The example that follows might not be easy to understand at a first sight, but it will become easy soon. The syntax is extremely simple, yet verbose: simply, only brackets and equalities are used.
+When you develop locally, you don't need to access any CS server: instead, you need to have total control. So, you need to work a bit on the local dirac.cfg file. There is not much else needed, just create your own etc/dirac.cfg. The example that follows might not be easy to understand at a first sight, but it will become easy soon. The syntax is extremely simple, yet verbose: simply, only brackets and equalities are used.
 
-  10.1. If you want to create an isolated installation just create a 
-  *$DEVROOT/etc/dirac.cfg* file with (create the etc directory first)::
+10.1. If you want to create an isolated installation just create a 
+*$DEVROOT/etc/dirac.cfg* file with (create the etc directory first)::
 
-    DIRAC
+ DIRAC
+ {
+   Setup = DeveloperSetup
+   Setups
+   {
+     DeveloperSetup
+     {
+       Framework = DevInstance
+       Test = DevInstance
+     }
+   }
+ }
+ Systems
+ {
+    Framework
     {
-      Setup = DeveloperSetup
-      Setups
+      DevInstance
       {
-        DeveloperSetup
+        URLs
         {
-          Framework = DevInstance
-          Test = DevInstance
+        }
+        Services
+        {
         }
       }
-    }
-    Systems
-    {
-       Framework
+   }
+   Test
+   {
+     DevInstance
+     {
+       URLs
        {
-         DevInstance
-         {
-           URLs
-           {
-           }
-           Services
-           {
-           }
-         }
-      }
-      Test
-      {
-        DevInstance
-        {
-          URLs
-          {
-          }
-          Services
-          {
-          }
-        }
-      }
-    }
-    Registry
-    {
-      Users
-      {
-        yourusername
-        {
-          DN = /your/dn/goes/here
-          Email = youremail@yourprovider.com
-        }
-      }
-      Groups
-      {
-        devGroup
-        {
-          Users = yourusername
-          Properties = CSAdministrator, JobAdministrator, ServiceAdministrator, ProxyDelegation, FullDelegation
-        }
-      }
-      Hosts
-      {
-        mydevbox
-        {
-          DN = /your/box/dn/goes/here
-          Properties = CSAdministrator, JobAdministrator, ServiceAdministrator, ProxyDelegation, FullDelegation
-        }
-      }
-    }
+       }
+       Services
+       {
+       }
+     }
+   }
+ }
+ Registry
+ {
+   Users
+   {
+     yourusername
+     {
+       DN = /your/dn/goes/here
+       Email = youremail@yourprovider.com
+     }
+   }
+   Groups
+   {
+     devGroup
+     {
+       Users = yourusername
+       Properties = CSAdministrator, JobAdministrator, ServiceAdministrator, ProxyDelegation, FullDelegation
+     }
+   }
+   Hosts
+   {
+     mydevbox
+     {
+       DN = /your/box/dn/goes/here
+       Properties = CSAdministrator, JobAdministrator, ServiceAdministrator, ProxyDelegation, FullDelegation
+     }
+   }
+ }
 
-  10.2. The second possibility (ALTERNATIVE to the previous one, and not 
-  suggested) is to issue the following script::
+10.2. The second possibility (ALTERNATIVE to the previous one, and not 
+suggested) is to issue the following script::
 
-      scripts/dirac-configure -S setupyouwanttorun -C configurationserverslist -n sitename -H
+   scripts/dirac-configure -S setupyouwanttorun -C configurationserverslist -n sitename -H
 
-  This is a standard script, widely used for non-developer installations, 
-  that will connect to an already existing installation when the 
-  configuration servers list is given.
+This is a standard script, widely used for non-developer installations, 
+that will connect to an already existing installation when the 
+configuration servers list is given.
 
 
 11. Now, it's time to deal with certificates. DIRAC understands 
