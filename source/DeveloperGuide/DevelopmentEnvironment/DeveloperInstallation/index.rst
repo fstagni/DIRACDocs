@@ -255,27 +255,25 @@ that directory *$DEVROOT*) and:
   but just user writable since it contains the certificate and public key. 
   Files ending in *key.pem* should be only user readable since they contain 
   the private key. You will need two different sets certificates and the CA 
-  certificate that signed the sets. 
-
-  The following commands should do the trick for you, by creating a fake CA, 
+  certificate that signed the sets. The following commands should do the trick for you, by creating a fake CA, 
   a fake user certificate, and a fake host certificate:
-
-    cd $DEVROOT/DIRAC
-    git checkout release/upstream
-    source tests/Jenkins/utilities.sh
-    generateCertificates
-    generateUserCredentials
-    mkdir -p ~/.globus/
-    cp /home/toffo/Devs/user/*.{pem,key} ~/.globus/
-    mv ~/.globus/client.key ~/.globus/userkey.pem
-    mv ~/.globus/client.pem ~/.globus/usercert.pem
-
+  ::
+  
+      cd $DEVROOT/DIRAC
+      git checkout release/upstream
+      source tests/Jenkins/utilities.sh
+      generateCertificates
+      generateUserCredentials
+      mkdir -p ~/.globus/
+      cp /home/toffo/Devs/user/*.{pem,key} ~/.globus/
+      mv ~/.globus/client.key ~/.globus/userkey.pem
+      mv ~/.globus/client.pem ~/.globus/usercert.pem
 
   12. Now we need to register those certificates in DIRAC. To do you you 
-      must modify *$DEVROOT/etc/dirac.cfg* file and set the correct
-      certificate DNs for you and your development box. For instance, 
-      to register the host replace "/your/box/dn/goes/here" 
-      (/Registry/Hosts/mydevbox/DN option) with the result of::
+  must modify *$DEVROOT/etc/dirac.cfg* file and set the correct
+  certificate DNs for you and your development box. For instance, 
+  to register the host replace "/your/box/dn/goes/here" 
+  (/Registry/Hosts/mydevbox/DN option) with the result of::
 
         openssl x509 -noout -subject -in etc/grid-security/hostcert.pem | sed 's:^subject= ::g'
 
