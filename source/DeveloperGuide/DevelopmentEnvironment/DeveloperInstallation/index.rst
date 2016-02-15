@@ -260,15 +260,15 @@ that directory *$DEVROOT*) and:
   The following commands should do the trick for you, by creating a fake CA, 
   a fake user certificate, and a fake host certificate:
 
-     cd $DEVROOT/DIRAC
-     git checkout release/upstream
-     source tests/Jenkins/utilities.sh
-     generateCertificates
-     generateUserCredentials
-     mkdir -p ~/.globus/
-     cp /home/toffo/Devs/user/*.{pem,key} ~/.globus/
-     mv ~/.globus/client.key ~/.globus/userkey.pem
-     mv ~/.globus/client.pem ~/.globus/usercert.pem
+    cd $DEVROOT/DIRAC
+    git checkout release/upstream
+    source tests/Jenkins/utilities.sh
+    generateCertificates
+    generateUserCredentials
+    mkdir -p ~/.globus/
+    cp /home/toffo/Devs/user/*.{pem,key} ~/.globus/
+    mv ~/.globus/client.key ~/.globus/userkey.pem
+    mv ~/.globus/client.pem ~/.globus/usercert.pem
 
 
   12. Now we need to register those certificates in DIRAC. To do you you 
